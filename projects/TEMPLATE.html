@@ -1,0 +1,208 @@
+<!DOCTYPE html>
+<html lang="en" class="no-js">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>[PROJECT NAME] — Muhammad Albharaka Putrosandy</title>
+<meta name="description" content="[One-sentence description of the project for search engines / link previews.]" />
+<meta name="theme-color" content="#1E9E71" />
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Crect width='100' height='100' rx='24' fill='%231E9E71'/%3E%3Ctext x='50' y='69' font-size='56' font-family='Georgia,serif' fill='white' text-anchor='middle'%3EK%3C/text%3E%3C/svg%3E" />
+
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,400;0,9..144,500;0,9..144,600;0,9..144,700;1,9..144,400;1,9..144,500&family=Plus+Jakarta+Sans:ital,wght@0,400;0,500;0,600;0,700;0,800;1,500&display=swap" rel="stylesheet" />
+
+<link rel="stylesheet" href="../assets/css/style.css" />
+</head>
+<!--
+  ============================================================================
+  HOW TO USE THIS TEMPLATE TO ADD A NEW PROJECT
+  ============================================================================
+  1. Save a copy of this file as projects/your-project-id.html
+  2. Replace every [BRACKETED] placeholder below with real content.
+  3. Set data-project-id below to match "id" you'll use in the data file.
+  4. Open /assets/js/projects-data.js and add a matching object to the
+     PROJECTS array (see the commented example at the bottom of that file).
+     That's what makes the card + filters + prev/next nav all update
+     automatically — you only have to enter each project once.
+  5. Add real photos/screenshots by replacing the dashed placeholder boxes
+     with an <img> tag, e.g.:
+       <img src="../assets/img/your-project/hero.jpg" alt="..." style="border-radius:inherit;width:100%;height:100%;object-fit:cover;">
+  ============================================================================
+-->
+<body data-project-id="[project-id]">
+<div class="scroll-progress" id="scrollProgress"></div>
+<div class="bg-blobs" aria-hidden="true"><span class="b1"></span><span class="b2"></span><span class="b3"></span></div>
+
+<header class="navbar" id="navbar">
+  <div class="container nav-inner">
+    <a href="../index.html" class="logo">Kaka<span class="dot">.</span></a>
+    <nav class="nav-links" id="navLinks">
+      <a href="../index.html#about" class="nav-link">About</a>
+      <a href="../index.html#experience" class="nav-link">Experience</a>
+      <a href="../index.html#projects" class="nav-link">Projects</a>
+      <a href="../index.html#contact" class="nav-link">Contact</a>
+    </nav>
+    <div class="nav-actions">
+      <a href="../assets/cv/CV-Muhammad-Albharaka-Putrosandy.pdf" class="btn btn-outline btn-sm" target="_blank" rel="noopener">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7,10 12,15 17,10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>
+        Resume
+      </a>
+      <button class="nav-toggle" id="navToggle" aria-label="Toggle menu" aria-expanded="false">
+        <span></span><span></span><span></span>
+      </button>
+    </div>
+  </div>
+</header>
+
+<main>
+
+  <section class="project-hero">
+    <div class="container">
+      <a href="../index.html#projects" class="back-link">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><line x1="19" y1="12" x2="5" y2="12"/><polyline points="12,19 5,12 12,5"/></svg>
+        All Projects
+      </a>
+
+      <div class="project-hero-grid">
+        <div class="reveal">
+          <div class="project-meta-row">
+            <!-- medal--gold / medal--silver / medal--bronze -->
+            <span class="medal medal--gold">
+              <span class="medal-icon"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 2l2.4 4.86 5.36.78-3.88 3.78.92 5.34L12 14.2l-4.8 2.56.92-5.34-3.88-3.78 5.36-.78L12 2z"/></svg></span>
+              [Award label — e.g. "1st Place — Some Competition"]
+            </span>
+            <span class="project-period">[Month Year – Month Year]</span>
+          </div>
+          <h1 class="project-brand"><span class="brand-a">[First</span><span class="brand-b">Half]</span></h1>
+          <p class="project-tagline">[One or two sentences that hook the reader — what does this project do, and why does it matter?]</p>
+          <div class="project-tags">
+            <span class="pill">[Category]</span>
+            <span class="pill">[Domain]</span>
+            <span class="pill">[Key tech]</span>
+            <span class="pill pill-outline">[Your Role]</span>
+          </div>
+          <div class="project-hero-actions">
+            <a href="[https://github.com/your-repo]" target="_blank" rel="noopener" class="btn btn-primary">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><path d="M9 19c-5 1.5-5-2.5-7-3m14 6v-3.87a3.37 3.37 0 0 0-.94-2.61c3.14-.35 6.44-1.54 6.44-7A5.44 5.44 0 0 0 20 4.77 5.07 5.07 0 0 0 19.91 1S18.73.65 16 2.48a13.38 13.38 0 0 0-7 0C6.27.65 5.09 1 5.09 1A5.07 5.07 0 0 0 5 4.77a5.44 5.44 0 0 0-1.5 3.78c0 5.42 3.3 6.61 6.44 7A3.37 3.37 0 0 0 9 18.13V22"/></svg>
+              View on GitHub
+            </a>
+            <a href="../index.html#contact" class="btn btn-ghost">Contact Me</a>
+          </div>
+        </div>
+
+        <div class="project-hero-visual reveal">
+          <!-- Replace this whole placeholder div with an <img> once you have a photo/mockup -->
+          <div class="photo-placeholder dashed">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M23 19a2 2 0 0 1-2 2H3a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h4l2-3h6l2 3h4a2 2 0 0 1 2 2z"/><circle cx="12" cy="13" r="4"/></svg>
+            <span>Add product photo / mockup here</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="section-pad" style="padding-top:28px;">
+    <div class="container two-col">
+      <div class="overview-text reveal">
+        <h2>Overview</h2>
+        <p>[Paragraph 1 — what the project is and the problem it solves.]</p>
+        <p>[Paragraph 2 — context: how it came about, who it's for, what made it interesting or hard.]</p>
+        <p>[Paragraph 3 — your specific role and the technical approach you took.]</p>
+      </div>
+
+      <aside class="overview-side">
+        <div class="info-card reveal">
+          <h3>My Role</h3>
+          <p>[Your title] (Group Project / Solo Project) — [one line on what you specifically owned].</p>
+        </div>
+        <div class="info-card reveal">
+          <h3>Tech Stack</h3>
+          <div class="tech-pills">
+            <span class="pill pill-outline">[Tech 1]</span>
+            <span class="pill pill-outline">[Tech 2]</span>
+            <span class="pill pill-outline">[Tech 3]</span>
+          </div>
+        </div>
+        <div class="info-card reveal">
+          <h3>Recognition</h3>
+          <p>[Award emoji] [Award description, if any — otherwise delete this card.]</p>
+        </div>
+        <div class="info-card reveal">
+          <h3>Links</h3>
+          <a class="repo-link" href="[https://github.com/your-repo]" target="_blank" rel="noopener">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/><polyline points="15,3 21,3 21,9"/><line x1="10" y1="14" x2="21" y2="3"/></svg>
+            github.com/your-repo
+          </a>
+        </div>
+      </aside>
+    </div>
+  </section>
+
+  <section class="project-gallery section-pad" style="padding-top:0;">
+    <div class="container">
+      <p class="section-eyebrow center">[Gallery eyebrow]</p>
+      <h2 class="section-title center">Highlights</h2>
+      <p class="section-sub center">[Short line introducing the screenshots/photos below.]</p>
+
+      <!-- Duplicate .gallery-item blocks as needed. Use class="gallery-grid wide-items"
+           on the parent instead if these are landscape photos rather than phone screenshots. -->
+      <div class="gallery-grid">
+        <div class="gallery-item reveal">
+          <div class="photo-placeholder dashed"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M23 19a2 2 0 0 1-2 2H3a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h4l2-3h6l2 3h4a2 2 0 0 1 2 2z"/><circle cx="12" cy="13" r="4"/></svg><span>Add screenshot</span></div>
+          <p class="gallery-caption">[Feature name]</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="project-nav">
+    <div class="container project-nav-inner">
+      <a href="#" id="prevProjectLink" class="nav-project-link prev">
+        <small>← Previous</small>
+        <strong>Loading…</strong>
+      </a>
+      <a href="../index.html#projects" class="nav-project-link all-link">
+        <small>Browse</small>
+        <strong>All Projects</strong>
+      </a>
+      <a href="#" id="nextProjectLink" class="nav-project-link next">
+        <small>Next →</small>
+        <strong>Loading…</strong>
+      </a>
+    </div>
+  </section>
+
+</main>
+
+<footer class="site-footer">
+  <div class="container footer-inner">
+    <p>© <span id="year">2026</span> Muhammad Albharaka Putrosandy. Built with care.</p>
+    <div class="footer-links">
+      <a href="https://github.com/K2Sandy" target="_blank" rel="noopener" aria-label="GitHub">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M9 19c-5 1.5-5-2.5-7-3m14 6v-3.87a3.37 3.37 0 0 0-.94-2.61c3.14-.35 6.44-1.54 6.44-7A5.44 5.44 0 0 0 20 4.77 5.07 5.07 0 0 0 19.91 1S18.73.65 16 2.48a13.38 13.38 0 0 0-7 0C6.27.65 5.09 1 5.09 1A5.07 5.07 0 0 0 5 4.77a5.44 5.44 0 0 0-1.5 3.78c0 5.42 3.3 6.61 6.44 7A3.37 3.37 0 0 0 9 18.13V22"/></svg>
+      </a>
+      <a href="https://linkedin.com/in/muhammad-albharaka-putrosandy" target="_blank" rel="noopener" aria-label="LinkedIn">
+        <svg viewBox="0 0 24 24" fill="none">
+          <rect x="2" y="2" width="20" height="20" rx="5" stroke="currentColor" stroke-width="1.8"/>
+          <circle cx="7.2" cy="7" r="1.15" fill="currentColor"/>
+          <line x1="7.2" y1="10.3" x2="7.2" y2="17" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/>
+          <path d="M11 17v-4.3c0-1.5 1-2.4 2.4-2.4s2.4.9 2.4 2.4V17" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/>
+          <line x1="11" y1="10.3" x2="11" y2="17" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/>
+        </svg>
+      </a>
+      <a href="mailto:m.kakasandy@gmail.com" aria-label="Email">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg>
+      </a>
+    </div>
+  </div>
+</footer>
+
+<button class="back-to-top" id="backToTop" aria-label="Back to top">
+  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><line x1="12" y1="19" x2="12" y2="5"/><polyline points="5,12 12,5 19,12"/></svg>
+</button>
+
+<script src="../assets/js/projects-data.js"></script>
+<script src="../assets/js/main.js"></script>
+</body>
+</html>

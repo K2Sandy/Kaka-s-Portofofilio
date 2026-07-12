@@ -1,0 +1,275 @@
+<!DOCTYPE html>
+<html lang="en" class="no-js">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Muhammad Albharaka Putrosandy — Portfolio</title>
+<meta name="description" content="Kaka — Computer Science student at Universitas Syiah Kuala building mobile, IoT, and web tools with real-world impact: GlucoScan, MindGuard, WindSense, and EscapeDisaster." />
+<meta name="theme-color" content="#1E9E71" />
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Crect width='100' height='100' rx='24' fill='%231E9E71'/%3E%3Ctext x='50' y='69' font-size='56' font-family='Georgia,serif' fill='white' text-anchor='middle'%3EK%3C/text%3E%3C/svg%3E" />
+
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,400;0,9..144,500;0,9..144,600;0,9..144,700;1,9..144,400;1,9..144,500&family=Plus+Jakarta+Sans:ital,wght@0,400;0,500;0,600;0,700;0,800;1,500&display=swap" rel="stylesheet" />
+
+<link rel="stylesheet" href="assets/css/style.css" />
+</head>
+<body>
+<div class="scroll-progress" id="scrollProgress"></div>
+<div class="bg-blobs" aria-hidden="true"><span class="b1"></span><span class="b2"></span><span class="b3"></span></div>
+
+<header class="navbar" id="navbar">
+  <div class="container nav-inner">
+  <a href="#hero" class="logo"><img src="assets/img/logo-usk.webp" alt="USK logo" class="usk-logo" /><span class="brand-text">Kaka</span><span class="dot">.</span></a>
+    <nav class="nav-links" id="navLinks">
+      <a href="#about" class="nav-link">About</a>
+      <a href="#experience" class="nav-link">Experience</a>
+      <a href="#projects" class="nav-link">Projects</a>
+      <a href="#contact" class="nav-link">Contact</a>
+    </nav>
+    <div class="nav-actions">
+      <a href="assets/cv/CV-Muhammad-Albharaka-Putrosandy.pdf" class="btn btn-outline btn-sm" target="_blank" rel="noopener">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7,10 12,15 17,10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>
+        Resume
+      </a>
+      <button class="nav-toggle" id="navToggle" aria-label="Toggle menu" aria-expanded="false">
+        <span></span><span></span><span></span>
+      </button>
+    </div>
+  </div>
+</header>
+
+<main>
+
+  <!-- ============================= HERO ============================= -->
+  <section class="hero" id="hero">
+    <div class="container hero-inner">
+      <div class="hero-text">
+        <h1>Hello, I am <span class="highlight">Kaka</span></h1>
+        <p class="hero-quote"><strong>“Every expert was once a beginner.”</strong> This is my journey as a tech developer striving to craft meaningful and impactful digital solutions.</p>
+        <div class="hero-actions">
+          <a href="#projects" class="btn btn-primary">See My Work</a>
+          <a href="#contact" class="btn btn-ghost">Get in Touch</a>
+        </div>
+        <div class="hero-stats">
+          <div class="stat"><span class="stat-num" id="statProjects" data-count="4">0</span><span class="stat-label">Projects Built</span></div>
+          <div class="stat"><span class="stat-num" id="statAwards" data-count="3">0</span><span class="stat-label">Awards Won</span></div>
+          <div class="stat"><span class="stat-num" data-count="2024">0</span><span class="stat-label">Building Since</span></div>
+        </div>
+      </div>
+      <div class="hero-visual">
+        <div class="hero-ring" aria-hidden="true"></div>
+        <div class="profile-frame scan-frame">
+          <img class="scan-image" src="assets/img/main-photo.webp" alt="Portrait of Muhammad Albharaka Putrosandy" loading="eager" />
+        </div>
+        <div class="hero-badge">🎓&nbsp; CS Student · Universitas Syiah Kuala</div>
+      </div>
+    </div>
+    <button class="scroll-cue" id="scrollCueBtn" aria-label="Scroll to About section" onclick="document.getElementById('about').scrollIntoView({behavior:'smooth'})">
+      <span></span>
+    </button>
+  </section>
+
+  <!-- ============================= ABOUT ============================= -->
+  <section class="about section-pad" id="about">
+    <div class="container about-inner">
+      <div class="about-visual">
+        <div class="blob-deco" aria-hidden="true"></div>
+        <div class="scan-frame">
+          <img class="scan-image" src="assets/img/second.webp" alt="Illustration for About section" loading="lazy" />
+        </div>
+      </div>
+      <div class="about-text reveal">
+        <h2 class="section-title" style="margin-bottom:22px;">About Kaka</h2>
+        <p class="lead">I am a Computer Science student at Universitas Syiah Kuala, driven to develop tools that serve a clear purpose. I thrive on building functional, efficient solutions to tackle real-world challenges. Every expert was once a beginner, and I'm dedicated to continuously learning and engineering technology that creates meaningful impact.</p>
+        <div class="about-facts">
+          <div class="fact">
+            <strong>🎓 Education</strong>
+            <span>Computer Science, Universitas Syiah Kuala</span>
+          </div>
+          <div class="fact">
+            <strong>📍 Based in</strong>
+            <span>Banda Aceh, Indonesia</span>
+          </div>
+          <div class="fact">
+            <strong>💡 Focus areas</strong>
+            <span>Mobile Apps · IoT · Human-centered Tech</span>
+          </div>
+          <div class="fact">
+            <strong>📊 GPA</strong>
+            <span>3.95 / 4.00</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============================= EXPERIENCE ============================= -->
+  <section class="experience section-pad" id="experience">
+    <div class="container">
+      <div class="section-head" style="text-align:center;">
+        <h2 class="section-title center">Career and Organizations</h2>
+        <p class="section-sub center">My roles and involvement so far - on campus and beyond.</p>
+      </div>
+
+      <div class="experience-list">
+        <div class="experience-row reveal">
+          <div class="org-logo" title="BEM MIPA — Social and Humanity Division">
+            <img src="assets/img/bem.webp" alt="BEM MIPA logo" width="64" height="64" class="reveal from-left" />
+          </div>
+          <div class="org-details">
+            <div class="org-top">
+              <h4>Student Executive Board MIPA <span class="org-div">— Social affair Division</span></h4>
+              <span class="pill pill-outline">2025 – Present</span>
+            </div>
+            <p class="org-org">Universitas Syiah Kuala</p>
+          </div>
+        </div>
+        <div class="experience-row reveal">
+          <div class="org-logo" title="Informatics Student Association">
+            <img src="assets/img/himpunan-infor.webp" alt="Informatics Student Association logo" width="48" height="48" class="reveal from-left" />
+          </div>
+          <div class="org-details">
+            <div class="org-top">
+              <h4>Informatics Student Association <span class="org-div">— Member</span></h4>
+              <span class="pill pill-outline">2026 – Present</span>
+            </div>
+            <p class="org-org">Universitas Syiah Kuala</p>
+          </div>
+        </div>
+      </div>
+
+      <p class="experience-note">More roles will show up here as they come.</p>
+
+      <!--
+        Add another role by duplicating the block below inside .experience-list:
+
+        <div class="experience-row reveal">
+          <div class="org-logo" title="Add organization logo here">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M3 21h18M5 21V7l7-4 7 4v14M9 9h1M9 13h1M14 9h1M14 13h1"/></svg>
+          </div>
+          <div class="org-details">
+            <div class="org-top">
+              <h4>Org Name <span class="org-div">— Role / Division</span></h4>
+              <span class="pill pill-outline">Month Year – Month Year</span>
+            </div>
+            <p class="org-org">Company / Institution</p>
+          </div>
+        </div>
+      -->
+    </div>
+  </section>
+
+  <!-- ============================= PROJECTS ============================= -->
+  <section class="projects section-pad" id="projects">
+    <div class="container">
+      <div class="section-head" style="text-align:center;">
+        <h2 class="section-title center">Projects</h2>
+        <p class="section-sub center">A selection of my recent work, spanning across mobile apps, web tools, and hardware engineering.</p>
+      </div>
+
+      <div class="project-filters" id="projectFilters"></div>
+      <div class="project-grid" id="projectGrid">
+        <!-- rendered by assets/js/main.js using assets/js/projects-data.js -->
+      </div>
+    </div>
+  </section>
+
+  <!-- ============================= CONTACT ============================= -->
+  <section class="contact section-pad" id="contact">
+    <div class="container contact-inner">
+      <div class="section-head" style="text-align:center;">
+        <h2 class="section-title center">Get In Touch</h2>
+        <p class="section-sub center">Open to collaborations, internships, and conversations about tech.</p>
+      </div>
+
+      <div class="contact-grid">
+        <div class="contact-card contact-card--email">
+          <span class="contact-icon">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg>
+          </span>
+          <strong>Email</strong>
+          <span>m.kakasandy@gmail.com</span>
+          <div class="contact-card-actions">
+            <a href="mailto:m.kakasandy@gmail.com" class="mini-link">Send</a>
+            <button type="button" class="copy-chip" data-copy="m.kakasandy@gmail.com">Copy</button>
+          </div>
+        </div>
+
+        <a class="contact-card" href="https://linkedin.com/in/muhammad-albharaka-putrosandy" target="_blank" rel="noopener">
+          <span class="contact-icon">
+            <svg viewBox="0 0 24 24" fill="none">
+              <rect x="2" y="2" width="20" height="20" rx="5" stroke="currentColor" stroke-width="1.8"/>
+              <circle cx="7.2" cy="7" r="1.15" fill="currentColor"/>
+              <line x1="7.2" y1="10.3" x2="7.2" y2="17" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/>
+              <path d="M11 17v-4.3c0-1.5 1-2.4 2.4-2.4s2.4.9 2.4 2.4V17" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/>
+              <line x1="11" y1="10.3" x2="11" y2="17" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/>
+            </svg>
+          </span>
+          <strong>LinkedIn</strong>
+          <span>muhammad-albharaka-putrosandy</span>
+        </a>
+
+        <a class="contact-card" href="https://github.com/K2Sandy" target="_blank" rel="noopener">
+          <span class="contact-icon">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M9 19c-5 1.5-5-2.5-7-3m14 6v-3.87a3.37 3.37 0 0 0-.94-2.61c3.14-.35 6.44-1.54 6.44-7A5.44 5.44 0 0 0 20 4.77 5.07 5.07 0 0 0 19.91 1S18.73.65 16 2.48a13.38 13.38 0 0 0-7 0C6.27.65 5.09 1 5.09 1A5.07 5.07 0 0 0 5 4.77a5.44 5.44 0 0 0-1.5 3.78c0 5.42 3.3 6.61 6.44 7A3.37 3.37 0 0 0 9 18.13V22"/></svg>
+          </span>
+          <strong>GitHub</strong>
+          <span>github.com/K2Sandy</span>
+        </a>
+
+        <a class="contact-card" href="https://wa.me/628116812397" target="_blank" rel="noopener">
+          <span class="contact-icon">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72c.13.96.36 1.9.7 2.81a2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45c.91.34 1.85.57 2.81.7A2 2 0 0 1 22 16.92z"/></svg>
+          </span>
+          <strong>WhatsApp</strong>
+          <span>+62 811 6812 397</span>
+        </a>
+      </div>
+
+      <div class="cv-cta reveal">
+        <div class="cv-cta-text">
+          <h3>Want the full picture?</h3>
+          <p>Download my CV for education, skills, and a complete project history.</p>
+        </div>
+        <a href="assets/cv/CV-Muhammad-Albharaka-Putrosandy.pdf" class="btn btn-primary btn-lg" target="_blank" rel="noopener">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7,10 12,15 17,10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>
+          Download CV
+        </a>
+      </div>
+    </div>
+  </section>
+
+</main>
+
+<footer class="site-footer">
+  <div class="container footer-inner">
+    <p>© <span id="year">2026</span> Muhammad Albharaka Putrosandy. Built with care.</p>
+    <div class="footer-links">
+      <a href="https://github.com/K2Sandy" target="_blank" rel="noopener" aria-label="GitHub">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M9 19c-5 1.5-5-2.5-7-3m14 6v-3.87a3.37 3.37 0 0 0-.94-2.61c3.14-.35 6.44-1.54 6.44-7A5.44 5.44 0 0 0 20 4.77 5.07 5.07 0 0 0 19.91 1S18.73.65 16 2.48a13.38 13.38 0 0 0-7 0C6.27.65 5.09 1 5.09 1A5.07 5.07 0 0 0 5 4.77a5.44 5.44 0 0 0-1.5 3.78c0 5.42 3.3 6.61 6.44 7A3.37 3.37 0 0 0 9 18.13V22"/></svg>
+      </a>
+      <a href="https://linkedin.com/in/muhammad-albharaka-putrosandy" target="_blank" rel="noopener" aria-label="LinkedIn">
+        <svg viewBox="0 0 24 24" fill="none">
+          <rect x="2" y="2" width="20" height="20" rx="5" stroke="currentColor" stroke-width="1.8"/>
+          <circle cx="7.2" cy="7" r="1.15" fill="currentColor"/>
+          <line x1="7.2" y1="10.3" x2="7.2" y2="17" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/>
+          <path d="M11 17v-4.3c0-1.5 1-2.4 2.4-2.4s2.4.9 2.4 2.4V17" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/>
+          <line x1="11" y1="10.3" x2="11" y2="17" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/>
+        </svg>
+      </a>
+      <a href="mailto:m.kakasandy@gmail.com" aria-label="Email">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg>
+      </a>
+    </div>
+  </div>
+</footer>
+
+<button class="back-to-top" id="backToTop" aria-label="Back to top">
+  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><line x1="12" y1="19" x2="12" y2="5"/><polyline points="5,12 12,5 19,12"/></svg>
+</button>
+
+<script src="assets/js/projects-data.js"></script>
+<script src="assets/js/main.js"></script>
+</body>
+</html>

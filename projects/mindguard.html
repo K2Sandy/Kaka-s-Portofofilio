@@ -1,0 +1,196 @@
+<!DOCTYPE html>
+<html lang="en" class="no-js">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>MindGuard — Muhammad Albharaka Putrosandy</title>
+<meta name="description" content="MindGuard: a privacy-centric browser extension that filters distressing content in real time to support student mental health. Finalist, 2026 UGM Public Health Hackathon." />
+<meta name="theme-color" content="#1E9E71" />
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Crect width='100' height='100' rx='24' fill='%231E9E71'/%3E%3Ctext x='50' y='69' font-size='56' font-family='Georgia,serif' fill='white' text-anchor='middle'%3EK%3C/text%3E%3C/svg%3E" />
+
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,400;0,9..144,500;0,9..144,600;0,9..144,700;1,9..144,400;1,9..144,500&family=Plus+Jakarta+Sans:ital,wght@0,400;0,500;0,600;0,700;0,800;1,500&display=swap" rel="stylesheet" />
+
+<link rel="stylesheet" href="../assets/css/style.css" />
+</head>
+<body data-project-id="mindguard">
+<div class="scroll-progress" id="scrollProgress"></div>
+<div class="bg-blobs" aria-hidden="true"><span class="b1"></span><span class="b2"></span><span class="b3"></span></div>
+
+<header class="navbar" id="navbar">
+  <div class="container nav-inner">
+    <a href="../index.html" class="logo">Kaka<span class="dot">.</span></a>
+    <nav class="nav-links" id="navLinks">
+      <a href="../index.html#about" class="nav-link">About</a>
+      <a href="../index.html#experience" class="nav-link">Experience</a>
+      <a href="../index.html#projects" class="nav-link">Projects</a>
+      <a href="../index.html#contact" class="nav-link">Contact</a>
+    </nav>
+    <div class="nav-actions">
+      <a href="../assets/cv/CV-Muhammad-Albharaka-Putrosandy.pdf" class="btn btn-outline btn-sm" target="_blank" rel="noopener">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7,10 12,15 17,10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>
+        Resume
+      </a>
+      <button class="nav-toggle" id="navToggle" aria-label="Toggle menu" aria-expanded="false">
+        <span></span><span></span><span></span>
+      </button>
+    </div>
+  </div>
+</header>
+
+<main>
+
+  <section class="project-hero">
+    <div class="container">
+      <a href="../index.html#projects" class="back-link">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><line x1="19" y1="12" x2="5" y2="12"/><polyline points="12,19 5,12 12,5"/></svg>
+        All Projects
+      </a>
+
+      <div class="project-hero-grid">
+        <div class="reveal from-left">
+          <div class="project-meta-row reveal">
+            <span class="medal medal--bronze">
+              <span class="medal-icon"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 2l2.4 4.86 5.36.78-3.88 3.78.92 5.34L12 14.2l-4.8 2.56.92-5.34-3.88-3.78 5.36-.78L12 2z"/></svg></span>
+              Finalist — UGM Public Health Hackathon
+            </span>
+            <span class="project-period">Mar 2026 – May 2026</span>
+          </div>
+          <h1 class="project-brand reveal">
+            <span class="brand-a">Mind</span><span class="brand-b">Guard</span>
+          </h1>
+          <p class="project-tagline reveal">A privacy-centric browser extension that filters distressing content in real time for a safer browsing experience.</p>
+          <div class="project-tags reveal">
+            <span class="pill">Browser Extension</span>
+            <span class="pill">Mental Health</span>
+            <span class="pill">Privacy-first</span>
+            <span class="pill pill-outline">Sole Tech Developer</span>
+          </div>
+          <div class="project-hero-actions reveal">
+            <a href="https://github.com/K2Sandy/MindGuard_Extension" target="_blank" rel="noopener" class="btn btn-primary">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><path d="M9 19c-5 1.5-5-2.5-7-3m14 6v-3.87a3.37 3.37 0 0 0-.94-2.61c3.14-.35 6.44-1.54 6.44-7A5.44 5.44 0 0 0 20 4.77 5.07 5.07 0 0 0 19.91 1S18.73.65 16 2.48a13.38 13.38 0 0 0-7 0C6.27.65 5.09 1 5.09 1A5.07 5.07 0 0 0 5 4.77a5.44 5.44 0 0 0-1.5 3.78c0 5.42 3.3 6.61 6.44 7A3.37 3.37 0 0 0 9 18.13V22"/></svg>
+              View on GitHub
+            </a>
+            <a href="../assets/paper/mindguard-paper.pdf" class="btn btn-ghost" download>
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/><path d="M12 18v-6"/><path d="m9 15 3-3 3 3"/></svg>
+              Download Paper
+            </a>
+          </div>
+        </div>
+
+        <div class="project-hero-visual reveal from-right">
+          <img src="../assets/img/mindguard/mindguard-top.webp" alt="MindGuard browser extension interface" style="width:100%;height:auto;object-fit:cover;display:block;border-radius:12px;" />
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="section-pad" style="padding-top:28px;">
+    <div class="container two-col">
+      <div class="overview-text reveal">
+        <h2>Overview</h2>
+        <p>MindGuard is a privacy-centric browser extension designed to provide real-time content filtering for student mental health support. It proactively masks distressing online content to create a safer digital environment.</p>
+        <p>The idea grew out of the 2026 UGM Public Health Hackathon, which focused on youth psychological distress. Research pointed to a clear pattern: heavy exposure to negative social media content correlates with rising depression risk among students. Rather than asking students to simply log off, MindGuard intercepts that content before it ever reaches them and offers a calmer alternative in its place.</p>
+        <p>I acted as the sole tech developer and UI/UX designer within a multidisciplinary team, engineering a local Regex engine and dynamic DOM manipulation that filters content instantly. It's built entirely in Vanilla JS on Manifest V3, so every scan happens on-device, no data ever leaves the browser.</p>
+      </div>
+
+      <aside class="overview-side">
+        <div class="info-card reveal">
+          <h3>My Role</h3>
+          <p>Sole Tech Developer &amp; UI/UX Designer (Group Project), built the entire extension while teammates led the psychological research and content strategy.</p>
+        </div>
+        <div class="info-card reveal">
+          <h3>Tech Stack</h3>
+          <div class="tech-pills">
+            <span class="pill pill-outline">Vanilla JavaScript</span>
+            <span class="pill pill-outline">Manifest V3</span>
+            <span class="pill pill-outline">Regex Engine</span>
+            <span class="pill pill-outline">DOM Manipulation</span>
+          </div>
+        </div>
+        <div class="info-card reveal">
+          <h3>Recognition</h3>
+          <p>🥉 Finalist at the 2026 UGM Public Health Hackathon, for an innovative solution bridging Computer Science and digital well-being.</p>
+        </div>
+        <div class="info-card reveal">
+          <h3>Links</h3>
+          <a class="repo-link" href="https://github.com/K2Sandy/MindGuard_Extension" target="_blank" rel="noopener">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/><polyline points="15,3 21,3 21,9"/><line x1="10" y1="14" x2="21" y2="3"/></svg>
+            github.com/K2Sandy/MindGuard_Extension
+          </a>
+        </div>
+      </aside>
+    </div>
+  </section>
+
+  <section class="project-gallery section-pad" style="padding-top:28px;">
+    <div class="container">
+      <h2 class="section-title center" style="margin-top:8px;">Highlights</h2>
+      <p class="section-sub center">How MindGuard transforms your digital experience.</p>
+
+      <div class="gallery-grid">
+        <div class="gallery-item reveal" style="grid-column: 1 / -1; max-width: 100%; margin: 0 auto;">
+          <button type="button" class="photo-placeholder dashed gallery-media" data-lightbox-src="../assets/img/mindguard/mindguard-workflow.webp" data-lightbox-alt="MindGuard Workflow" style="aspect-ratio: auto; min-height: 0; height: auto; padding: 0; border-radius: var(--radius-lg);">
+            <img src="../assets/img/mindguard/mindguard-workflow.webp" alt="MindGuard Workflow" style="width: 100%; height: auto; display: block; border-radius: inherit;">
+            <span class="gallery-media-overlay">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M21 21l-4.35-4.35"/><circle cx="11" cy="11" r="5.5"/></svg>
+              <span>View</span>
+            </span>
+          </button>
+          <p class="gallery-caption">MindGuard Workflow</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="project-nav">
+    <div class="container project-nav-inner">
+      <a href="#" id="prevProjectLink" class="nav-project-link prev">
+        <small>← Previous</small>
+        <strong>Loading…</strong>
+      </a>
+      <a href="../index.html#projects" class="nav-project-link all-link">
+        <small>Browse</small>
+        <strong>All Projects</strong>
+      </a>
+      <a href="#" id="nextProjectLink" class="nav-project-link next">
+        <small>Next →</small>
+        <strong>Loading…</strong>
+      </a>
+    </div>
+  </section>
+
+</main>
+
+<footer class="site-footer">
+  <div class="container footer-inner">
+    <p>© <span id="year">2026</span> Muhammad Albharaka Putrosandy. Built with care.</p>
+    <div class="footer-links">
+      <a href="https://github.com/K2Sandy" target="_blank" rel="noopener" aria-label="GitHub">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M9 19c-5 1.5-5-2.5-7-3m14 6v-3.87a3.37 3.37 0 0 0-.94-2.61c3.14-.35 6.44-1.54 6.44-7A5.44 5.44 0 0 0 20 4.77 5.07 5.07 0 0 0 19.91 1S18.73.65 16 2.48a13.38 13.38 0 0 0-7 0C6.27.65 5.09 1 5.09 1A5.07 5.07 0 0 0 5 4.77a5.44 5.44 0 0 0-1.5 3.78c0 5.42 3.3 6.61 6.44 7A3.37 3.37 0 0 0 9 18.13V22"/></svg>
+      </a>
+      <a href="https://linkedin.com/in/muhammad-albharaka-putrosandy" target="_blank" rel="noopener" aria-label="LinkedIn">
+        <svg viewBox="0 0 24 24" fill="none">
+          <rect x="2" y="2" width="20" height="20" rx="5" stroke="currentColor" stroke-width="1.8"/>
+          <circle cx="7.2" cy="7" r="1.15" fill="currentColor"/>
+          <line x1="7.2" y1="10.3" x2="7.2" y2="17" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/>
+          <path d="M11 17v-4.3c0-1.5 1-2.4 2.4-2.4s2.4.9 2.4 2.4V17" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/>
+          <line x1="11" y1="10.3" x2="11" y2="17" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/>
+        </svg>
+      </a>
+      <a href="mailto:m.kakasandy@gmail.com" aria-label="Email">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg>
+      </a>
+    </div>
+  </div>
+</footer>
+
+<button class="back-to-top" id="backToTop" aria-label="Back to top">
+  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><line x1="12" y1="19" x2="12" y2="5"/><polyline points="5,12 12,5 19,12"/></svg>
+</button>
+
+<script src="../assets/js/projects-data.js"></script>
+<script src="../assets/js/main.js"></script>
+</body>
+</html>

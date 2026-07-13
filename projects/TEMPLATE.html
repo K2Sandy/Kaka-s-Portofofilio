@@ -38,15 +38,28 @@
   <div class="container nav-inner">
     <a href="../index.html" class="logo">Kaka<span class="dot">.</span></a>
     <nav class="nav-links" id="navLinks">
-      <a href="../index.html#about" class="nav-link">About</a>
-      <a href="../index.html#experience" class="nav-link">Experience</a>
-      <a href="../index.html#projects" class="nav-link">Projects</a>
-      <a href="../index.html#contact" class="nav-link">Contact</a>
+      <a href="../index.html#about" class="nav-link" data-i18n="nav.about">About</a>
+      <a href="../index.html#experience" class="nav-link" data-i18n="nav.experience">Experience</a>
+      <a href="../index.html#projects" class="nav-link" data-i18n="nav.projects">Projects</a>
+      <a href="../index.html#contact" class="nav-link" data-i18n="nav.contact">Contact</a>
+      <div class="lang-switcher" id="langSwitcher">
+        <button type="button" class="nav-link lang-trigger" aria-haspopup="true" aria-expanded="false">
+          <svg class="lang-globe" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"/><line x1="3" y1="12" x2="21" y2="12"/><path d="M12 3a14 14 0 0 1 0 18 14 14 0 0 1 0-18z"/></svg>
+          <span data-i18n="nav.language">Language</span>
+          <span class="lang-current-label">EN</span>
+          <svg class="lang-caret" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="6,9 12,15 18,9"/></svg>
+        </button>
+        <div class="lang-dropdown" id="langDropdown" role="menu">
+          <button type="button" class="lang-option is-active" data-lang="en" role="menuitem"><span class="flag">🇬🇧</span><span>English</span><svg class="check" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><polyline points="20,6 9,17 4,12"/></svg></button>
+          <button type="button" class="lang-option" data-lang="id" role="menuitem"><span class="flag">🇮🇩</span><span>Bahasa Indonesia</span><svg class="check" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><polyline points="20,6 9,17 4,12"/></svg></button>
+          <button type="button" class="lang-option" data-lang="zh" role="menuitem"><span class="flag">🇨🇳</span><span>中文</span><svg class="check" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><polyline points="20,6 9,17 4,12"/></svg></button>
+        </div>
+      </div>
     </nav>
     <div class="nav-actions">
       <a href="../assets/cv/CV-Muhammad-Albharaka-Putrosandy.pdf" class="btn btn-outline btn-sm" target="_blank" rel="noopener">
         <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7,10 12,15 17,10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>
-        Resume
+        <span data-i18n="nav.resume">Resume</span>
       </a>
       <button class="nav-toggle" id="navToggle" aria-label="Toggle menu" aria-expanded="false">
         <span></span><span></span><span></span>
@@ -61,7 +74,7 @@
     <div class="container">
       <a href="../index.html#projects" class="back-link">
         <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><line x1="19" y1="12" x2="5" y2="12"/><polyline points="12,19 5,12 12,5"/></svg>
-        All Projects
+        <span data-i18n="projectPage.allProjects">All Projects</span>
       </a>
 
       <div class="project-hero-grid">
@@ -85,7 +98,7 @@
           <div class="project-hero-actions">
             <a href="[https://github.com/your-repo]" target="_blank" rel="noopener" class="btn btn-primary">
               <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><path d="M9 19c-5 1.5-5-2.5-7-3m14 6v-3.87a3.37 3.37 0 0 0-.94-2.61c3.14-.35 6.44-1.54 6.44-7A5.44 5.44 0 0 0 20 4.77 5.07 5.07 0 0 0 19.91 1S18.73.65 16 2.48a13.38 13.38 0 0 0-7 0C6.27.65 5.09 1 5.09 1A5.07 5.07 0 0 0 5 4.77a5.44 5.44 0 0 0-1.5 3.78c0 5.42 3.3 6.61 6.44 7A3.37 3.37 0 0 0 9 18.13V22"/></svg>
-              View on GitHub
+              <span data-i18n="projectPage.viewGithub">View on GitHub</span>
             </a>
             <a href="../index.html#contact" class="btn btn-ghost">Contact Me</a>
           </div>
@@ -105,7 +118,7 @@
   <section class="section-pad" style="padding-top:28px;">
     <div class="container two-col">
       <div class="overview-text reveal">
-        <h2>Overview</h2>
+        <h2 data-i18n="projectPage.overview">Overview</h2>
         <p>[Paragraph 1 — what the project is and the problem it solves.]</p>
         <p>[Paragraph 2 — context: how it came about, who it's for, what made it interesting or hard.]</p>
         <p>[Paragraph 3 — your specific role and the technical approach you took.]</p>
@@ -113,11 +126,11 @@
 
       <aside class="overview-side">
         <div class="info-card reveal">
-          <h3>My Role</h3>
+          <h3 data-i18n="projectPage.myRole">My Role</h3>
           <p>[Your title] (Group Project / Solo Project) — [one line on what you specifically owned].</p>
         </div>
         <div class="info-card reveal">
-          <h3>Tech Stack</h3>
+          <h3 data-i18n="projectPage.techStack">Tech Stack</h3>
           <div class="tech-pills">
             <span class="pill pill-outline">[Tech 1]</span>
             <span class="pill pill-outline">[Tech 2]</span>
@@ -125,11 +138,11 @@
           </div>
         </div>
         <div class="info-card reveal">
-          <h3>Recognition</h3>
+          <h3 data-i18n="projectPage.recognition">Recognition</h3>
           <p>[Award emoji] [Award description, if any — otherwise delete this card.]</p>
         </div>
         <div class="info-card reveal">
-          <h3>Links</h3>
+          <h3 data-i18n="projectPage.links">Links</h3>
           <a class="repo-link" href="[https://github.com/your-repo]" target="_blank" rel="noopener">
             <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/><polyline points="15,3 21,3 21,9"/><line x1="10" y1="14" x2="21" y2="3"/></svg>
             github.com/your-repo
@@ -159,12 +172,12 @@
   <section class="project-nav">
     <div class="container project-nav-inner">
       <a href="#" id="prevProjectLink" class="nav-project-link prev">
-        <small>← Previous</small>
+        <small>← <span data-i18n="projectNav.prev">Previous</span></small>
         <strong>Loading…</strong>
       </a>
       <a href="../index.html#projects" class="nav-project-link all-link">
-        <small>Browse</small>
-        <strong>All Projects</strong>
+        <small data-i18n="projectNav.browse">Browse</small>
+        <strong data-i18n="projectNav.all">All Projects</strong>
       </a>
       <a href="#" id="nextProjectLink" class="nav-project-link next">
         <small>Next →</small>
@@ -177,7 +190,7 @@
 
 <footer class="site-footer">
   <div class="container footer-inner">
-    <p>© <span id="year">2026</span> Muhammad Albharaka Putrosandy. Built with care.</p>
+    <p>© <span id="year">2026</span> Muhammad Albharaka Putrosandy. <span data-i18n="footer.builtWith">Built with care.</span></p>
     <div class="footer-links">
       <a href="https://github.com/K2Sandy" target="_blank" rel="noopener" aria-label="GitHub">
         <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M9 19c-5 1.5-5-2.5-7-3m14 6v-3.87a3.37 3.37 0 0 0-.94-2.61c3.14-.35 6.44-1.54 6.44-7A5.44 5.44 0 0 0 20 4.77 5.07 5.07 0 0 0 19.91 1S18.73.65 16 2.48a13.38 13.38 0 0 0-7 0C6.27.65 5.09 1 5.09 1A5.07 5.07 0 0 0 5 4.77a5.44 5.44 0 0 0-1.5 3.78c0 5.42 3.3 6.61 6.44 7A3.37 3.37 0 0 0 9 18.13V22"/></svg>
@@ -203,6 +216,7 @@
 </button>
 
 <script src="../assets/js/projects-data.js"></script>
+<script src="../assets/js/i18n.js"></script>
 <script src="../assets/js/main.js"></script>
 </body>
 </html>

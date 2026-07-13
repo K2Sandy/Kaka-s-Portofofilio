@@ -11,6 +11,104 @@
 
   const reduceMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
   const hasProjects = typeof PROJECTS !== "undefined";
+  const hasI18n = typeof I18N !== "undefined";
+
+  /* ---------------- i18n engine ---------------- */
+  let currentLang = "en";
+
+  function getNested(obj, path) {
+    return path.split(".").reduce((o, k) => (o && o[k] !== undefined ? o[k] : undefined), obj);
+  }
+
+  function t(path) {
+    if (!hasI18n) return "";
+    const val = getNested(I18N[currentLang], path);
+    if (val !== undefined) return val;
+    return getNested(I18N.en, path) || "";
+  }
+
+  function applyStaticTranslations() {
+    document.querySelectorAll("[data-i18n]").forEach((el) => {
+      const val = t(el.getAttribute("data-i18n"));
+      if (val) el.textContent = val;
+    });
+    document.querySelectorAll("[data-i18n-html]").forEach((el) => {
+      const val = t(el.getAttribute("data-i18n-html"));
+      if (val) el.innerHTML = val;
+    });
+  }
+
+  function updateLangUI() {
+    document.querySelectorAll(".lang-option").forEach((btn) => {
+      btn.classList.toggle("is-active", btn.getAttribute("data-lang") === currentLang);
+    });
+    document.querySelectorAll(".lang-current-label").forEach((el) => {
+      el.textContent = currentLang.toUpperCase();
+    });
+  }
+
+  function setLanguage(lang) {
+    if (!hasI18n) return;
+    currentLang = I18N[lang] ? lang : "en";
+    document.documentElement.setAttribute("lang", currentLang);
+    try {
+      localStorage.setItem("kaka-lang", currentLang);
+    } catch (e) {
+      /* localStorage unavailable (private mode etc.) — language just won't persist */
+    }
+    applyStaticTranslations();
+    if (hasProjects) renderProjectGrid();
+    updateLangUI();
+  }
+
+  function initLangSwitcher() {
+    let saved = "en";
+    try {
+      saved = localStorage.getItem("kaka-lang") || "en";
+    } catch (e) {
+      /* ignore */
+    }
+    setLanguage(saved);
+
+    document.querySelectorAll(".lang-switcher").forEach((wrap) => {
+      const trigger = wrap.querySelector(".lang-trigger");
+      if (!trigger) return;
+      trigger.addEventListener("click", (e) => {
+        e.stopPropagation();
+        const isOpen = wrap.classList.contains("is-open");
+        document.querySelectorAll(".lang-switcher.is-open").forEach((w) => {
+          w.classList.remove("is-open");
+          const t2 = w.querySelector(".lang-trigger");
+          if (t2) t2.setAttribute("aria-expanded", "false");
+        });
+        if (!isOpen) {
+          wrap.classList.add("is-open");
+          trigger.setAttribute("aria-expanded", "true");
+        }
+      });
+      wrap.querySelectorAll(".lang-option").forEach((opt) => {
+        opt.addEventListener("click", (e) => {
+          e.stopPropagation();
+          setLanguage(opt.getAttribute("data-lang"));
+          wrap.classList.remove("is-open");
+          trigger.setAttribute("aria-expanded", "false");
+        });
+      });
+    });
+
+    document.addEventListener("click", () => {
+      document.querySelectorAll(".lang-switcher.is-open").forEach((w) => {
+        w.classList.remove("is-open");
+        const trig = w.querySelector(".lang-trigger");
+        if (trig) trig.setAttribute("aria-expanded", "false");
+      });
+    });
+    document.addEventListener("keydown", (e) => {
+      if (e.key === "Escape") {
+        document.querySelectorAll(".lang-switcher.is-open").forEach((w) => w.classList.remove("is-open"));
+      }
+    });
+  }
 
   /* ---------------- Navbar scroll state + progress bar ---------------- */
   const navbar = document.querySelector(".navbar");
@@ -220,7 +318,11 @@
     }
 
     function cardHTML(p) {
-      const tags = p.tags.map((t) => `<span class="pill">${t}</span>`).join("");
+      const tr = (typeof PROJECT_TRANSLATIONS !== "undefined" && PROJECT_TRANSLATIONS[p.id] && PROJECT_TRANSLATIONS[p.id][currentLang]) || {};
+      const summary = tr.summary || p.summary;
+      const awardTr = (typeof AWARD_LABEL_TRANSLATIONS !== "undefined" && AWARD_LABEL_TRANSLATIONS[p.award.label]) || {};
+      const awardLabel = awardTr[currentLang] || p.award.label;
+      const tags = p.tags.map((tag) => `<span class="pill">${tag}</span>`).join("");
       const medalIcon = (AWARD_ICON && AWARD_ICON[p.award.tier]) || "";
       const previewImage = p.image
         ? `<img src="${resolveProjectImagePath(p.image)}" alt="${p.name} preview" loading="lazy" />`
@@ -233,11 +335,11 @@
               <h3>${p.name}</h3>
               <span class="project-card-period">${p.period}</span>
             </div>
-            <p class="desc">${p.summary}</p>
+            <p class="desc">${summary}</p>
             <div class="project-card-tags">${tags}</div>
             <div class="project-card-foot">
-              <span class="medal medal--${p.award.tier}"><span class="medal-icon">${medalIcon}</span>${p.award.label}</span>
-              <span class="card-link">View <svg viewBox="0 0 24 24" fill="none"><path d="M5 12h14M13 6l6 6-6 6" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/></svg></span>
+              <span class="medal medal--${p.award.tier}"><span class="medal-icon">${medalIcon}</span>${awardLabel}</span>
+              <span class="card-link">${t("projects.viewLink")} <svg viewBox="0 0 24 24" fill="none"><path d="M5 12h14M13 6l6 6-6 6" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/></svg></span>
             </div>
           </div>
         </a>`;
@@ -247,8 +349,8 @@
       return `
         <div class="project-card ghost-card reveal">
           <div class="empty-icon">＋</div>
-          <h3>More on the way</h3>
-          <p>New builds get added here as they ship. This spot is reserved for what's next.</p>
+          <h3>${t("projects.moreTitle")}</h3>
+          <p>${t("projects.moreText")}</p>
         </div>`;
     }
 
@@ -259,10 +361,11 @@
     }
 
     if (filterWrap) {
+      const labelFor = (c) => (typeof CATEGORY_LABELS !== "undefined" && CATEGORY_LABELS[currentLang] && CATEGORY_LABELS[currentLang][c]) || c;
       filterWrap.innerHTML = categories
         .map(
           (c, i) =>
-            `<button type="button" class="filter-btn${i === 0 ? " is-active" : ""}" data-filter="${c}">${c}</button>`
+            `<button type="button" class="filter-btn${c === active ? " is-active" : ""}" data-filter="${c}">${labelFor(c)}</button>`
         )
         .join("");
       filterWrap.addEventListener("click", (e) => {
@@ -433,7 +536,7 @@
   /* ---------------- Init ---------------- */
   syncStatsWithProjects();
   initCounters();
-  renderProjectGrid();
+  initLangSwitcher();
   initProjectNav();
   initGalleryLightbox();
   triggerInitialReveals();

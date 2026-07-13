@@ -304,6 +304,82 @@ h2.section-title {
 .nav-toggle.is-open span:nth-child(2) { opacity: 0; }
 .nav-toggle.is-open span:nth-child(3) { transform: translateY(-7px) rotate(-45deg); }
 
+/* ---------- Language switcher ---------- */
+.lang-switcher { position: relative; }
+.lang-trigger {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  background: none;
+  border: none;
+  cursor: pointer;
+}
+.lang-trigger svg.lang-globe { width: 16px; height: 16px; }
+.lang-trigger .lang-caret { width: 12px; height: 12px; transition: transform var(--dur-sm) var(--ease); }
+.lang-switcher.is-open .lang-trigger .lang-caret { transform: rotate(180deg); }
+
+.lang-dropdown {
+  position: absolute;
+  top: calc(100% + 8px);
+  right: 0;
+  min-width: 190px;
+  background: var(--white);
+  border: 1px solid var(--line);
+  border-radius: var(--radius-md);
+  box-shadow: var(--shadow-lg);
+  padding: 6px;
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+  opacity: 0;
+  visibility: hidden;
+  transform: translateY(-8px);
+  transition: opacity var(--dur-sm) var(--ease), transform var(--dur-sm) var(--ease), visibility var(--dur-sm);
+  z-index: 950;
+}
+.lang-switcher.is-open .lang-dropdown {
+  opacity: 1;
+  visibility: visible;
+  transform: translateY(0);
+}
+.lang-option {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  width: 100%;
+  padding: 9px 12px;
+  border: none;
+  background: none;
+  border-radius: var(--radius-sm);
+  font-size: 0.88rem;
+  font-weight: 600;
+  color: var(--ink-soft);
+  text-align: left;
+  cursor: pointer;
+  transition: background var(--dur-sm) var(--ease), color var(--dur-sm) var(--ease);
+}
+.lang-option:hover { background: var(--mint-mist); color: var(--teal-deep); }
+.lang-option.is-active { background: var(--mint-mist); color: var(--teal-deep); font-weight: 800; }
+.lang-option .flag { font-size: 1.05rem; line-height: 1; }
+.lang-option .check { margin-left: auto; width: 15px; height: 15px; color: var(--mint-600); opacity: 0; }
+.lang-option.is-active .check { opacity: 1; }
+
+@media (max-width: 760px) {
+  .lang-switcher { width: 100%; }
+  .lang-trigger { width: 100%; justify-content: space-between; padding: 12px 14px; }
+  .lang-dropdown {
+    position: static;
+    box-shadow: none;
+    border: none;
+    padding: 0 0 0 14px;
+    opacity: 1;
+    visibility: visible;
+    transform: none;
+    display: none;
+  }
+  .lang-switcher.is-open .lang-dropdown { display: flex; }
+}
+
 /* ---------- Back link (project pages) ---------- */
 .back-link {
   display: inline-flex;

@@ -32,7 +32,7 @@ const I18N = {
     },
     about: {
       title: "About Kaka",
-      lead: "I am a Computer Science student at Universitas Syiah Kuala, driven to develop tools that serve a clear purpose. I thrive on building functional, efficient solutions to tackle real-world challenges. Every expert was once a beginner, and I'm dedicated to continuously learning and engineering technology that creates meaningful impact.",
+      lead: "I am a Computer Science student at Syiah Kuala University, driven to develop tools that serve a clear purpose. I thrive on building functional, efficient solutions to tackle real-world challenges. Every expert was once a beginner, and I'm dedicated to continuously learning and engineering technology that creates meaningful impact.",
       factEducation: "🎓 Education",
       factEducationValue: "Computer Science, Universitas Syiah Kuala",
       factBased: "📍 Based in",
@@ -278,7 +278,7 @@ const I18N = {
     },
     about: {
       title: "关于 Kaka",
-      lead: "我是 Universitas Syiah Kuala 的计算机科学专业学生，致力于开发目标明确的实用工具。我热衷于构建功能完善、高效的解决方案来应对现实挑战。每个专家都曾是初学者，我也将持续学习，打造真正产生影响力的技术。",
+      lead: "我是锡亚库拉大学的计算机科学专业学生，致力于开发目标明确的实用工具。我热衷于构建功能完善、高效的解决方案来应对现实挑战。每个专家都曾是初学者，我也将持续学习，打造真正产生影响力的技术。",
       factEducation: "🎓 教育背景",
       factEducationValue: "计算机科学，Universitas Syiah Kuala",
       factBased: "📍 常驻地",

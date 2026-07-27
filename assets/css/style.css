@@ -380,6 +380,8 @@ h2.section-title {
   .lang-switcher.is-open .lang-dropdown { display: flex; }
 }
 
+.nav-resume-mobile { display: none; }
+
 /* ---------- Back link (project pages) ---------- */
 .back-link {
   display: inline-flex;
@@ -1403,14 +1405,13 @@ body.modal-open { overflow: hidden; }
     box-shadow: var(--shadow-md);
     gap: 4px;
   }
-  .navbar.is-menu-open .nav-actions .btn-outline {
-    display: inline-flex;
-    position: absolute;
-    top: calc(var(--nav-h) + 1px);
-    right: 20px;
-    transform: translateY(210px);
-  }
   .nav-link { padding: 12px 14px; width: 100%; }
+  .nav-resume-mobile {
+    display: inline-flex;
+    width: 100%;
+    justify-content: center;
+    margin-top: 10px;
+  }
 
   .about-facts { grid-template-columns: 1fr; }
   .project-grid { grid-template-columns: 1fr; }

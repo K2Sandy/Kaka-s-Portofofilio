@@ -317,6 +317,12 @@ h2.section-title {
 .lang-trigger svg.lang-globe { width: 16px; height: 16px; }
 .lang-trigger .lang-caret { width: 12px; height: 12px; transition: transform var(--dur-sm) var(--ease); }
 .lang-switcher.is-open .lang-trigger .lang-caret { transform: rotate(180deg); }
+.lang-trigger-left, .lang-trigger-right {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+}
+.lang-trigger-right { margin-left: auto; }
 
 .lang-dropdown {
   position: absolute;

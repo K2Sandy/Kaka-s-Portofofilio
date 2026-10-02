@@ -84,6 +84,30 @@
           <img class="scan-image" src="assets/img/main-photo.webp" alt="Portrait of Muhammad Albharaka Putrosandy" loading="eager" />
         </div>
         <div class="hero-badge" data-i18n="hero.badge">🎓&nbsp; CS Student · Universitas Syiah Kuala</div>
+
+        <!--
+          Floating work artifacts — cropped fragments of real project UI, so
+          proof of work sits above the fold instead of only down in #projects.
+          Purely decorative (aria-hidden): every screen here appears in full,
+          captioned, on its own project page. The stat card's text is filled in
+          from the gold-tier entry in projects-data.js by initHeroArtifacts(),
+          so it is never a second copy of that data.
+        -->
+        <div class="hero-artifacts" aria-hidden="true">
+          <figure class="artifact artifact--screen" data-depth="2.6">
+            <img src="assets/img/glucoscan/scanning-result-screen.webp" alt=""
+                 width="1080" height="2340" loading="lazy" decoding="async" fetchpriority="low" />
+          </figure>
+          <figure class="artifact artifact--stat" data-depth="1.4">
+            <span class="artifact-stat-label">Gold Medal</span>
+            <strong class="artifact-stat-value">International Indonesia Inventors Day 2024</strong>
+            <span class="artifact-spark"></span>
+          </figure>
+          <figure class="artifact artifact--wide" data-depth="3.4">
+            <img src="assets/img/mindguard/mindguard-workflow.webp" alt=""
+                 width="1051" height="491" loading="lazy" decoding="async" fetchpriority="low" />
+          </figure>
+        </div>
       </div>
     </div>
     <button class="scroll-cue" id="scrollCueBtn" aria-label="Scroll to About section" onclick="document.getElementById('about').scrollIntoView({behavior:'smooth'})">

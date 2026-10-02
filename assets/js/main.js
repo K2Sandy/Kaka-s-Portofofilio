@@ -58,6 +58,7 @@
     }
     applyStaticTranslations();
     if (hasProjects) renderProjectGrid();
+    initHeroArtifacts();
     updateLangUI();
   }
 
@@ -328,7 +329,7 @@
         ? `<img src="${resolveProjectImagePath(p.image)}" alt="${p.name} preview" loading="lazy" />`
         : `<span class="icon-emoji">${p.emoji}</span>`;
       return `
-        <a href="${p.page}" class="project-card reveal">
+        <a href="${p.page}" class="project-card reveal" style="view-transition-name: card-${p.id}">
           <div class="project-card-head">${previewImage}</div>
           <div class="project-card-body">
             <div class="project-card-top">
@@ -347,17 +348,31 @@
 
     function ghostCardHTML() {
       return `
-        <div class="project-card ghost-card reveal">
+        <div class="project-card ghost-card reveal" style="view-transition-name: card-ghost">
           <div class="empty-icon">＋</div>
           <h3>${t("projects.moreTitle")}</h3>
           <p>${t("projects.moreText")}</p>
         </div>`;
     }
 
-    function draw() {
-      const list = active === "All" ? PROJECTS : PROJECTS.filter((p) => p.category === active);
-      grid.innerHTML = list.map(cardHTML).join("") + ghostCardHTML();
-      observeReveals(grid);
+    function draw(isFilterSwap) {
+      const paint = () => {
+        const list = active === "All" ? PROJECTS : PROJECTS.filter((p) => p.category === active);
+        grid.innerHTML = list.map(cardHTML).join("") + ghostCardHTML();
+        observeReveals(grid);
+        if (isFilterSwap) {
+          // On a filter swap the grid is already on screen and the View
+          // Transition is doing the animating, so skip the entrance reveal.
+          // On first paint we must NOT do this, or scrolling down to the
+          // projects section would find every card already faded in.
+          grid.querySelectorAll(".project-card").forEach((c) => c.classList.add("is-visible"));
+        }
+      };
+      if (!reduceMotion && typeof document.startViewTransition === "function") {
+        document.startViewTransition(paint);
+      } else {
+        paint();
+      }
     }
 
     if (filterWrap) {
@@ -368,13 +383,40 @@
             `<button type="button" class="filter-btn${c === active ? " is-active" : ""}" data-filter="${c}">${labelFor(c)}</button>`
         )
         .join("");
+      // One pill slides between filters instead of the active fill jumping.
+      // Built here rather than in the markup so it survives a re-render on
+      // language change.
+      const indicator = document.createElement("span");
+      indicator.className = "filter-indicator";
+      filterWrap.appendChild(indicator);
+
+      function moveIndicator(btn) {
+        if (!btn) return;
+        indicator.style.width = btn.offsetWidth + "px";
+        indicator.style.height = btn.offsetHeight + "px";
+        indicator.style.transform =
+          "translate(" + btn.offsetLeft + "px, " + btn.offsetTop + "px)";
+        indicator.classList.add("is-ready");
+      }
+
+      // Fonts load after first paint and change button widths, so measure
+      // once they have settled; otherwise the pill lands a few pixels off.
+      const placeIndicator = () =>
+        moveIndicator(filterWrap.querySelector(".filter-btn.is-active"));
+      if (document.fonts && document.fonts.ready) {
+        document.fonts.ready.then(placeIndicator);
+      }
+      requestAnimationFrame(placeIndicator);
+      window.addEventListener("resize", placeIndicator);
+
       filterWrap.addEventListener("click", (e) => {
         const btn = e.target.closest(".filter-btn");
         if (!btn) return;
         filterWrap.querySelectorAll(".filter-btn").forEach((b) => b.classList.remove("is-active"));
         btn.classList.add("is-active");
+        moveIndicator(btn);
         active = btn.getAttribute("data-filter");
-        draw();
+        draw(true);
       });
     }
     draw();
@@ -512,20 +554,150 @@
     });
   }
 
+  /* ---------------- Hero work artifacts ---------------- */
+  /* The stat card reads its text from the gold-tier entry in PROJECTS, so
+     the award is never written down twice. If no gold entry exists the card
+     removes itself rather than showing placeholder copy. */
+  function initHeroArtifacts() {
+    const stat = document.querySelector(".artifact--stat");
+    if (!stat) return;
+    if (!hasProjects) return;
+    const best =
+      PROJECTS.find((p) => p.award && p.award.tier === "gold") ||
+      PROJECTS.find((p) => p.award);
+    if (!best) {
+      stat.remove();
+      return;
+    }
+    const labelEl = stat.querySelector(".artifact-stat-label");
+    const valueEl = stat.querySelector(".artifact-stat-value");
+    const awardTr =
+      (typeof AWARD_LABEL_TRANSLATIONS !== "undefined" &&
+        AWARD_LABEL_TRANSLATIONS[best.award.label]) || {};
+    if (labelEl) labelEl.textContent = awardTr[currentLang] || best.award.label;
+    if (valueEl) valueEl.textContent = best.award.event;
+  }
+
   /* ---------------- Hero parallax (subtle, desktop only) ---------------- */
+  /* The portrait tilts in 3D; the floating artifacts translate by their own
+     data-depth, so the cluster separates into layers as the pointer moves.
+     Reads are batched into one rAF frame to keep mousemove off the layout
+     critical path. */
   function initHeroParallax() {
     if (reduceMotion) return;
     const visual = document.querySelector(".hero-visual");
     const frame = document.querySelector(".hero-visual .profile-frame");
     if (!visual || !frame || window.matchMedia("(max-width: 760px)").matches) return;
+
+    const artifacts = Array.prototype.map.call(
+      visual.querySelectorAll(".artifact"),
+      (el) => ({ el: el, depth: parseFloat(el.getAttribute("data-depth")) || 1 })
+    );
+
+    let queued = false;
+    let nx = 0;
+    let ny = 0;
+
+    function paint() {
+      queued = false;
+      frame.style.transform = `rotateY(${nx * 9}deg) rotateX(${-ny * 9}deg)`;
+      artifacts.forEach((a) => {
+        a.el.style.transform =
+          `translate3d(${-nx * a.depth * 9}px, ${-ny * a.depth * 9}px, 0)`;
+      });
+    }
+
     visual.addEventListener("mousemove", (e) => {
       const rect = visual.getBoundingClientRect();
-      const x = (e.clientX - rect.left - rect.width / 2) / rect.width;
-      const y = (e.clientY - rect.top - rect.height / 2) / rect.height;
-      frame.style.transform = `rotateY(${x * 9}deg) rotateX(${-y * 9}deg)`;
+      nx = (e.clientX - rect.left - rect.width / 2) / rect.width;
+      ny = (e.clientY - rect.top - rect.height / 2) / rect.height;
+      if (!queued) {
+        queued = true;
+        requestAnimationFrame(paint);
+      }
     });
+
     visual.addEventListener("mouseleave", () => {
       frame.style.transform = "";
+      artifacts.forEach((a) => {
+        a.el.style.transform = "";
+      });
+    });
+  }
+
+  /* ---------------- Scan-sweep section headings ---------------- */
+  /* Separate from the .reveal system on purpose: section titles should not
+     also slide in from the side, they just get the sweep. */
+  function initScanHeadings() {
+    const titles = document.querySelectorAll(".section-title");
+    if (!titles.length) return;
+    if (reduceMotion || !("IntersectionObserver" in window)) {
+      titles.forEach((el) => el.classList.add("is-scanned"));
+      return;
+    }
+    const obs = new IntersectionObserver(
+      (entries, o) => {
+        entries.forEach((entry) => {
+          if (!entry.isIntersecting) return;
+          entry.target.classList.add("is-scanned");
+          o.unobserve(entry.target);
+        });
+      },
+      { threshold: 0.5, rootMargin: "0px 0px -8% 0px" }
+    );
+    titles.forEach((el) => obs.observe(el));
+  }
+
+  /* ---------------- Magnetic project cards ---------------- */
+  /* Delegated from the grid because cards are re-rendered on every filter
+     change and language switch — per-card listeners would leak. */
+  function initCardTilt() {
+    const grid = document.getElementById("projectGrid");
+    if (!grid || reduceMotion) return;
+    if (!window.matchMedia("(hover: hover)").matches) return;
+
+    let active = null;
+    let queued = false;
+    let px = 0;
+    let py = 0;
+
+    function paint() {
+      queued = false;
+      if (!active) return;
+      const rect = active.getBoundingClientRect();
+      const x = (px - rect.left) / rect.width;
+      const y = (py - rect.top) / rect.height;
+      // half the hero's tilt strength: these are content, not a centrepiece
+      active.style.transform =
+        `translateY(-6px) rotateY(${(x - 0.5) * 4.5}deg) rotateX(${(0.5 - y) * 4.5}deg)`;
+      active.style.setProperty("--mx", x * 100 + "%");
+      active.style.setProperty("--my", y * 100 + "%");
+    }
+
+    grid.addEventListener("mousemove", (e) => {
+      const card = e.target.closest(".project-card");
+      if (!card) return;
+      if (active && active !== card) reset(active);
+      active = card;
+      card.classList.add("is-tilting");
+      px = e.clientX;
+      py = e.clientY;
+      if (!queued) {
+        queued = true;
+        requestAnimationFrame(paint);
+      }
+    });
+
+    function reset(card) {
+      card.classList.remove("is-tilting");
+      card.style.transform = "";
+      card.style.removeProperty("--mx");
+      card.style.removeProperty("--my");
+    }
+
+    grid.addEventListener("mouseleave", () => {
+      if (active) reset(active);
+      active = null;
     });
   }
 
@@ -540,5 +712,8 @@
   initProjectNav();
   initGalleryLightbox();
   triggerInitialReveals();
+  initHeroArtifacts();
   initHeroParallax();
+  initScanHeadings();
+  initCardTilt();
 })();

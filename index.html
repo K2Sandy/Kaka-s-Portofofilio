@@ -86,26 +86,38 @@
         <div class="hero-badge" data-i18n="hero.badge">🎓&nbsp; CS Student · Universitas Syiah Kuala</div>
 
         <!--
-          Floating work artifacts — cropped fragments of real project UI, so
-          proof of work sits above the fold instead of only down in #projects.
-          Purely decorative (aria-hidden): every screen here appears in full,
-          captioned, on its own project page. The stat card's text is filled in
-          from the gold-tier entry in projects-data.js by initHeroArtifacts(),
-          so it is never a second copy of that data.
+          Floating dev artifacts — a code fragment, the stack, and a build
+          prompt. Decorative (aria-hidden) and language-neutral, so there is
+          nothing here to translate. The stack chips mirror what the project
+          write-ups actually say was used: Kotlin/Compose, Vanilla JS,
+          C/C++ on Arduino.
         -->
         <div class="hero-artifacts" aria-hidden="true">
-          <figure class="artifact artifact--screen" data-depth="2.6">
-            <img src="assets/img/glucoscan/scanning-result-screen.webp" alt=""
-                 width="1080" height="2340" loading="lazy" decoding="async" fetchpriority="low" />
+          <figure class="artifact artifact--code" data-depth="2.6">
+            <div class="artifact-code">
+              <span class="code-line"><span class="c-key">@Composable</span></span>
+              <span class="code-line"><span class="c-key">fun</span> <span class="c-fn">ScanLabel</span>() {</span>
+              <span class="code-line is-indent"><span class="c-key">val</span> sugar = ocr.<span class="c-fn">read</span>()</span>
+              <span class="code-line is-indent"><span class="c-cmt">// over daily limit?</span></span>
+              <span class="code-line is-indent"><span class="c-fn">Alert</span>(sugar)</span>
+              <span class="code-line">}<span class="code-caret"></span></span>
+            </div>
           </figure>
-          <figure class="artifact artifact--stat" data-depth="1.4">
-            <span class="artifact-stat-label">Gold Medal</span>
-            <strong class="artifact-stat-value">International Indonesia Inventors Day 2024</strong>
-            <span class="artifact-spark"></span>
+
+          <figure class="artifact artifact--stack" data-depth="1.4">
+            <span class="artifact-label">Tech Stack</span>
+            <div class="artifact-chips">
+              <span class="artifact-chip">Kotlin</span>
+              <span class="artifact-chip">Compose</span>
+              <span class="artifact-chip">JS</span>
+              <span class="artifact-chip">C/C++</span>
+              <span class="artifact-chip">Arduino</span>
+            </div>
           </figure>
-          <figure class="artifact artifact--wide" data-depth="3.4">
-            <img src="assets/img/mindguard/mindguard-workflow.webp" alt=""
-                 width="1051" height="491" loading="lazy" decoding="async" fetchpriority="low" />
+
+          <figure class="artifact artifact--term" data-depth="3.4">
+            <span class="term-dots"><span></span><span></span><span></span></span>
+            <span class="term-line"><span class="term-prompt">$</span> gradlew assembleRelease<span class="code-caret"></span></span>
           </figure>
         </div>
       </div>

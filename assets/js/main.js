@@ -58,7 +58,6 @@
     }
     applyStaticTranslations();
     if (hasProjects) renderProjectGrid();
-    initHeroArtifacts();
     updateLangUI();
   }
 
@@ -554,30 +553,6 @@
     });
   }
 
-  /* ---------------- Hero work artifacts ---------------- */
-  /* The stat card reads its text from the gold-tier entry in PROJECTS, so
-     the award is never written down twice. If no gold entry exists the card
-     removes itself rather than showing placeholder copy. */
-  function initHeroArtifacts() {
-    const stat = document.querySelector(".artifact--stat");
-    if (!stat) return;
-    if (!hasProjects) return;
-    const best =
-      PROJECTS.find((p) => p.award && p.award.tier === "gold") ||
-      PROJECTS.find((p) => p.award);
-    if (!best) {
-      stat.remove();
-      return;
-    }
-    const labelEl = stat.querySelector(".artifact-stat-label");
-    const valueEl = stat.querySelector(".artifact-stat-value");
-    const awardTr =
-      (typeof AWARD_LABEL_TRANSLATIONS !== "undefined" &&
-        AWARD_LABEL_TRANSLATIONS[best.award.label]) || {};
-    if (labelEl) labelEl.textContent = awardTr[currentLang] || best.award.label;
-    if (valueEl) valueEl.textContent = best.award.event;
-  }
-
   /* ---------------- Hero parallax (subtle, desktop only) ---------------- */
   /* The portrait tilts in 3D; the floating artifacts translate by their own
      data-depth, so the cluster separates into layers as the pointer moves.
@@ -712,7 +687,6 @@
   initProjectNav();
   initGalleryLightbox();
   triggerInitialReveals();
-  initHeroArtifacts();
   initHeroParallax();
   initScanHeadings();
   initCardTilt();

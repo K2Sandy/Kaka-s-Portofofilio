@@ -6,15 +6,84 @@
 <title>Muhammad Albharaka Putrosandy — Portfolio</title>
 <meta name="description" content="Kaka — Computer Science student at Universitas Syiah Kuala building mobile, IoT, and web tools with real-world impact: GlucoScan, MindGuard, WindSense, and EscapeDisaster." />
 <meta name="theme-color" content="#1E9E71" />
+<script>
+/* Preloader gate: runs before first paint. Skips the intro on repeat visits in
+   the same tab session (add ?preloader to the URL to force it while testing),
+   otherwise locks scrolling until the preloader leaves. */
+(function () {
+  var d = document.documentElement;
+  try {
+    if (sessionStorage.getItem("kaka-pl") && !/[?&]preloader/.test(location.search)) {
+      d.classList.add("skip-preloader");
+      return;
+    }
+  } catch (e) {}
+  d.classList.add("is-loading");
+  setTimeout(function () { d.classList.remove("is-loading"); }, 10000); /* failsafe */
+})();
+</script>
 <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Crect width='100' height='100' rx='24' fill='%231E9E71'/%3E%3Ctext x='50' y='69' font-size='56' font-family='Georgia,serif' fill='white' text-anchor='middle'%3EK%3C/text%3E%3C/svg%3E" />
 
 <link rel="preconnect" href="https://fonts.googleapis.com" />
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
 <link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,400;0,9..144,500;0,9..144,600;0,9..144,700;1,9..144,400;1,9..144,500&family=Plus+Jakarta+Sans:ital,wght@0,400;0,500;0,600;0,700;0,800;1,500&display=swap" rel="stylesheet" />
 
-<link rel="stylesheet" href="assets/css/style.css?v=3" />
+<link rel="stylesheet" href="assets/css/style.css?v=4" />
+<noscript><style>.preloader { display: none !important; }</style></noscript>
 </head>
 <body>
+<!-- Preloader: hand-drawn envelope. It draws itself, then opens and slides the letter out once the page is ready. -->
+<div class="preloader" id="preloader" role="status" aria-label="Loading">
+  <div class="pl-stage">
+    <svg class="pl-svg" viewBox="0 0 240 216" aria-hidden="true">
+      <g class="pl-bob">
+        <!-- open flap, sits behind the letter -->
+        <g class="pl-flap-open-wrap">
+          <path class="pl-flap-open" d="M61 81 L120 33 L180 81.5 Z" />
+        </g>
+
+        <!-- the letter that slides out -->
+        <g class="pl-letter">
+          <path class="pl-paper" d="M77 92 L163 91.5 L164 156 L76 156.5 Z" />
+          <rect class="pl-badge" x="84" y="99" width="19" height="19" rx="5" />
+          <path class="pl-k" d="M90 103.5 L90.2 113.5 M96.5 103.2 L90.4 109 L96.8 114" />
+          <path class="pl-line" d="M109 106 L152 105.4 M109 113 L141 112.6 M84 127 L154 126.4 M84 135 L148 135.6 M84 143 L128 142.6" />
+        </g>
+
+        <!-- front of the envelope + fold lines -->
+        <path class="pl-front" pathLength="1" style="--t:0s; --d:.85s" d="M61 81 L180 81.5 L179 169 L120 170.5 L60 168.5 Z" />
+        <path class="pl-fold" pathLength="1" style="--t:.65s; --d:.5s" d="M62 167 L112 119 M178 167 L128 119" />
+
+        <!-- closed flap, folds away when the envelope opens -->
+        <g class="pl-flap-wrap">
+          <path class="pl-flap" pathLength="1" style="--t:.35s; --d:.6s" d="M61 81 L120 128 L180 81.5 Z" />
+        </g>
+      </g>
+
+      <!-- LOADING, drawn letter by letter -->
+      <g class="pl-text pl-loading" transform="translate(0 186)">
+        <path class="pl-g" pathLength="1" style="--i:0" transform="translate(60 0)"  d="M2 1 L1.5 19 L13 19.5" />
+        <path class="pl-g" pathLength="1" style="--i:1" transform="translate(79 0)"  d="M7.5 1 C3 .5 1 5 1.2 10 C1.4 15 3.5 19.5 8 19.2 C12.5 19 13.5 14 13.2 9.5 C13 4.5 11 1.2 7.5 1" />
+        <path class="pl-g" pathLength="1" style="--i:2" transform="translate(98 0)"  d="M1 19.5 L7.2 1 L13.5 19.2 M3.6 13 L11 12.6" />
+        <path class="pl-g" pathLength="1" style="--i:3" transform="translate(118 0)" d="M2 1 L1.6 19.3 M2 1 C9 .5 13.5 4 13.2 10 C13 16 9 19.6 1.6 19.3" />
+        <path class="pl-g" pathLength="1" style="--i:4" transform="translate(137 0)" d="M2 1.2 L1.8 19.4" />
+        <path class="pl-g" pathLength="1" style="--i:5" transform="translate(146 0)" d="M1.5 19.5 L2 1 L12.5 19.2 L12.8 .8" />
+        <path class="pl-g" pathLength="1" style="--i:6" transform="translate(165 0)" d="M12.5 4 C9 -.5 2 1 1.5 10 C1.2 17 6 20 10 19 C13 18.2 13.2 14 13 11 L7.5 11.5" />
+      </g>
+
+      <!-- HELLO! replaces it when the envelope opens -->
+      <g class="pl-text pl-hello" transform="translate(0 186)">
+        <path class="pl-g" pathLength="1" style="--i:0" transform="translate(70 0)"  d="M2 1 L1.6 19.5 M12.5 .8 L12.8 19.4 M1.8 10 L12.6 9.6" />
+        <path class="pl-g" pathLength="1" style="--i:1" transform="translate(89 0)"  d="M12.5 1.2 L2 1.4 L1.8 19.2 L12.8 19.6 M2 10.2 L10 9.8" />
+        <path class="pl-g" pathLength="1" style="--i:2" transform="translate(108 0)" d="M2 1 L1.5 19 L13 19.5" />
+        <path class="pl-g" pathLength="1" style="--i:3" transform="translate(127 0)" d="M2 1 L1.5 19 L13 19.5" />
+        <path class="pl-g" pathLength="1" style="--i:4" transform="translate(146 0)" d="M7.5 1 C3 .5 1 5 1.2 10 C1.4 15 3.5 19.5 8 19.2 C12.5 19 13.5 14 13.2 9.5 C13 4.5 11 1.2 7.5 1" />
+        <path class="pl-g" pathLength="1" style="--i:5" transform="translate(165 0)" d="M2 1 L2 13 M2 18.2 L2.1 18.8" />
+      </g>
+    </svg>
+  </div>
+</div>
+
 <div class="scroll-progress" id="scrollProgress"></div>
 <div class="bg-blobs" aria-hidden="true"><span class="b1"></span><span class="b2"></span><span class="b3"></span></div>
 
@@ -312,6 +381,6 @@
 
 <script src="assets/js/projects-data.js?v=2"></script>
 <script src="assets/js/i18n.js?v=2"></script>
-<script src="assets/js/main.js?v=2"></script>
+<script src="assets/js/main.js?v=3"></script>
 </body>
 </html>

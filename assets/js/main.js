@@ -13,6 +13,64 @@
   const hasProjects = typeof PROJECTS !== "undefined";
   const hasI18n = typeof I18N !== "undefined";
 
+  /* ---------------- Preloader (index page only) ----------------
+     The envelope markup lives in index.html; the animation is pure CSS.
+     This block only decides WHEN to open it and when to leave.
+       MIN_SHOW        ms the envelope is allowed to finish drawing before it may open
+       HOLD_AFTER_OPEN ms the open envelope + "HELLO!" stay on screen
+       MAX_WAIT        open anyway after this long, even if the page is still loading */
+  const MIN_SHOW = reduceMotion ? 300 : 1500;
+  const HOLD_AFTER_OPEN = reduceMotion ? 300 : 1800;
+  const MAX_WAIT = 8000;
+
+  const preloader = document.getElementById("preloader");
+  let preloaderActive = !!preloader && !document.documentElement.classList.contains("skip-preloader");
+
+  /* run fn now, or once the preloader has left (so the hero can animate in after it) */
+  function afterPreloader(fn) {
+    if (!preloaderActive) fn();
+    else window.addEventListener("preloader:done", fn, { once: true });
+  }
+
+  function initPreloader() {
+    if (!preloader) return;
+    if (!preloaderActive) {
+      preloader.remove();
+      return;
+    }
+    let opened = false;
+
+    function leave() {
+      document.documentElement.classList.remove("is-loading");
+      preloader.classList.add("is-leaving");
+      try {
+        sessionStorage.setItem("kaka-pl", "1");
+      } catch (e) {
+        /* private mode — the intro just plays again next visit */
+      }
+      preloaderActive = false;
+      window.dispatchEvent(new Event("preloader:done"));
+      setTimeout(() => preloader.remove(), 900);
+    }
+
+    function open() {
+      if (opened) return;
+      opened = true;
+      preloader.classList.add("is-open");
+      preloader.setAttribute("aria-label", "Welcome");
+      setTimeout(leave, HOLD_AFTER_OPEN);
+    }
+
+    const pageReady = new Promise((resolve) => {
+      if (document.readyState === "complete") resolve();
+      else window.addEventListener("load", resolve, { once: true });
+    }).then(() => (document.fonts && document.fonts.ready) || null);
+    const minTime = new Promise((resolve) => setTimeout(resolve, MIN_SHOW));
+
+    Promise.all([pageReady, minTime]).then(open);
+    setTimeout(open, MAX_WAIT);
+  }
+
   /* ---------------- i18n engine ---------------- */
   let currentLang = "en";
 
@@ -248,7 +306,7 @@
   }
 
   autoAttachReveal();
-  observeReveals();
+  afterPreloader(() => observeReveals()); /* hero animates in after the preloader leaves */
 
   /* ---------------- Stat counters ---------------- */
   function animateCount(el) {
@@ -686,7 +744,8 @@
   initLangSwitcher();
   initProjectNav();
   initGalleryLightbox();
-  triggerInitialReveals();
+  initPreloader();
+  afterPreloader(triggerInitialReveals);
   initHeroParallax();
   initScanHeadings();
   initCardTilt();

@@ -57,12 +57,13 @@
       } catch (e) {
         /* private mode — the intro just plays again next visit */
       }
-      /* unlock scrolling and let the hero animate in just as the curtains start to lift */
+      /* unlock scrolling and start the hero entrance once the curtain has lifted off the top of the
+         page, so the hero animation is actually seen (the page is revealed bottom-first) */
       setTimeout(() => {
         document.documentElement.classList.remove("is-loading");
         preloaderActive = false;
         window.dispatchEvent(new Event("preloader:done"));
-      }, exit * 0.62);
+      }, exit * 0.8);
       setTimeout(() => preloader.remove(), exit + 150);
     }
 

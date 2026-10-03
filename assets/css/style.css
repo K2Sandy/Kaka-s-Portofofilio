@@ -1720,3 +1720,133 @@ body.modal-open { overflow: hidden; }
     mix-blend-mode: normal;
   }
 }
+
+
+/* =========================================================================
+   PRELOADER — hand-drawn envelope (index only)
+   Timeline: envelope draws itself (~1.5s) -> waits for the page to be ready
+   -> flap flips open, letter slides out, "LOADING" becomes "HELLO!" -> fades.
+   Timings for the JS side live at the top of the preloader block in main.js.
+   ========================================================================= */
+html.is-loading { overflow: hidden; }
+html.skip-preloader .preloader { display: none; }
+
+.preloader {
+  position: fixed;
+  inset: 0;
+  z-index: 3000;
+  display: grid;
+  place-items: center;
+  background: radial-gradient(circle at 50% 46%, var(--mint-mist) 0%, var(--paper) 62%);
+  transition: opacity .6s ease;
+  /* if JS never runs, get out of the way after 10s */
+  animation: pl-failsafe .4s ease 10s forwards;
+}
+.preloader.is-leaving {
+  opacity: 0;
+  pointer-events: none;
+}
+.pl-stage {
+  transition: transform .8s var(--ease);
+}
+.preloader.is-leaving .pl-stage {
+  transform: translateY(-28px) scale(.96);
+}
+.pl-svg {
+  width: min(340px, 78vw);
+  height: auto;
+  overflow: visible;
+  fill: none;
+  stroke: var(--ink);
+  stroke-width: 2.2;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+}
+
+/* gentle float, runs the whole time so nothing jumps when it opens */
+.pl-bob { animation: pl-bob 2.4s ease-in-out 1.2s infinite; }
+
+/* --- self-drawing strokes --- */
+.pl-front, .pl-flap, .pl-fold, .pl-g {
+  stroke-dasharray: 1;
+  stroke-dashoffset: 1;
+  opacity: 0;
+}
+.pl-front, .pl-flap {
+  fill: var(--white);
+  fill-opacity: 0;
+  animation:
+    pl-draw var(--d) cubic-bezier(.65, 0, .35, 1) var(--t) forwards,
+    pl-fill .3s ease .95s forwards;
+}
+.pl-fold {
+  animation: pl-draw var(--d) cubic-bezier(.65, 0, .35, 1) var(--t) forwards;
+}
+.pl-fold { stroke: var(--ink-soft); stroke-width: 1.8; }
+.pl-loading .pl-g {
+  stroke-width: 2.4;
+  animation: pl-draw .45s cubic-bezier(.65, 0, .35, 1) calc(.55s + var(--i) * .08s) forwards;
+}
+
+/* --- pieces that stay hidden until it opens --- */
+.pl-flap-open-wrap,
+.pl-flap-wrap {
+  transform-box: fill-box;
+}
+.pl-flap-open-wrap { transform-origin: 50% 100%; opacity: 0; }
+.pl-flap-wrap { transform-origin: 50% 0; }
+.pl-flap-open { fill: var(--mint-100); }
+
+.pl-letter {
+  transform-box: fill-box;
+  transform-origin: 50% 100%;
+  opacity: 0;
+}
+.pl-paper { fill: var(--white); stroke-width: 2; }
+.pl-badge { fill: var(--mint-600); stroke: none; }
+.pl-k { stroke: var(--white); stroke-width: 1.9; }
+.pl-line { stroke: var(--mint-300); stroke-width: 1.8; }
+
+.pl-hello .pl-g {
+  stroke-width: 2.4;
+  stroke: var(--mint-600);
+  animation: none;
+}
+
+/* --- open --- */
+.is-open .pl-flap-wrap { animation: pl-flap-close .32s ease-in forwards; }
+.is-open .pl-flap-open-wrap { animation: pl-flap-open .38s cubic-bezier(.2, .8, .3, 1) .3s both; }
+.is-open .pl-letter { animation: pl-letter-out .8s cubic-bezier(.2, .9, .25, 1) .55s both; }
+.is-open .pl-loading { animation: pl-fade-out .25s ease forwards; }
+.is-open .pl-hello .pl-g {
+  animation: pl-draw .4s cubic-bezier(.65, 0, .35, 1) calc(.75s + var(--i) * .06s) forwards;
+}
+
+@keyframes pl-draw {
+  0%   { stroke-dashoffset: 1; opacity: 0; }
+  2%   { opacity: 1; }
+  100% { stroke-dashoffset: 0; opacity: 1; }
+}
+@keyframes pl-fill { to { fill-opacity: 1; } }
+@keyframes pl-bob {
+  0%, 100% { transform: translateY(0); }
+  50%      { transform: translateY(-3px); }
+}
+@keyframes pl-flap-close {
+  0%   { transform: scaleY(1); opacity: 1; }
+  99%  { transform: scaleY(0); opacity: 1; }
+  100% { transform: scaleY(0); opacity: 0; }
+}
+@keyframes pl-flap-open {
+  0%   { transform: scaleY(0); opacity: 0; }
+  1%   { transform: scaleY(0); opacity: 1; }
+  100% { transform: scaleY(1); opacity: 1; }
+}
+@keyframes pl-letter-out {
+  0%   { transform: translateY(0); opacity: 0; }
+  1%   { transform: translateY(0); opacity: 1; }
+  70%  { transform: translateY(-63px) rotate(-1.5deg); opacity: 1; }
+  100% { transform: translateY(-58px) rotate(0); opacity: 1; }
+}
+@keyframes pl-fade-out { to { opacity: 0; } }
+@keyframes pl-failsafe { to { opacity: 0; visibility: hidden; pointer-events: none; } }

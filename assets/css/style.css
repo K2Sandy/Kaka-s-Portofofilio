@@ -1562,17 +1562,13 @@ body.modal-open { overflow: hidden; }
              artifactDrift 7s ease-in-out infinite alternate;
 }
 
-/* The single floating card: a dark slab at top right, balancing the light
-   hero badge at bottom left. Dark on purpose — it is the one place on an
-   otherwise pale page where the stack can read as a deliberate accent
-   rather than another white box. */
+/* The single floating card at top right, balancing the hero badge at
+   bottom left. Light surface, inherited from .artifact. */
 .artifact--stack {
   top: 3%;
   right: -14%;
   width: 164px;
   padding: 13px 14px 14px;
-  background: var(--ink);
-  border-color: var(--ink);
   rotate: -2.5deg;
   animation-delay: .4s, 1.2s;
 }
@@ -1582,8 +1578,7 @@ body.modal-open { overflow: hidden; }
   font-weight: 700;
   text-transform: uppercase;
   letter-spacing: 0.12em;
-  /* warm off-white rather than pure white, to match --paper's temperature */
-  color: rgba(255, 255, 250, 0.52);
+  color: var(--ink-faint);
   margin-bottom: 9px;
 }
 .artifact-chips { display: flex; flex-wrap: wrap; gap: 5px; }
@@ -1593,8 +1588,8 @@ body.modal-open { overflow: hidden; }
   font-weight: 500;
   padding: 4px 8px;
   border-radius: var(--radius-full);
-  background: rgba(255, 255, 250, 0.08);
-  color: var(--mint-100);
+  background: var(--mint-mist);
+  color: var(--mint-600);
   white-space: nowrap;
 }
 

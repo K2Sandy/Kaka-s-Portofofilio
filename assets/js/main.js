@@ -40,17 +40,30 @@
     }
     let opened = false;
 
+    /* length of the curtain exit, read from --pl-exit in style.css so there is one place to change it */
+    function exitMs() {
+      if (reduceMotion) return 0;
+      const raw = getComputedStyle(preloader).getPropertyValue("--pl-exit").trim();
+      const n = parseFloat(raw);
+      if (isNaN(n)) return 1800;
+      return raw.endsWith("ms") ? n : n * 1000;
+    }
+
     function leave() {
-      document.documentElement.classList.remove("is-loading");
-      preloader.classList.add("is-leaving");
+      const exit = exitMs();
+      preloader.classList.add("is-leaving"); /* starts the curtain wipe */
       try {
         sessionStorage.setItem("kaka-pl", "1");
       } catch (e) {
         /* private mode — the intro just plays again next visit */
       }
-      preloaderActive = false;
-      window.dispatchEvent(new Event("preloader:done"));
-      setTimeout(() => preloader.remove(), 900);
+      /* unlock scrolling and let the hero animate in just as the curtains start to lift */
+      setTimeout(() => {
+        document.documentElement.classList.remove("is-loading");
+        preloaderActive = false;
+        window.dispatchEvent(new Event("preloader:done"));
+      }, exit * 0.62);
+      setTimeout(() => preloader.remove(), exit + 150);
     }
 
     function open() {

@@ -1735,7 +1735,7 @@ html.skip-preloader .preloader { display: none; }
 .preloader {
   /* ---- the two knobs you'll probably want ---- */
   --pl-size: 250px;   /* width of the envelope drawing (it never exceeds 62% of the screen width) */
-  --pl-exit: 1.8s;    /* how long the curtain exit takes; main.js reads this value */
+  --pl-exit: 1.1s;    /* how long the curtain exit takes; main.js reads this value */
 
   position: fixed;
   inset: 0;
@@ -1861,7 +1861,7 @@ html.skip-preloader .preloader { display: none; }
   top: 0;
   height: 100vh;
   height: 100dvh;
-  transform: translateY(120vh); /* parked below the screen until it's time */
+  transform: translate3d(0, 120vh, 0); /* parked below the screen until it's time */
   will-change: transform;
 }
 /* soften the leading and trailing edges with an oversized ellipse cap */
@@ -1877,28 +1877,20 @@ html.skip-preloader .preloader { display: none; }
 }
 .pl-curtain::before { top: -16vh; }
 .pl-curtain::after { bottom: -16vh; }
-.pl-c1 { background: var(--mint-300); }  /* light band: leads in, trails out */
-.pl-c2 { background: var(--mint-600); }  /* your accent green */
+.pl-curtain { background: var(--mint-300); } /* want the bolder accent green? use var(--mint-600) */
 
-.is-leaving .pl-c1 { animation: pl-curtain-1 var(--pl-exit) linear forwards; }
-.is-leaving .pl-c2 { animation: pl-curtain-2 var(--pl-exit) linear forwards; }
+.is-leaving .pl-curtain { animation: pl-curtain var(--pl-exit) linear forwards; }
 /* the envelope + backdrop vanish at the instant the screen is fully covered */
 .is-leaving .pl-bg,
 .is-leaving .pl-stage { animation: pl-uncover var(--pl-exit) linear forwards; }
 
-@keyframes pl-curtain-1 {
-  0%   { transform: translateY(120vh);  animation-timing-function: cubic-bezier(.76, 0, .24, 1); }
-  38%  { transform: translateY(0);      animation-timing-function: linear; }
-  60%  { transform: translateY(0);      animation-timing-function: cubic-bezier(.76, 0, .24, 1); }
-  100% { transform: translateY(-120vh); }
-}
-@keyframes pl-curtain-2 {
-  0%, 10% { transform: translateY(120vh);  animation-timing-function: cubic-bezier(.76, 0, .24, 1); }
-  46%     { transform: translateY(0);      animation-timing-function: linear; }
-  52%     { transform: translateY(0);      animation-timing-function: cubic-bezier(.76, 0, .24, 1); }
-  92%, 100% { transform: translateY(-120vh); }
+@keyframes pl-curtain {
+  0%   { transform: translate3d(0, 120vh, 0);  animation-timing-function: cubic-bezier(.65, 0, .35, 1); }
+  42%  { transform: translate3d(0, 0, 0);      animation-timing-function: linear; }
+  48%  { transform: translate3d(0, 0, 0);      animation-timing-function: cubic-bezier(.65, 0, .35, 1); }
+  100% { transform: translate3d(0, -120vh, 0); }
 }
 @keyframes pl-uncover {
-  0%, 49% { opacity: 1; }
-  50%, 100% { opacity: 0; }
+  0%, 44% { opacity: 1; }
+  45%, 100% { opacity: 0; }
 }

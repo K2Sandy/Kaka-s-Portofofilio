@@ -131,6 +131,50 @@
     applyStaticTranslations();
     if (hasProjects) renderProjectGrid();
     updateLangUI();
+    updateThemeUI();
+  }
+
+  /* ---------------- Theme: light (default) / night mode ----------------
+     index.html and every project page set data-theme="dark" on <html> from a tiny inline
+     script in <head> BEFORE first paint (so there is no light flash), using localStorage
+     key "kaka-theme". Light stays the default: it only goes dark if the visitor chose it. */
+  function currentTheme() {
+    return document.documentElement.getAttribute("data-theme") === "dark" ? "dark" : "light";
+  }
+
+  function updateThemeUI() {
+    const dark = currentTheme() === "dark";
+    const label = t(dark ? "nav.toLight" : "nav.toNight") || (dark ? "Switch to light mode" : "Switch to night mode");
+    document.querySelectorAll(".theme-toggle").forEach((btn) => {
+      btn.setAttribute("aria-label", label);
+      btn.setAttribute("title", label);
+      btn.setAttribute("aria-pressed", dark ? "true" : "false");
+    });
+    const meta = document.querySelector('meta[name="theme-color"]');
+    if (meta) meta.setAttribute("content", dark ? "#0A1410" : "#1E9E71");
+  }
+
+  function setTheme(theme, animate) {
+    const root = document.documentElement;
+    if (animate && !reduceMotion) {
+      root.classList.add("theme-anim"); /* enables the 0.4s cross-fade in style.css */
+      setTimeout(() => root.classList.remove("theme-anim"), 500);
+    }
+    if (theme === "dark") root.setAttribute("data-theme", "dark");
+    else root.removeAttribute("data-theme");
+    try {
+      localStorage.setItem("kaka-theme", theme);
+    } catch (e) {
+      /* private mode — the choice just won't be remembered */
+    }
+    updateThemeUI();
+  }
+
+  function initThemeToggle() {
+    document.querySelectorAll(".theme-toggle").forEach((btn) => {
+      btn.addEventListener("click", () => setTheme(currentTheme() === "dark" ? "light" : "dark", true));
+    });
+    updateThemeUI();
   }
 
   function initLangSwitcher() {
@@ -756,6 +800,7 @@
   syncStatsWithProjects();
   initCounters();
   initLangSwitcher();
+  initThemeToggle();
   initProjectNav();
   initGalleryLightbox();
   initPreloader();

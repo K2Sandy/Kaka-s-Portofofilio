@@ -1810,7 +1810,7 @@ html.skip-preloader .preloader { display: none; }
 
 .pl-hello .pl-g {
   stroke-width: 2.4;
-  stroke: var(--mint-600);
+  stroke: var(--ink);
   animation: none;
 }
 

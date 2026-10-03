@@ -1725,35 +1725,38 @@ body.modal-open { overflow: hidden; }
 /* =========================================================================
    PRELOADER — hand-drawn envelope (index only)
    Timeline: envelope draws itself (~1.5s) -> waits for the page to be ready
-   -> flap flips open, letter slides out, "LOADING" becomes "HELLO!" -> fades.
-   Timings for the JS side live at the top of the preloader block in main.js.
+   -> flap flips open, letter slides out, "LOADING" becomes "HELLO!"
+   -> two mint curtains sweep up over the screen and lift away, revealing the page.
+   Wait times for the JS side live at the top of the preloader block in main.js.
    ========================================================================= */
 html.is-loading { overflow: hidden; }
 html.skip-preloader .preloader { display: none; }
 
 .preloader {
+  /* ---- the two knobs you'll probably want ---- */
+  --pl-size: 250px;   /* width of the envelope drawing (it never exceeds 62% of the screen width) */
+  --pl-exit: 1.8s;    /* how long the curtain exit takes; main.js reads this value */
+
   position: fixed;
   inset: 0;
   z-index: 3000;
   display: grid;
   place-items: center;
-  background: radial-gradient(circle at 50% 46%, var(--mint-mist) 0%, var(--paper) 62%);
-  transition: opacity .6s ease;
   /* if JS never runs, get out of the way after 10s */
   animation: pl-failsafe .4s ease 10s forwards;
 }
-.preloader.is-leaving {
-  opacity: 0;
-  pointer-events: none;
+.preloader.is-leaving { pointer-events: none; }
+
+/* soft mint backdrop (kept separate so it can disappear while the curtain covers it) */
+.pl-bg {
+  position: absolute;
+  inset: 0;
+  background: radial-gradient(circle at 50% 46%, var(--mint-mist) 0%, var(--paper) 62%);
 }
-.pl-stage {
-  transition: transform .8s var(--ease);
-}
-.preloader.is-leaving .pl-stage {
-  transform: translateY(-28px) scale(.96);
-}
+.pl-stage { position: relative; }
+
 .pl-svg {
-  width: min(340px, 78vw);
+  width: min(var(--pl-size), 62vw);
   height: auto;
   overflow: visible;
   fill: none;
@@ -1779,9 +1782,7 @@ html.skip-preloader .preloader { display: none; }
     pl-draw var(--d) cubic-bezier(.65, 0, .35, 1) var(--t) forwards,
     pl-fill .3s ease .95s forwards;
 }
-.pl-fold {
-  animation: pl-draw var(--d) cubic-bezier(.65, 0, .35, 1) var(--t) forwards;
-}
+/* the V fold stays hidden under the closed flap, then draws as it opens */
 .pl-fold { stroke: var(--ink-soft); stroke-width: 1.8; }
 .pl-loading .pl-g {
   stroke-width: 2.4;
@@ -1816,6 +1817,7 @@ html.skip-preloader .preloader { display: none; }
 /* --- open --- */
 .is-open .pl-flap-wrap { animation: pl-flap-close .32s ease-in forwards; }
 .is-open .pl-flap-open-wrap { animation: pl-flap-open .38s cubic-bezier(.2, .8, .3, 1) .3s both; }
+.is-open .pl-fold { animation: pl-draw .5s cubic-bezier(.65, 0, .35, 1) .35s forwards; }
 .is-open .pl-letter { animation: pl-letter-out .8s cubic-bezier(.2, .9, .25, 1) .55s both; }
 .is-open .pl-loading { animation: pl-fade-out .25s ease forwards; }
 .is-open .pl-hello .pl-g {
@@ -1850,3 +1852,53 @@ html.skip-preloader .preloader { display: none; }
 }
 @keyframes pl-fade-out { to { opacity: 0; } }
 @keyframes pl-failsafe { to { opacity: 0; visibility: hidden; pointer-events: none; } }
+
+/* --- exit: two mint curtains sweep up, hold for a beat, then lift away --- */
+.pl-curtain {
+  position: fixed;
+  left: 0;
+  right: 0;
+  top: 0;
+  height: 100vh;
+  height: 100dvh;
+  transform: translateY(120vh); /* parked below the screen until it's time */
+  will-change: transform;
+}
+/* soften the leading and trailing edges with an oversized ellipse cap */
+.pl-curtain::before,
+.pl-curtain::after {
+  content: "";
+  position: absolute;
+  left: -10%;
+  right: -10%;
+  height: 32vh;
+  border-radius: 50%;
+  background: inherit;
+}
+.pl-curtain::before { top: -16vh; }
+.pl-curtain::after { bottom: -16vh; }
+.pl-c1 { background: var(--mint-300); }  /* light band: leads in, trails out */
+.pl-c2 { background: var(--mint-600); }  /* your accent green */
+
+.is-leaving .pl-c1 { animation: pl-curtain-1 var(--pl-exit) linear forwards; }
+.is-leaving .pl-c2 { animation: pl-curtain-2 var(--pl-exit) linear forwards; }
+/* the envelope + backdrop vanish at the instant the screen is fully covered */
+.is-leaving .pl-bg,
+.is-leaving .pl-stage { animation: pl-uncover var(--pl-exit) linear forwards; }
+
+@keyframes pl-curtain-1 {
+  0%   { transform: translateY(120vh);  animation-timing-function: cubic-bezier(.76, 0, .24, 1); }
+  38%  { transform: translateY(0);      animation-timing-function: linear; }
+  60%  { transform: translateY(0);      animation-timing-function: cubic-bezier(.76, 0, .24, 1); }
+  100% { transform: translateY(-120vh); }
+}
+@keyframes pl-curtain-2 {
+  0%, 10% { transform: translateY(120vh);  animation-timing-function: cubic-bezier(.76, 0, .24, 1); }
+  46%     { transform: translateY(0);      animation-timing-function: linear; }
+  52%     { transform: translateY(0);      animation-timing-function: cubic-bezier(.76, 0, .24, 1); }
+  92%, 100% { transform: translateY(-120vh); }
+}
+@keyframes pl-uncover {
+  0%, 49% { opacity: 1; }
+  50%, 100% { opacity: 0; }
+}

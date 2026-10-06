@@ -385,6 +385,129 @@ const I18N = {
         g1: "开始界面", g2: "游戏画面 — 场景一", g3: "游戏画面 — 场景二", g4: "游戏结束"
       }
     }
+  },
+
+  tl: {
+    nav: { about: "Tungkol", experience: "Karanasan", projects: "Mga Proyekto", contact: "Kontak", resume: "Resume", language: "Wika" },
+    hero: {
+      title_html: 'Kumusta, ako si <span class="highlight">Kaka</span>',
+      quote_html: '<strong>“Ang bawat eksperto ay dating baguhan.”</strong> Ito ang aking paglalakbay bilang isang tech developer na nagsisikap lumikha ng makabuluhan at may epektong mga digital na solusyon.',
+      btnWork: "Tingnan ang Aking Gawa",
+      btnContact: "Makipag-ugnayan",
+      statProjects: "Mga Proyektong Nagawa",
+      statAwards: "Mga Parangal na Napanalunan",
+      statBuilding: "Gumagawa Mula Pa Noong",
+      badge: "🎓  Estudyante ng Computer Science · Universitas Syiah Kuala"
+    },
+    about: {
+      title: "Tungkol kay Kaka",
+      lead: "Ako ay estudyante ng Computer Science sa Syiah Kuala University na nagsisikap bumuo ng mga kasangkapang may malinaw na layunin. Masaya akong gumawa ng mga solusyong gumagana at episyente para harapin ang mga tunay na hamon. Ang bawat eksperto ay dating baguhan, at nakatuon ako sa patuloy na pag-aaral at paglikha ng teknolohiyang may makabuluhang epekto.",
+      factEducation: "🎓 Edukasyon",
+      factEducationValue: "Computer Science, Universitas Syiah Kuala",
+      factBased: "📍 Nakatira sa",
+      factBasedValue: "Banda Aceh, Indonesia",
+      factFocus: "💡 Mga larangang pinagtutuunan",
+      factFocusValue: "Mobile Apps · IoT · Teknolohiyang Nakasentro sa Tao",
+      factGpa: "📊 GPA"
+    },
+    experience: {
+      title: "Karera at mga Organisasyon",
+      subtitle: "Ang aking mga tungkulin at pakikilahok hanggang ngayon — sa loob at labas ng kampus.",
+      bemRole: "Student Executive Board MIPA",
+      bemDiv: "— Dibisyon ng Social Affairs",
+      himaRole: "Asosasyon ng mga Estudyante ng Informatics",
+      himaDiv: "— Miyembro",
+      note: "Madaragdagan pa ang mga tungkulin dito sa paglipas ng panahon."
+    },
+    projects: {
+      title: "Mga Proyekto",
+      subtitle: "Piling mga kamakailang gawa ko, mula sa mga mobile app at web tool hanggang sa hardware engineering.",
+      viewLink: "Tingnan",
+      moreTitle: "May paparating pa",
+      moreText: "Idaragdag dito ang mga bagong gawa pagkatapos nitong ilabas. Nakalaan ang espasyong ito para sa susunod."
+    },
+    contact: {
+      title: "Makipag-ugnayan",
+      subtitle: "Bukas sa pakikipagtulungan, internship, at mga usapan tungkol sa teknolohiya.",
+      emailLabel: "Email",
+      send: "Ipadala",
+      copy: "Kopyahin",
+      linkedinLabel: "LinkedIn",
+      githubLabel: "GitHub",
+      whatsappLabel: "WhatsApp",
+      cvTitle: "Gusto mo bang makita ang buong larawan?",
+      cvText: "I-download ang aking CV para sa edukasyon, mga kasanayan, at kumpletong kasaysayan ng mga proyekto.",
+      downloadCv: "I-download ang CV"
+    },
+    footer: { builtWith: "Ginawa nang buong puso." },
+    projectNav: { all: "Lahat ng Proyekto", browse: "Mag-browse", prev: "Nakaraan", next: "Susunod" },
+    projectPage: {
+      overview: "Pangkalahatang-ideya",
+      highlights: "Mga Tampok",
+      myRole: "Aking Tungkulin",
+      techStack: "Tech Stack",
+      recognition: "Pagkilala",
+      links: "Mga Link",
+      contactMe: "Makipag-ugnayan sa Akin",
+      viewGithub: "Tingnan sa GitHub",
+      downloadPaper: "I-download ang Papel",
+      allProjects: "Lahat ng Proyekto"
+    },
+    roles: { coLead: "Co-Lead Tech Developer", sole: "Nag-iisang Tech Developer" },
+    tags: {
+      android: "Android", healthcare: "Kalusugan", onDeviceAI: "AI sa Device",
+      browserExtension: "Browser Extension", mentalHealth: "Kalusugang Pangkaisipan", privacyFirst: "Privacy-first",
+      iot: "IoT", hardware: "Hardware", arduino: "Arduino",
+      game: "Laro", education: "Edukasyon", mobile: "Mobile"
+    },
+    pages: {
+      glucoscan: {
+        awardFull: "Ika-2 Puwesto — LKTIN ng IYSA",
+        tagline: "Isang Android app na tumutulong sa mga may diabetes na subaybayan ang kanilang arawang pagkonsumo ng asukal sa pamamagitan ng pag-scan ng label ng pagkain.",
+        gallerySub: "Mas malapitang pagtingin sa mobile UI/UX design ng GlucoScan.",
+        overview1: "Ang GlucoScan ay isang Android app na tumutulong sa mga may diabetes na subaybayan ang kanilang arawang pagkonsumo ng asukal sa pamamagitan lamang ng pag-scan ng label ng pakete ng pagkain gamit ang camera ng kanilang smartphone. Awtomatiko nitong kinukuha ang dami ng asukal at inihahambing ito sa personal na limitasyon ng user, kaya nagbibigay ito ng real-time na gabay sa pagkain.",
+        overview2: "Ang pag-unawa sa mga nutrition label ay tahimik ngunit patuloy na pasanin para sa mga namumuhay na may diabetes. Inaalis ito ng GlucoScan: itutok lang ang camera sa label, at ang app na ang magbabasa, magkakalkula, at magbababala.",
+        overview3: "Ako ang nag-iisang developer at UI/UX designer sa isang multidisciplinary na koponan. Buong-buo kong binuo ang app gamit ang Kotlin at Jetpack Compose, at isinama ang Google ML Kit OCR kasama ang custom na Regex pipeline para tumpak na makuha ang halaga ng asukal mula sa mga totoong pakete na hindi pare-pareho ang format.",
+        role: "Co-Lead Tech Developer (Group Project), nag-iisang app developer at UI/UX designer, habang ang mga kasamahan ko ang namuno sa pananaliksik sa nutrisyon at medisina.",
+        recognition: "🥈 Ika-2 Puwesto sa National Scientific Paper Competition (LKTIN) ng IYSA, para sa multidisciplinary na inobasyong nag-uugnay sa Computer Science at Kalusugan.",
+        g1: "Resulta ng Real-Time na Pag-scan", g2: "Pinagsama-samang Kasaysayan ng Asukal", g3: "Personal na Limitasyon ng Asukal",
+        g4: "Pag-set up ng Klinikal na Profile ng User", g5: "Live na Pagtukoy ng Label gamit ang Camera", g6: "Hakbang-hakbang na Gabay sa Paggamit",
+        g7: "Pagpapalit ng Wika", g8: "Nabigasyon ng Dashboard", g9: "Mga Tip sa Kalusugan at Pangangalaga", g10: "Talaan ng mga Na-scan na Larawan ng Label"
+      },
+      mindguard: {
+        awardFull: "Finalist — UGM Public Health Hackathon",
+        tagline: "Isang browser extension na nakatuon sa privacy na sinasala ang nakababahalang nilalaman nang real time para sa mas ligtas na pagba-browse.",
+        gallerySub: "Kung paano binabago ng MindGuard ang iyong digital na karanasan.",
+        overview1: "Ang MindGuard ay isang browser extension na nakatuon sa privacy at idinisenyo para sa real-time na pagsasala ng nilalaman bilang suporta sa kalusugang pangkaisipan ng mga estudyante. Maagap nitong tinatakpan ang nakababahalang nilalaman online para makalikha ng mas ligtas na digital na kapaligiran.",
+        overview2: "Nagmula ang ideya sa 2026 UGM Public Health Hackathon, na nakatuon sa sikolohikal na paghihirap ng kabataan. Malinaw ang ipinakita ng pananaliksik: ang labis na pagkakalantad sa negatibong nilalaman sa social media ay may kaugnayan sa pagtaas ng panganib ng depresyon sa mga estudyante. Sa halip na basta sabihing mag-log off na lang, hinaharang ng MindGuard ang nilalamang iyon bago pa ito umabot sa kanila at nag-aalok ng mas mahinahong alternatibo.",
+        overview3: "Ako ang nag-iisang tech developer at UI/UX designer sa isang multidisciplinary na koponan. Binuo ko ang lokal na Regex engine at dynamic na DOM manipulation na agad na nagsasala ng nilalaman. Buong gawa ito sa Vanilla JS sa Manifest V3, kaya lahat ng pag-scan ay nangyayari sa mismong device at walang datos na lumalabas sa browser.",
+        role: "Nag-iisang Tech Developer at UI/UX Designer (Group Project), binuo ang buong extension habang ang mga kasamahan ko ang namuno sa sikolohikal na pananaliksik at estratehiya sa nilalaman.",
+        recognition: "🥉 Finalist sa 2026 UGM Public Health Hackathon, para sa makabagong solusyong nag-uugnay sa Computer Science at digital na kagalingan.",
+        g1: "Daloy ng Trabaho ng MindGuard"
+      },
+      windsense: {
+        awardFull: "Gintong Medalya — Indonesia Inventors Day",
+        tagline: "Isang IoT-based na smart early warning system na nagbabasa ng bilis at direksyon ng hangin nang real time, at naipapaabot ang babala sa iyong telepono bago pa dumating ang panahon.",
+        gallerySub: "Ang inhinyeriya sa likod ng early warning system ng WindSense.",
+        overview1: "Ang WindSense ay isang IoT-based na smart early warning system na idinisenyo para subaybayan ang bilis at direksyon ng hangin nang real time. Patuloy nitong binabantayan ang kondisyon ng kapaligiran at agad na nagpapadala ng mobile alert para mapanatiling ligtas ang mga tao sa matinding panahon.",
+        overview2: "Ito ang proyektong unang humila sa akin sa programming. Noong high school, inanyayahan ako ng ilang kaibigan na tumulong sa paggawa nito. Wala akong anumang karanasan sa programming noon, at malayo sa aking comfort zone ang sumali sa ganito kalaking proyekto. Naging unang tunay kong hakbang ito papasok sa computer science: hindi lang pag-aaral mag-code, kundi pati pakikipagtulungan at paggawa ng pisikal na bagay na talagang gumagana.",
+        overview3: "Bilang Co-Lead Tech Developer, ako ang humawak sa software-hardware integration gamit ang C/C++ sa Arduino, pagproseso ng real-time na sensor data, at pagtiyak na maaasahan ang komunikasyon nito para sa agarang mobile alert.",
+        role: "Co-Lead Tech Developer (Group Project), humawak sa software-hardware integration at sensor data pipeline kasama ang isa pang co-lead.",
+        recognition: "🥇 Gintong Medalya sa International Indonesia Inventors Day 2024, para sa teknikal na inobasyon at functional na disenyo.",
+        g1: "Pinal na Produkto", g2: "Proseso ng Hardware at Software Integration"
+      },
+      escapedisaster: {
+        awardFull: "Lahok sa Kumpetisyon — DEMC U-DARE 3.0",
+        tagline: "Isang interaktibong mobile na larong pang-edukasyon na ginagaya ang mga sakuna para ituro ang mahahalagang paraan ng pagligtas sa sarili.",
+        gallerySub: "Mga tampok mula sa gameplay ng EscapeDisaster.",
+        overview1: "Ang Escape Disaster ay isang mobile na larong pang-edukasyon na idinisenyo para ituro ang mahahalagang paraan ng pagligtas sa sarili sa mga emerhensiya tulad ng lindol at tsunami. Inilulubog nito ang mga manlalaro sa mga ginagayang senaryo ng sakuna, gamit ang mga quiz na may takdang oras para sanayin ang mabilis na pagdedesisyon.",
+        overview2: "Para sa U-DARE na kumpetisyon sa disaster mitigation, malinaw ang problema: natututo ang mga estudyante ng teorya ng emerhensiya, pero bihirang magsagawa ang mga paaralan ng aktwal na drill. Iminungkahi ng isang kasamahan na gawing interaktibong laro ang teoryang iyon, isang ligtas na paraan para magsanay ng real-time na pagdedesisyon mula sa screen. Hindi pa ako nakagawa ng laro noon, at natutunan ko ang mga batayan ng game logic mula sa nakababatang kapatid ng isang kasamahan, na nakapagpakumbaba sa akin pero siyang tulak na kailangan ko.",
+        overview3: "Ako ang nag-iisang developer sa isang multidisciplinary na koponan. Ginamit ko ang TurboWarp engine para gawing maayos at interaktibong gameplay ang visual at block-based na lohika, at buong isinama ang custom na UI/UX assets.",
+        role: "Nag-iisang Tech Developer (Group Project), binuo ang interaktibong gameplay habang ang mga kasamahan ko ang nag-ambag ng nilalaman tungkol sa pagtugon sa sakuna at disenyo ng mga senaryo.",
+        recognition: "🥉 Binuo bilang lahok sa Disaster Education Media Competition (DEMC) U-DARE 3.0, na inorganisa ng TDMRC USK.",
+        g1: "Panimulang Screen", g2: "Gameplay — Eksena 1", g3: "Gameplay — Eksena 2", g4: "Game Over"
+      }
+    }
   }
 };
 
@@ -394,16 +517,17 @@ const I18N = {
 const CATEGORY_LABELS = {
   en: { All: "All", Mobile: "Mobile", Web: "Web", IoT: "IoT", Game: "Game" },
   id: { All: "Semua", Mobile: "Mobile", Web: "Web", IoT: "IoT", Game: "Game" },
-  zh: { All: "全部", Mobile: "移动端", Web: "网页", IoT: "物联网", Game: "游戏" }
+  zh: { All: "全部", Mobile: "移动端", Web: "网页", IoT: "物联网", Game: "游戏" },
+  tl: { All: "Lahat", Mobile: "Mobile", Web: "Web", IoT: "IoT", Game: "Laro" }
 };
 
 /* Award tier labels shown on project cards, keyed by the exact English
    label already in PROJECTS[].award.label. */
 const AWARD_LABEL_TRANSLATIONS = {
-  "2nd Place": { id: "Juara 2", zh: "第二名" },
-  "Finalist": { id: "Finalis", zh: "入围决赛" },
-  "Gold Medal": { id: "Medali Emas", zh: "金牌" },
-  "Competition Entry": { id: "Peserta Kompetisi", zh: "竞赛参赛作品" }
+  "2nd Place": { id: "Juara 2", zh: "第二名", tl: "Ika-2 Puwesto" },
+  "Finalist": { id: "Finalis", zh: "入围决赛", tl: "Finalist" },
+  "Gold Medal": { id: "Medali Emas", zh: "金牌", tl: "Gintong Medalya" },
+  "Competition Entry": { id: "Peserta Kompetisi", zh: "竞赛参赛作品", tl: "Lahok sa Kumpetisyon" }
 };
 
 /* Project card tagline + summary, keyed by project id. Falls back to the
@@ -417,6 +541,10 @@ const PROJECT_TRANSLATIONS = {
     zh: {
       tagline: "扫描食品标签，立即知晓您的血糖摄入上限。",
       summary: "一款安卓应用，通过摄像头扫描食品包装标签，帮助糖尿病患者监测每日糖分摄入量。"
+    },
+    tl: {
+      tagline: "I-scan ang label ng pagkain, alamin agad ang limitasyon mo sa asukal.",
+      summary: "Isang Android app na tumutulong sa mga may diabetes na subaybayan ang arawang pagkonsumo ng asukal sa pamamagitan ng pag-scan ng label ng pakete ng pagkain gamit ang camera."
     }
   },
   mindguard: {
@@ -427,6 +555,10 @@ const PROJECT_TRANSLATIONS = {
     zh: {
       tagline: "在学生与负能量信息流之间，筑起一道安静的保护屏障。",
       summary: "一款注重隐私的浏览器扩展程序，可实时过滤令人不安的内容，助力守护学生心理健康。"
+    },
+    tl: {
+      tagline: "Isang tahimik na panangga sa pagitan ng mga estudyante at ng nakalalasong social media feed.",
+      summary: "Isang browser extension na nakatuon sa privacy na sinasala ang nakababahalang nilalaman nang real time para suportahan ang kalusugang pangkaisipan ng mga estudyante."
     }
   },
   windsense: {
@@ -437,6 +569,10 @@ const PROJECT_TRANSLATIONS = {
     zh: {
       tagline: "在风暴来袭之前，提前读懂风向的预警系统。",
       summary: "一款基于物联网的智能预警系统，实时追踪风速与风向，并即时向手机发送警报。"
+    },
+    tl: {
+      tagline: "Isang early warning system na nagbabasa ng direksyon ng hangin bago pa dumating ang bagyo.",
+      summary: "Isang IoT-based na early warning system na sinusubaybayan ang bilis at direksyon ng hangin at agad na nagpapadala ng alerto sa telepono."
     }
   },
   escapedisaster: {
@@ -447,6 +583,10 @@ const PROJECT_TRANSLATIONS = {
     zh: {
       tagline: "在关键时刻真正来临之前，先练习那至关重要的几秒钟。",
       summary: "一款移动教育类游戏，通过模拟情景教授地震与海啸中的自救逃生技巧。"
+    },
+    tl: {
+      tagline: "Magsanay sa mga mahahalagang sandali bago pa ito tunay na dumating.",
+      summary: "Isang mobile na larong pang-edukasyon na nagtuturo ng pagligtas sa sarili tuwing lindol at tsunami sa pamamagitan ng mga ginagayang senaryo ng sakuna."
     }
   }
 };

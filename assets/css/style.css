@@ -1863,6 +1863,11 @@ html.skip-preloader .preloader { display: none; }
   animation: none;
 }
 
+/* Tagalog greeting (KUMUSTA!) swaps in for HELLO! when html.pl-tl is set */
+.pl-hello-tl { display: none; }
+html.pl-tl .pl-hello:not(.pl-hello-tl) { display: none; }
+html.pl-tl .pl-hello-tl { display: inline; }
+
 /* --- open --- */
 .is-open .pl-flap-wrap { animation: pl-flap-close .32s ease-in forwards; }
 .is-open .pl-flap-open-wrap { animation: pl-flap-open .38s cubic-bezier(.2, .8, .3, 1) .3s both; }

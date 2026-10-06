@@ -177,14 +177,26 @@
     updateThemeUI();
   }
 
+  /* First visit (nothing saved yet): follow the browser language if it is one of ours, else English.
+     "in" is the legacy code for Indonesian, "fil" is Filipino (treated as Tagalog). */
+  function detectBrowserLang() {
+    const map = { en: "en", id: "id", in: "id", zh: "zh", tl: "tl", fil: "tl" };
+    const prefs = (navigator.languages && navigator.languages.length ? navigator.languages : [navigator.language || "en"]);
+    for (const l of prefs) {
+      const code = map[String(l).toLowerCase().split("-")[0]];
+      if (code && I18N[code]) return code;
+    }
+    return "en";
+  }
+
   function initLangSwitcher() {
-    let saved = "en";
+    let saved = null;
     try {
-      saved = localStorage.getItem("kaka-lang") || "en";
+      saved = localStorage.getItem("kaka-lang");
     } catch (e) {
       /* ignore */
     }
-    setLanguage(saved);
+    setLanguage(saved || detectBrowserLang());
 
     document.querySelectorAll(".lang-switcher").forEach((wrap) => {
       const trigger = wrap.querySelector(".lang-trigger");

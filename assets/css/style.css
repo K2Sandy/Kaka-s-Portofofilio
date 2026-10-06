@@ -62,12 +62,61 @@
   --shadow-md: 0 10px 28px rgba(18, 32, 25, 0.09);
   --shadow-lg: 0 24px 56px rgba(18, 32, 25, 0.14);
 
+  /* Role tokens: let the night theme change meaning without touching every rule.
+     --white is "card surface"; --on-accent is "text/icons sitting on a green or colored fill". */
+  --on-accent: #FFFFFF;
+  --accent-text: var(--teal-deep);   /* green text on a surface */
+  --inverse-bg: var(--ink);          /* active filter chip, toast */
+  --inverse-text: #FFFFFF;
+  --navbar-bg: rgba(251, 253, 251, 0.7);
+  --sheen: rgba(255, 255, 255, 0.75);
+
   /* Motion */
   --ease: cubic-bezier(.22, .68, .1, 1);
   --dur-sm: .25s;
   --dur-md: .5s;
 
   --nav-h: 76px;
+}
+
+/* ---------- Night mode (green, never grey) ----------
+   Light is the default. Dark only turns on when data-theme="dark" is set on <html>
+   (by the toggle in the navbar; the choice is saved in localStorage as "kaka-theme"). */
+:root[data-theme="dark"] {
+  color-scheme: dark;
+
+  --paper: #0A1410;
+  --paper-dim: #0E1B15;
+  --mint-mist: #13271E;
+  --mint-100: #173626;
+  --mint-300: #2B5F48;
+  /* --mint-500 / --mint-600 / --teal-deep stay: they are the brand greens */
+  --ink: #E4F1EA;
+  --ink-soft: #A7BDB1;
+  --ink-faint: #7A9084;
+  --line: #20382C;
+  --line-soft: #172A20;
+  --white: #112119;                  /* card surface */
+
+  --gold: #E3B04B;
+  --gold-bg: rgba(227, 176, 75, 0.14);
+  --gold-border: rgba(227, 176, 75, 0.38);
+  --silver: #9FB0B8;
+  --silver-bg: rgba(159, 176, 184, 0.12);
+  --silver-border: rgba(159, 176, 184, 0.3);
+  --bronze: #D9935B;
+  --bronze-bg: rgba(217, 147, 91, 0.14);
+  --bronze-border: rgba(217, 147, 91, 0.38);
+
+  --shadow-sm: 0 2px 10px rgba(0, 0, 0, 0.35);
+  --shadow-md: 0 10px 28px rgba(0, 0, 0, 0.42);
+  --shadow-lg: 0 24px 56px rgba(0, 0, 0, 0.55);
+
+  --accent-text: #6FE3B1;            /* bright mint for green text on dark */
+  --inverse-bg: var(--mint-600);
+  --inverse-text: #FFFFFF;
+  --navbar-bg: rgba(10, 20, 16, 0.72);
+  --sheen: rgba(255, 255, 255, 0.05);
 }
 
 /* ---------- Reset ---------- */
@@ -147,7 +196,7 @@ section + section { border-top: 1px solid var(--line); }
   font-weight: 700;
   letter-spacing: 0.14em;
   text-transform: uppercase;
-  color: var(--teal-deep);
+  color: var(--accent-text);
   margin-bottom: 14px;
 }
 .section-eyebrow::before {
@@ -195,19 +244,19 @@ h2.section-title {
 .btn svg { width: 17px; height: 17px; flex-shrink: 0; }
 .btn-primary {
   background: linear-gradient(135deg, var(--mint-500), var(--mint-600));
-  color: var(--white);
+  color: var(--on-accent);
   box-shadow: 0 10px 24px -8px rgba(30, 158, 113, 0.55);
 }
 .btn-primary:hover { transform: translateY(-2px); box-shadow: 0 14px 28px -8px rgba(30, 158, 113, 0.65); }
 .btn-outline {
   background: transparent;
-  color: var(--teal-deep);
+  color: var(--accent-text);
   border-color: var(--line);
 }
 .btn-outline:hover { border-color: var(--mint-500); background: var(--mint-mist); }
 .btn-ghost {
   background: var(--mint-mist);
-  color: var(--teal-deep);
+  color: var(--accent-text);
 }
 .btn-ghost:hover { background: var(--mint-100); transform: translateY(-2px); }
 .btn-lg { padding: 16px 34px; font-size: 1.02rem; }
@@ -252,7 +301,7 @@ h2.section-title {
   height: var(--nav-h);
   display: flex;
   align-items: center;
-  background: rgba(251, 253, 251, 0.7);
+  background: var(--navbar-bg);
   backdrop-filter: blur(14px) saturate(160%);
   -webkit-backdrop-filter: blur(14px) saturate(160%);
   border-bottom: 1px solid var(--mint-300);
@@ -296,8 +345,8 @@ h2.section-title {
   color: var(--ink-soft);
   transition: color var(--dur-sm) var(--ease), background var(--dur-sm) var(--ease);
 }
-.nav-link:hover { color: var(--teal-deep); background: var(--mint-mist); }
-.nav-link.is-active { color: var(--teal-deep); background: var(--mint-mist); }
+.nav-link:hover { color: var(--accent-text); background: var(--mint-mist); }
+.nav-link.is-active { color: var(--accent-text); background: var(--mint-mist); }
 .nav-actions { display: flex; align-items: center; gap: 10px; }
 
 .nav-toggle {
@@ -384,8 +433,8 @@ h2.section-title {
   cursor: pointer;
   transition: background var(--dur-sm) var(--ease), color var(--dur-sm) var(--ease);
 }
-.lang-option:hover { background: var(--mint-mist); color: var(--teal-deep); }
-.lang-option.is-active { background: var(--mint-mist); color: var(--teal-deep); font-weight: 800; }
+.lang-option:hover { background: var(--mint-mist); color: var(--accent-text); }
+.lang-option.is-active { background: var(--mint-mist); color: var(--accent-text); font-weight: 800; }
 .lang-option .flag { font-size: 1.05rem; line-height: 1; }
 .lang-option .check { margin-left: auto; width: 15px; height: 15px; color: var(--mint-600); opacity: 0; }
 .lang-option.is-active .check { opacity: 1; }
@@ -415,7 +464,7 @@ h2.section-title {
   gap: 8px;
   font-weight: 700;
   font-size: 0.9rem;
-  color: var(--teal-deep);
+  color: var(--accent-text);
   padding: 8px 6px;
   transition: gap var(--dur-sm) var(--ease);
 }
@@ -448,7 +497,7 @@ h2.section-title {
   height: 3px;
   top: 8%;
   border-radius: 3px;
-  background: linear-gradient(90deg, transparent, var(--mint-600) 45%, var(--white) 50%, var(--mint-600) 55%, transparent);
+  background: linear-gradient(90deg, transparent, var(--mint-600) 45%, var(--on-accent) 50%, var(--mint-600) 55%, transparent);
   box-shadow: 0 0 18px 3px rgba(30, 158, 113, 0.55);
   animation: scanSweep 4.4s var(--ease) infinite;
   z-index: 2;
@@ -468,7 +517,7 @@ h2.section-title {
   justify-content: center;
   gap: 12px;
   text-align: center;
-  color: var(--teal-deep);
+  color: var(--accent-text);
   padding: 30px;
 }
 .photo-placeholder svg { width: 48px; height: 48px; opacity: 0.65; }
@@ -519,7 +568,7 @@ h2.section-title {
   padding: 6px 14px;
   border-radius: var(--radius-full);
   background: var(--mint-mist);
-  color: var(--teal-deep);
+  color: var(--accent-text);
   font-size: 0.78rem;
   font-weight: 700;
   letter-spacing: 0.01em;
@@ -546,11 +595,11 @@ h2.section-title {
 }
 .medal-icon svg { width: 13px; height: 13px; }
 .medal--gold { background: var(--gold-bg); border-color: var(--gold-border); color: var(--gold); }
-.medal--gold .medal-icon { background: var(--gold); color: var(--white); }
+.medal--gold .medal-icon { background: var(--gold); color: var(--on-accent); }
 .medal--silver { background: var(--silver-bg); border-color: var(--silver-border); color: var(--silver); }
-.medal--silver .medal-icon { background: var(--silver); color: var(--white); }
+.medal--silver .medal-icon { background: var(--silver); color: var(--on-accent); }
 .medal--bronze { background: var(--bronze-bg); border-color: var(--bronze-border); color: var(--bronze); }
-.medal--bronze .medal-icon { background: var(--bronze); color: var(--white); }
+.medal--bronze .medal-icon { background: var(--bronze); color: var(--on-accent); }
 
 /* =========================================================================
    HERO
@@ -578,7 +627,7 @@ h2.section-title {
 .hero-text h1 .serif-italic {
   font-style: italic;
   font-weight: 400;
-  color: var(--teal-deep);
+  color: var(--accent-text);
 }
 .hero-text h1 .highlight { color: var(--mint-600); }
 .hero-sub {
@@ -605,7 +654,7 @@ h2.section-title {
   font-family: var(--font-display);
   font-size: 2.4rem;
   font-weight: 700;
-  color: var(--teal-deep);
+  color: var(--accent-text);
   line-height: 1;
 }
 .stat-label {
@@ -726,7 +775,7 @@ h2.section-title {
 .fact strong {
   display: block;
   font-size: 0.82rem;
-  color: var(--teal-deep);
+  color: var(--accent-text);
   margin-bottom: 6px;
 }
 .fact span { font-size: 0.86rem; color: var(--ink-soft); line-height: 1.4; }
@@ -771,7 +820,7 @@ h2.section-title {
 .experience-item:last-child { border-bottom: none; }
 .experience-item .exp-period { font-weight: 700; color: var(--ink-faint); font-size: 0.85rem; }
 .experience-item h4 { font-family: var(--font-display); font-size: 1.15rem; font-weight: 600; margin-bottom: 6px; }
-.experience-item .exp-org { color: var(--teal-deep); font-weight: 700; font-size: 0.9rem; margin-bottom: 8px; }
+.experience-item .exp-org { color: var(--accent-text); font-weight: 700; font-size: 0.9rem; margin-bottom: 8px; }
 .experience-item p { color: var(--ink-soft); font-size: 0.92rem; line-height: 1.6; }
 
 /* horizontal "org row" card — logo badge + info, all on one line */
@@ -801,7 +850,7 @@ h2.section-title {
   border-radius: 50%;
   border: 1.5px dashed var(--mint-300);
   background: var(--mint-mist);
-  color: var(--teal-deep);
+  color: var(--accent-text);
   display: flex;
   align-items: center;
   justify-content: center;
@@ -812,7 +861,7 @@ h2.section-title {
 .org-top { display: flex; align-items: center; justify-content: space-between; gap: 12px; flex-wrap: wrap; }
 .org-top h4 { font-family: var(--font-display); font-weight: 600; font-size: 1.08rem; color: var(--ink); }
 .org-div { font-family: var(--font-body); font-weight: 500; font-style: italic; color: var(--ink-soft); font-size: 0.92rem; }
-.org-org { color: var(--teal-deep); font-weight: 700; font-size: 0.85rem; margin-top: 4px; }
+.org-org { color: var(--accent-text); font-weight: 700; font-size: 0.85rem; margin-top: 4px; }
 .experience-note {
   text-align: center;
   color: var(--ink-faint);
@@ -841,11 +890,11 @@ h2.section-title {
   font-size: 0.86rem;
   transition: all var(--dur-sm) var(--ease);
 }
-.filter-btn:hover { border-color: var(--mint-300); color: var(--teal-deep); }
+.filter-btn:hover { border-color: var(--mint-300); color: var(--accent-text); }
 .filter-btn.is-active {
-  background: var(--ink);
-  border-color: var(--ink);
-  color: var(--white);
+  background: var(--inverse-bg);
+  border-color: var(--inverse-bg);
+  color: var(--inverse-text);
 }
 
 .project-grid {
@@ -884,7 +933,7 @@ h2.section-title {
   left: -20%; right: -20%;
   top: -30%;
   height: 40%;
-  background: linear-gradient(180deg, rgba(255,255,255,0.75), transparent);
+  background: linear-gradient(180deg, var(--sheen), transparent);
   transform: translateY(-140%) rotate(4deg);
   transition: transform .8s var(--ease);
 }
@@ -928,14 +977,14 @@ h2.section-title {
 }
 .card-link {
   display: inline-flex; align-items: center; gap: 6px;
-  font-weight: 700; font-size: 0.88rem; color: var(--teal-deep);
+  font-weight: 700; font-size: 0.88rem; color: var(--accent-text);
 }
 .card-link svg { width: 15px; height: 15px; transition: transform var(--dur-sm) var(--ease); }
 
 /* ============================= MARQUEE STRIP ============================= */
 .marquee-strip {
   background: linear-gradient(90deg, var(--mint-600), var(--mint-500));
-  color: var(--white);
+  color: var(--on-accent);
   padding: 12px 0;
   overflow: hidden;
   border-top: 1px solid rgba(255,255,255,0.05);
@@ -952,18 +1001,18 @@ h2.section-title {
 }
 .marquee-segment { display: flex; align-items: center; gap: 18px; flex: 0 0 auto; padding-inline: 12px; }
 .marquee-title { color: var(--mint-100); font-weight: 700; margin-right: 10px; font-family: var(--font-display); font-size: 0.98rem; letter-spacing: 0.06em; }
-.tech-row { display: flex; align-items: center; gap: 12px; color: var(--white); font-weight: 700; }
-.tech-item { display: flex; flex-direction: column; align-items: center; gap: 6px; color: var(--white); font-size: 0.78rem; }
+.tech-row { display: flex; align-items: center; gap: 12px; color: var(--on-accent); font-weight: 700; }
+.tech-item { display: flex; flex-direction: column; align-items: center; gap: 6px; color: var(--on-accent); font-size: 0.78rem; }
 .tech-icon { display: inline-flex; align-items: center; justify-content: center; width: 34px; height: 34px; border-radius: 8px; background: var(--marquee-contrast); color: var(--mint-300); font-weight: 800; font-size: 0.78rem; box-shadow: 0 6px 14px rgba(0,0,0,0.06); }
 .bullet { color: var(--mint-300); margin: 0 8px; font-weight: 700; }
 .projects-row { display: flex; gap: 12px; align-items: center; }
 .mini-card { display: flex; flex-direction: column; align-items: center; gap: 6px; padding: 6px; border-radius: 8px; border: 1px solid rgba(255,255,255,0.06); background: linear-gradient(180deg, rgba(255,255,255,0.02), rgba(255,255,255,0.01)); min-width: 72px; }
 .mini-logo { display: inline-flex; align-items: center; justify-content: center; width: 46px; height: 34px; border-radius: 6px; background: rgba(255,255,250,0.06); color: var(--mint-300); font-weight: 800; }
-.mini-label { font-size: 0.78rem; color: var(--white); margin-top: 6px; text-align: center; white-space: nowrap; }
+.mini-label { font-size: 0.78rem; color: var(--on-accent); margin-top: 6px; text-align: center; white-space: nowrap; }
 .roles-row { display: flex; gap: 12px; align-items: center; }
 .role-item { display: flex; gap: 10px; align-items: center; min-width: 160px; background: transparent; border-radius: 10px; padding: 6px; border: 1px solid rgba(255,255,255,0.04); }
-.role-logo { display: inline-flex; align-items: center; justify-content: center; width: 46px; height: 46px; border-radius: 8px; background: rgba(255,255,250,0.06); color: var(--white); font-weight: 800; font-size: 0.92rem; box-shadow: 0 6px 12px rgba(0,0,0,0.05); }
-.role-name { color: var(--white); font-weight: 700; font-size: 0.86rem; }
+.role-logo { display: inline-flex; align-items: center; justify-content: center; width: 46px; height: 46px; border-radius: 8px; background: rgba(255,255,250,0.06); color: var(--on-accent); font-weight: 800; font-size: 0.92rem; box-shadow: 0 6px 12px rgba(0,0,0,0.05); }
+.role-name { color: var(--on-accent); font-weight: 700; font-size: 0.86rem; }
 .role-sub { color: var(--mint-100); font-size: 0.72rem; margin-top: 2px; }
 
 @keyframes marquee {
@@ -1025,7 +1074,7 @@ h2.section-title {
   width: 52px; height: 52px;
   border-radius: 50%;
   background: var(--mint-mist);
-  color: var(--teal-deep);
+  color: var(--accent-text);
   display: flex; align-items: center; justify-content: center;
 }
 .contact-icon svg { width: 22px; height: 22px; }
@@ -1035,7 +1084,7 @@ h2.section-title {
 .mini-link, .copy-chip {
   font-size: 0.72rem;
   font-weight: 700;
-  color: var(--teal-deep);
+  color: var(--accent-text);
   background: var(--mint-mist);
   border: none;
   padding: 6px 13px;
@@ -1054,11 +1103,11 @@ h2.section-title {
   justify-content: space-between;
   gap: 24px;
   flex-wrap: wrap;
-  color: var(--white);
+  color: var(--on-accent);
 }
 .cv-cta-text h3 { font-family: var(--font-display); font-size: 1.5rem; font-weight: 600; margin-bottom: 6px; }
 .cv-cta-text p { color: rgba(255,255,255,0.85); font-size: 0.94rem; }
-.cv-cta .btn-primary { background: var(--white); color: var(--teal-deep); box-shadow: none; }
+.cv-cta .btn-primary { background: var(--on-accent); color: var(--teal-deep); box-shadow: none; }
 .cv-cta .btn-primary:hover { background: var(--mint-mist); }
 
 /* toast (copy email) */
@@ -1067,8 +1116,8 @@ h2.section-title {
   bottom: 28px;
   left: 50%;
   transform: translate(-50%, 20px);
-  background: var(--ink);
-  color: var(--white);
+  background: var(--inverse-bg);
+  color: var(--inverse-text);
   padding: 12px 22px;
   border-radius: var(--radius-full);
   font-size: 0.85rem;
@@ -1098,7 +1147,7 @@ h2.section-title {
   width: 38px; height: 38px;
   border-radius: 50%;
   background: var(--mint-mist);
-  color: var(--teal-deep);
+  color: var(--accent-text);
   display: flex; align-items: center; justify-content: center;
   transition: background var(--dur-sm) var(--ease), transform var(--dur-sm) var(--ease);
 }
@@ -1114,7 +1163,7 @@ h2.section-title {
   border-radius: 50%;
   border: 1px solid var(--line);
   background: var(--white);
-  color: var(--teal-deep);
+  color: var(--accent-text);
   box-shadow: var(--shadow-md);
   display: flex; align-items: center; justify-content: center;
   opacity: 0;
@@ -1182,13 +1231,13 @@ h2.section-title {
   font-size: 0.78rem;
   text-transform: uppercase;
   letter-spacing: 0.08em;
-  color: var(--teal-deep);
+  color: var(--accent-text);
   font-weight: 800;
   margin-bottom: 10px;
 }
 .info-card p { color: var(--ink-soft); font-size: 0.92rem; line-height: 1.55; }
 .info-card .tech-pills { display: flex; flex-wrap: wrap; gap: 7px; }
-.info-card a.repo-link { display: inline-flex; align-items: center; gap: 7px; font-weight: 700; color: var(--teal-deep); font-size: 0.9rem; }
+.info-card a.repo-link { display: inline-flex; align-items: center; gap: 7px; font-weight: 700; color: var(--accent-text); font-size: 0.9rem; }
 .info-card a.repo-link svg { width: 16px; height: 16px; }
 
 .project-gallery { padding-top: 8px; }
@@ -1239,7 +1288,7 @@ h2.section-title {
   align-items: center;
   justify-content: center;
   gap: 8px;
-  color: var(--white);
+  color: var(--on-accent);
   font-weight: 700;
   font-size: 0.92rem;
   letter-spacing: 0.04em;
@@ -1352,7 +1401,7 @@ body.modal-open { overflow: hidden; }
   content: '';
   position: absolute;
   inset: 8px;
-  border: 1px solid rgba(18, 32, 25, 0.08);
+  border: 1px solid var(--line);
   border-radius: 18px;
   pointer-events: none;
 }
@@ -1361,7 +1410,7 @@ body.modal-open { overflow: hidden; }
   left: 18px;
   bottom: 18px;
   background: rgba(18, 32, 25, 0.72);
-  color: var(--white);
+  color: var(--on-accent);
   padding: 6px 10px;
   border-radius: 999px;
   font-size: 0.72rem;
@@ -1498,7 +1547,7 @@ body.modal-open { overflow: hidden; }
   /* 4. Perbesar logo dan ubah warnanya jadi putih agar kontras */
   .contact-card .contact-icon {
     background: transparent;
-    color: var(--white);
+    color: var(--on-accent);
     width: 28px;
     height: 28px;
   }
@@ -1686,7 +1735,7 @@ body.modal-open { overflow: hidden; }
   left: 0;
   height: 0;
   border-radius: var(--radius-full);
-  background: var(--ink);
+  background: var(--inverse-bg);
   z-index: 0;
   opacity: 0;
   transition: transform .42s var(--ease), width .42s var(--ease),
@@ -1700,7 +1749,7 @@ body.modal-open { overflow: hidden; }
 .project-filters:has(.filter-indicator.is-ready) .filter-btn.is-active {
   background: transparent;
   border-color: transparent;
-  color: var(--white);
+  color: var(--inverse-text);
 }
 
 /* View Transitions: each card carries its own transition name, so on a
@@ -1720,3 +1769,238 @@ body.modal-open { overflow: hidden; }
     mix-blend-mode: normal;
   }
 }
+
+
+/* =========================================================================
+   PRELOADER — hand-drawn envelope (index only)
+   Timeline: envelope draws itself (~1.5s) -> waits for the page to be ready
+   -> flap flips open, letter slides out, "LOADING" becomes "HELLO!"
+   -> two mint curtains sweep up over the screen and lift away, revealing the page.
+   Wait times for the JS side live at the top of the preloader block in main.js.
+   ========================================================================= */
+html.is-loading { overflow: hidden; }
+html.skip-preloader .preloader { display: none; }
+
+.preloader {
+  /* ---- the two knobs you'll probably want ---- */
+  --pl-size: 250px;   /* width of the envelope drawing (it never exceeds 62% of the screen width) */
+  --pl-exit: 1.1s;    /* how long the curtain exit takes; main.js reads this value */
+
+  position: fixed;
+  inset: 0;
+  z-index: 3000;
+  display: grid;
+  place-items: center;
+  /* if JS never runs, get out of the way after 10s */
+  animation: pl-failsafe .4s ease 10s forwards;
+}
+.preloader.is-leaving { pointer-events: none; }
+
+/* soft mint backdrop (kept separate so it can disappear while the curtain covers it) */
+.pl-bg {
+  position: absolute;
+  inset: 0;
+  background: radial-gradient(circle at 50% 46%, var(--mint-mist) 0%, var(--paper) 62%);
+}
+.pl-stage { position: relative; }
+
+.pl-svg {
+  width: min(var(--pl-size), 62vw);
+  height: auto;
+  overflow: visible;
+  fill: none;
+  stroke: var(--ink);
+  stroke-width: 2.2;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+}
+
+/* gentle float, runs the whole time so nothing jumps when it opens */
+.pl-bob { animation: pl-bob 2.4s ease-in-out 1.2s infinite; }
+
+/* --- self-drawing strokes --- */
+.pl-front, .pl-flap, .pl-fold, .pl-g {
+  stroke-dasharray: 1;
+  stroke-dashoffset: 1;
+  opacity: 0;
+}
+.pl-front, .pl-flap {
+  fill: var(--white);
+  fill-opacity: 0;
+  animation:
+    pl-draw var(--d) cubic-bezier(.65, 0, .35, 1) var(--t) forwards,
+    pl-fill .3s ease .95s forwards;
+}
+/* the V fold stays hidden under the closed flap, then draws as it opens */
+.pl-fold { stroke: var(--ink-soft); stroke-width: 1.8; }
+.pl-loading .pl-g {
+  stroke-width: 2.4;
+  animation: pl-draw .45s cubic-bezier(.65, 0, .35, 1) calc(.55s + var(--i) * .08s) forwards;
+}
+
+/* --- pieces that stay hidden until it opens --- */
+.pl-flap-open-wrap,
+.pl-flap-wrap {
+  transform-box: fill-box;
+}
+.pl-flap-open-wrap { transform-origin: 50% 100%; opacity: 0; }
+.pl-flap-wrap { transform-origin: 50% 0; }
+.pl-flap-open { fill: var(--mint-100); }
+
+.pl-letter {
+  transform-box: fill-box;
+  transform-origin: 50% 100%;
+  opacity: 0;
+}
+.pl-paper { fill: var(--white); stroke-width: 2; }
+.pl-badge { fill: var(--mint-600); stroke: none; }
+.pl-k { stroke: var(--on-accent); stroke-width: 1.9; }
+.pl-line { stroke: var(--mint-300); stroke-width: 1.8; }
+
+.pl-hello .pl-g {
+  stroke-width: 2.4;
+  stroke: var(--ink);
+  animation: none;
+}
+
+/* --- open --- */
+.is-open .pl-flap-wrap { animation: pl-flap-close .32s ease-in forwards; }
+.is-open .pl-flap-open-wrap { animation: pl-flap-open .38s cubic-bezier(.2, .8, .3, 1) .3s both; }
+.is-open .pl-fold { animation: pl-draw .5s cubic-bezier(.65, 0, .35, 1) .35s forwards; }
+.is-open .pl-letter { animation: pl-letter-out .8s cubic-bezier(.2, .9, .25, 1) .55s both; }
+.is-open .pl-loading { animation: pl-fade-out .25s ease forwards; }
+.is-open .pl-hello .pl-g {
+  animation: pl-draw .4s cubic-bezier(.65, 0, .35, 1) calc(.75s + var(--i) * .06s) forwards;
+}
+
+@keyframes pl-draw {
+  0%   { stroke-dashoffset: 1; opacity: 0; }
+  2%   { opacity: 1; }
+  100% { stroke-dashoffset: 0; opacity: 1; }
+}
+@keyframes pl-fill { to { fill-opacity: 1; } }
+@keyframes pl-bob {
+  0%, 100% { transform: translateY(0); }
+  50%      { transform: translateY(-3px); }
+}
+@keyframes pl-flap-close {
+  0%   { transform: scaleY(1); opacity: 1; }
+  99%  { transform: scaleY(0); opacity: 1; }
+  100% { transform: scaleY(0); opacity: 0; }
+}
+@keyframes pl-flap-open {
+  0%   { transform: scaleY(0); opacity: 0; }
+  1%   { transform: scaleY(0); opacity: 1; }
+  100% { transform: scaleY(1); opacity: 1; }
+}
+@keyframes pl-letter-out {
+  0%   { transform: translateY(0); opacity: 0; }
+  1%   { transform: translateY(0); opacity: 1; }
+  70%  { transform: translateY(-63px) rotate(-1.5deg); opacity: 1; }
+  100% { transform: translateY(-58px) rotate(0); opacity: 1; }
+}
+@keyframes pl-fade-out { to { opacity: 0; } }
+@keyframes pl-failsafe { to { opacity: 0; visibility: hidden; pointer-events: none; } }
+
+/* --- exit: two mint curtains sweep up, hold for a beat, then lift away --- */
+.pl-curtain {
+  position: fixed;
+  left: 0;
+  right: 0;
+  top: 0;
+  height: 100vh;
+  height: 100dvh;
+  transform: translate3d(0, 120vh, 0); /* parked below the screen until it's time */
+  will-change: transform;
+}
+/* soften the leading and trailing edges with an oversized ellipse cap */
+.pl-curtain::before,
+.pl-curtain::after {
+  content: "";
+  position: absolute;
+  left: -10%;
+  right: -10%;
+  height: 32vh;
+  border-radius: 50%;
+  background: inherit;
+}
+.pl-curtain::before { top: -16vh; }
+.pl-curtain::after { bottom: -16vh; }
+.pl-curtain { background: var(--mint-300); } /* want the bolder accent green? use var(--mint-600) */
+
+.is-leaving .pl-curtain { animation: pl-curtain var(--pl-exit) linear forwards; }
+/* the envelope + backdrop vanish at the instant the screen is fully covered */
+.is-leaving .pl-bg,
+.is-leaving .pl-stage { animation: pl-uncover var(--pl-exit) linear forwards; }
+
+@keyframes pl-curtain {
+  0%   { transform: translate3d(0, 120vh, 0);  animation-timing-function: cubic-bezier(.65, 0, .35, 1); }
+  42%  { transform: translate3d(0, 0, 0);      animation-timing-function: linear; }
+  48%  { transform: translate3d(0, 0, 0);      animation-timing-function: cubic-bezier(.65, 0, .35, 1); }
+  100% { transform: translate3d(0, -120vh, 0); }
+}
+@keyframes pl-uncover {
+  0%, 44% { opacity: 1; }
+  45%, 100% { opacity: 0; }
+}
+
+
+/* =========================================================================
+   NIGHT MODE — toggle button + dark-only touches
+   The palette itself lives in :root[data-theme="dark"] at the top of this file.
+   ========================================================================= */
+.nav-tools {
+  display: flex;
+  align-items: center;
+  gap: 4px;
+}
+
+.theme-toggle {
+  position: relative;
+  flex: none;
+  width: 40px;
+  height: 40px;
+  display: grid;
+  place-items: center;
+  border: none;
+  border-radius: var(--radius-full);
+  background: none;
+  color: var(--ink-soft);
+  cursor: pointer;
+  transition: color var(--dur-sm) var(--ease), background var(--dur-sm) var(--ease);
+}
+.theme-toggle:hover { color: var(--accent-text); background: var(--mint-mist); }
+.theme-toggle svg {
+  grid-area: 1 / 1;
+  width: 19px;
+  height: 19px;
+  transition: transform .5s var(--ease), opacity .3s ease;
+}
+/* light mode shows the moon (tap to go dark), dark mode shows the sun */
+.theme-toggle .icon-sun  { opacity: 0; transform: rotate(-90deg) scale(.5); }
+:root[data-theme="dark"] .theme-toggle .icon-moon { opacity: 0; transform: rotate(90deg) scale(.5); }
+:root[data-theme="dark"] .theme-toggle .icon-sun  { opacity: 1; transform: none; }
+
+@media (max-width: 760px) {
+  /* inside the mobile menu: language row + toggle sit side by side */
+  .nav-tools { width: 100%; gap: 8px; }
+  .nav-tools .lang-switcher { flex: 1; min-width: 0; }
+  .theme-toggle { width: 46px; height: 46px; background: var(--mint-mist); }
+}
+
+/* smooth cross-fade, only while the toggle is being used (class added by main.js for ~0.5s) */
+html.theme-anim,
+html.theme-anim *,
+html.theme-anim *::before,
+html.theme-anim *::after {
+  transition: background-color .4s ease, color .4s ease, border-color .4s ease,
+              fill .4s ease, stroke .4s ease, box-shadow .4s ease !important;
+}
+
+/* --- dark-only touches --- */
+:root[data-theme="dark"] .navbar.is-scrolled { box-shadow: 0 4px 24px rgba(0, 0, 0, 0.4); }
+:root[data-theme="dark"] .lightbox-close { background: rgba(255, 255, 255, 0.92); color: #122019; }
+/* the dark org/club logos would vanish on a dark card: give them a light plate */
+:root[data-theme="dark"] .org-logo img { background: #FFFFFF; padding: 3px; }
+/* the preloader curtain goes bold green instead of pale mint */
+:root[data-theme="dark"] .pl-curtain { background: var(--mint-600); }

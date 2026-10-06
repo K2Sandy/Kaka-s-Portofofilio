@@ -13,6 +13,78 @@
   const hasProjects = typeof PROJECTS !== "undefined";
   const hasI18n = typeof I18N !== "undefined";
 
+  /* ---------------- Preloader (index page only) ----------------
+     The envelope markup lives in index.html; the animation is pure CSS.
+     This block only decides WHEN to open it and when to leave.
+       MIN_SHOW        ms the envelope is allowed to finish drawing before it may open
+       HOLD_AFTER_OPEN ms the open envelope + "HELLO!" stay on screen
+       MAX_WAIT        open anyway after this long, even if the page is still loading */
+  const MIN_SHOW = reduceMotion ? 300 : 1500;
+  const HOLD_AFTER_OPEN = reduceMotion ? 300 : 1800;
+  const MAX_WAIT = 8000;
+
+  const preloader = document.getElementById("preloader");
+  let preloaderActive = !!preloader && !document.documentElement.classList.contains("skip-preloader");
+
+  /* run fn now, or once the preloader has left (so the hero can animate in after it) */
+  function afterPreloader(fn) {
+    if (!preloaderActive) fn();
+    else window.addEventListener("preloader:done", fn, { once: true });
+  }
+
+  function initPreloader() {
+    if (!preloader) return;
+    if (!preloaderActive) {
+      preloader.remove();
+      return;
+    }
+    let opened = false;
+
+    /* length of the curtain exit, read from --pl-exit in style.css so there is one place to change it */
+    function exitMs() {
+      if (reduceMotion) return 0;
+      const raw = getComputedStyle(preloader).getPropertyValue("--pl-exit").trim();
+      const n = parseFloat(raw);
+      if (isNaN(n)) return 1800;
+      return raw.endsWith("ms") ? n : n * 1000;
+    }
+
+    function leave() {
+      const exit = exitMs();
+      preloader.classList.add("is-leaving"); /* starts the curtain wipe */
+      try {
+        sessionStorage.setItem("kaka-pl", "1");
+      } catch (e) {
+        /* private mode — the intro just plays again next visit */
+      }
+      /* unlock scrolling and start the hero entrance once the curtain has lifted off the top of the
+         page, so the hero animation is actually seen (the page is revealed bottom-first) */
+      setTimeout(() => {
+        document.documentElement.classList.remove("is-loading");
+        preloaderActive = false;
+        window.dispatchEvent(new Event("preloader:done"));
+      }, exit * 0.8);
+      setTimeout(() => preloader.remove(), exit + 150);
+    }
+
+    function open() {
+      if (opened) return;
+      opened = true;
+      preloader.classList.add("is-open");
+      preloader.setAttribute("aria-label", "Welcome");
+      setTimeout(leave, HOLD_AFTER_OPEN);
+    }
+
+    const pageReady = new Promise((resolve) => {
+      if (document.readyState === "complete") resolve();
+      else window.addEventListener("load", resolve, { once: true });
+    }).then(() => (document.fonts && document.fonts.ready) || null);
+    const minTime = new Promise((resolve) => setTimeout(resolve, MIN_SHOW));
+
+    Promise.all([pageReady, minTime]).then(open);
+    setTimeout(open, MAX_WAIT);
+  }
+
   /* ---------------- i18n engine ---------------- */
   let currentLang = "en";
 
@@ -59,6 +131,50 @@
     applyStaticTranslations();
     if (hasProjects) renderProjectGrid();
     updateLangUI();
+    updateThemeUI();
+  }
+
+  /* ---------------- Theme: light (default) / night mode ----------------
+     index.html and every project page set data-theme="dark" on <html> from a tiny inline
+     script in <head> BEFORE first paint (so there is no light flash), using localStorage
+     key "kaka-theme". Light stays the default: it only goes dark if the visitor chose it. */
+  function currentTheme() {
+    return document.documentElement.getAttribute("data-theme") === "dark" ? "dark" : "light";
+  }
+
+  function updateThemeUI() {
+    const dark = currentTheme() === "dark";
+    const label = t(dark ? "nav.toLight" : "nav.toNight") || (dark ? "Switch to light mode" : "Switch to night mode");
+    document.querySelectorAll(".theme-toggle").forEach((btn) => {
+      btn.setAttribute("aria-label", label);
+      btn.setAttribute("title", label);
+      btn.setAttribute("aria-pressed", dark ? "true" : "false");
+    });
+    const meta = document.querySelector('meta[name="theme-color"]');
+    if (meta) meta.setAttribute("content", dark ? "#0A1410" : "#1E9E71");
+  }
+
+  function setTheme(theme, animate) {
+    const root = document.documentElement;
+    if (animate && !reduceMotion) {
+      root.classList.add("theme-anim"); /* enables the 0.4s cross-fade in style.css */
+      setTimeout(() => root.classList.remove("theme-anim"), 500);
+    }
+    if (theme === "dark") root.setAttribute("data-theme", "dark");
+    else root.removeAttribute("data-theme");
+    try {
+      localStorage.setItem("kaka-theme", theme);
+    } catch (e) {
+      /* private mode — the choice just won't be remembered */
+    }
+    updateThemeUI();
+  }
+
+  function initThemeToggle() {
+    document.querySelectorAll(".theme-toggle").forEach((btn) => {
+      btn.addEventListener("click", () => setTheme(currentTheme() === "dark" ? "light" : "dark", true));
+    });
+    updateThemeUI();
   }
 
   function initLangSwitcher() {
@@ -248,7 +364,7 @@
   }
 
   autoAttachReveal();
-  observeReveals();
+  afterPreloader(() => observeReveals()); /* hero animates in after the preloader leaves */
 
   /* ---------------- Stat counters ---------------- */
   function animateCount(el) {
@@ -684,9 +800,11 @@
   syncStatsWithProjects();
   initCounters();
   initLangSwitcher();
+  initThemeToggle();
   initProjectNav();
   initGalleryLightbox();
-  triggerInitialReveals();
+  initPreloader();
+  afterPreloader(triggerInitialReveals);
   initHeroParallax();
   initScanHeadings();
   initCardTilt();

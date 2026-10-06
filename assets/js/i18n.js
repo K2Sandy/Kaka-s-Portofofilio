@@ -19,7 +19,7 @@
  */
 const I18N = {
   en: {
-    nav: { about: "About", experience: "Experience", projects: "Projects", contact: "Contact", resume: "Resume", language: "Language" },
+    nav: { about: "About", experience: "Experience", projects: "Projects", contact: "Contact", resume: "Resume", language: "Language", toNight: "Switch to night mode", toLight: "Switch to light mode" },
     hero: {
       title_html: 'Hello, I am <span class="highlight">Kaka</span>',
       quote_html: '<strong>“Every expert was once a beginner.”</strong> This is my journey as a tech developer striving to craft meaningful and impactful digital solutions.',
@@ -142,7 +142,7 @@ const I18N = {
   },
 
   id: {
-    nav: { about: "Tentang", experience: "Pengalaman", projects: "Proyek", contact: "Kontak", resume: "CV", language: "Bahasa" },
+    nav: { about: "Tentang", experience: "Pengalaman", projects: "Proyek", contact: "Kontak", resume: "CV", language: "Bahasa", toNight: "Ganti ke mode malam", toLight: "Ganti ke mode terang" },
     hero: {
       title_html: 'Halo, saya <span class="highlight">Kaka</span>',
       quote_html: '<strong>“Setiap ahli pernah menjadi pemula.”</strong> Ini adalah perjalanan saya sebagai pengembang teknologi yang berusaha menciptakan solusi digital yang bermakna dan berdampak.',
@@ -265,7 +265,7 @@ const I18N = {
   },
 
   zh: {
-    nav: { about: "关于", experience: "经历", projects: "项目", contact: "联系", resume: "简历", language: "语言" },
+    nav: { about: "关于", experience: "经历", projects: "项目", contact: "联系", resume: "简历", language: "语言", toNight: "切换到夜间模式", toLight: "切换到浅色模式" },
     hero: {
       title_html: '你好，我是 <span class="highlight">Kaka</span>',
       quote_html: '<strong>“每个专家都曾是初学者。”</strong>这是我作为技术开发者的旅程，致力于打造有意义且有影响力的数字解决方案。',
@@ -388,7 +388,7 @@ const I18N = {
   },
 
   tl: {
-    nav: { about: "Tungkol", experience: "Karanasan", projects: "Mga Proyekto", contact: "Kontak", resume: "Resume", language: "Wika" },
+    nav: { about: "Tungkol", experience: "Karanasan", projects: "Mga Proyekto", contact: "Kontak", resume: "Resume", language: "Wika", toNight: "Lumipat sa night mode", toLight: "Lumipat sa light mode" },
     hero: {
       title_html: 'Kumusta, ako si <span class="highlight">Kaka</span>',
       quote_html: '<strong>“Ang bawat eksperto ay dating baguhan.”</strong> Ito ang aking paglalakbay bilang isang tech developer na nagsisikap lumikha ng makabuluhan at may epektong mga digital na solusyon.',

@@ -6,13 +6,14 @@
 <title>EscapeDisaster — Muhammad Albharaka Putrosandy</title>
 <meta name="description" content="EscapeDisaster: a mobile educational game teaching self-rescue procedures for earthquakes and tsunamis. Built for the Disaster Education Media Competition (DEMC) U-DARE 3.0 by TDMRC USK." />
 <meta name="theme-color" content="#1E9E71" />
+<script>try{if(localStorage.getItem("kaka-theme")==="dark")document.documentElement.setAttribute("data-theme","dark")}catch(e){}</script>
 <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Crect width='100' height='100' rx='24' fill='%231E9E71'/%3E%3Ctext x='50' y='69' font-size='56' font-family='Georgia,serif' fill='white' text-anchor='middle'%3EK%3C/text%3E%3C/svg%3E" />
 
 <link rel="preconnect" href="https://fonts.googleapis.com" />
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
 <link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,400;0,9..144,500;0,9..144,600;0,9..144,700;1,9..144,400;1,9..144,500&family=Plus+Jakarta+Sans:ital,wght@0,400;0,500;0,600;0,700;0,800;1,500&display=swap" rel="stylesheet" />
 
-<link rel="stylesheet" href="../assets/css/style.css?v=2" />
+<link rel="stylesheet" href="../assets/css/style.css?v=7" />
 </head>
 <body data-project-id="escapedisaster">
 <div class="scroll-progress" id="scrollProgress"></div>
@@ -26,19 +27,25 @@
       <a href="../index.html#experience" class="nav-link" data-i18n="nav.experience">Experience</a>
       <a href="../index.html#projects" class="nav-link" data-i18n="nav.projects">Projects</a>
       <a href="../index.html#contact" class="nav-link" data-i18n="nav.contact">Contact</a>
-      <div class="lang-switcher" id="langSwitcher">
-        <button type="button" class="nav-link lang-trigger" aria-haspopup="true" aria-expanded="false">
-          <svg class="lang-globe" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"/><line x1="3" y1="12" x2="21" y2="12"/><path d="M12 3a14 14 0 0 1 0 18 14 14 0 0 1 0-18z"/></svg>
-          <span data-i18n="nav.language">Language</span>
-          <span class="lang-current-label">EN</span>
-          <svg class="lang-caret" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="6,9 12,15 18,9"/></svg>
-        </button>
-        <div class="lang-dropdown" id="langDropdown" role="menu">
-          <button type="button" class="lang-option is-active" data-lang="en" role="menuitem"><span class="flag">🇬🇧</span><span>English</span><svg class="check" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><polyline points="20,6 9,17 4,12"/></svg></button>
-          <button type="button" class="lang-option" data-lang="id" role="menuitem"><span class="flag">🇮🇩</span><span>Bahasa Indonesia</span><svg class="check" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><polyline points="20,6 9,17 4,12"/></svg></button>
-          <button type="button" class="lang-option" data-lang="zh" role="menuitem"><span class="flag">🇨🇳</span><span>中文</span><svg class="check" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><polyline points="20,6 9,17 4,12"/></svg></button>
-          <button type="button" class="lang-option" data-lang="tl" role="menuitem"><span class="flag">🇵🇭</span><span>Tagalog</span><svg class="check" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><polyline points="20,6 9,17 4,12"/></svg></button>
+      <div class="nav-tools">
+        <div class="lang-switcher" id="langSwitcher">
+          <button type="button" class="nav-link lang-trigger" aria-haspopup="true" aria-expanded="false">
+            <svg class="lang-globe" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"/><line x1="3" y1="12" x2="21" y2="12"/><path d="M12 3a14 14 0 0 1 0 18 14 14 0 0 1 0-18z"/></svg>
+            <span data-i18n="nav.language">Language</span>
+            <span class="lang-current-label">EN</span>
+            <svg class="lang-caret" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="6,9 12,15 18,9"/></svg>
+          </button>
+          <div class="lang-dropdown" id="langDropdown" role="menu">
+            <button type="button" class="lang-option is-active" data-lang="en" role="menuitem"><span class="flag">🇬🇧</span><span>English</span><svg class="check" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><polyline points="20,6 9,17 4,12"/></svg></button>
+            <button type="button" class="lang-option" data-lang="id" role="menuitem"><span class="flag">🇮🇩</span><span>Bahasa Indonesia</span><svg class="check" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><polyline points="20,6 9,17 4,12"/></svg></button>
+            <button type="button" class="lang-option" data-lang="zh" role="menuitem"><span class="flag">🇨🇳</span><span>中文</span><svg class="check" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><polyline points="20,6 9,17 4,12"/></svg></button>
+            <button type="button" class="lang-option" data-lang="tl" role="menuitem"><span class="flag">🇵🇭</span><span>Tagalog</span><svg class="check" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><polyline points="20,6 9,17 4,12"/></svg></button>
+          </div>
         </div>
+        <button type="button" class="theme-toggle" id="themeToggle" aria-label="Switch to night mode" title="Switch to night mode">
+          <svg class="icon-moon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M21 12.8A9 9 0 1 1 11.2 3a7 7 0 0 0 9.8 9.8z"/></svg>
+          <svg class="icon-sun" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="4.2"/><path d="M12 2.6v2.2M12 19.2v2.2M2.6 12h2.2M19.2 12h2.2M5.35 5.35l1.55 1.55M17.1 17.1l1.55 1.55M18.65 5.35 17.1 6.9M6.9 17.1l-1.55 1.55"/></svg>
+        </button>
       </div>
       <a href="../assets/cv/CV-Muhammad-Albharaka-Putrosandy.pdf" class="btn btn-outline btn-sm nav-resume-mobile" target="_blank" rel="noopener">
         <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7,10 12,15 17,10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>
@@ -246,7 +253,7 @@
 </button>
 
 <script src="../assets/js/projects-data.js?v=2"></script>
-<script src="../assets/js/i18n.js?v=2"></script>
-<script src="../assets/js/main.js?v=2"></script>
+<script src="../assets/js/i18n.js?v=3"></script>
+<script src="../assets/js/main.js?v=6"></script>
 </body>
 </html>

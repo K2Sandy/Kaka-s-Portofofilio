@@ -1,0 +1,448 @@
+/* =========================================================================
+   ENHANCE.CSS — additions picked from the "letter" redesign (Oct 2026).
+   Loaded after style.css. Uses only the tokens already defined there, so
+   night mode works automatically. Delete this file + its <link> tags (and
+   enhance.js) to drop every addition.
+
+   1. Paper-sheet section edges (rounded top + soft shadow)
+   2. About: mint arch behind the cut-out photo
+   3. About: lead paragraph "ink" words (animated by enhance.js)
+   4. Projects: stacked sheet cards
+   5. Get in Touch: motion + hover details (layout unchanged)
+   6. Footer: big "Kaka." wordmark
+   7. Project pages: framed cover, lead paragraph, title split, prev / next
+   ========================================================================= */
+
+:root { --sheet-r: var(--radius-lg, 32px); --sheet-shadow: 0 -18px 40px -24px rgba(18, 32, 25, 0.18); }
+:root[data-theme="dark"] { --sheet-shadow: 0 -18px 40px -20px rgba(0, 0, 0, 0.6); }
+
+/* ---------- 1. Paper-sheet section edges ---------- */
+.about, .experience, .projects, .contact {
+  border-radius: var(--sheet-r) var(--sheet-r) 0 0;
+  margin-top: calc(var(--sheet-r) * -1);
+  box-shadow: var(--sheet-shadow);
+}
+.about { z-index: 1; }
+.experience { z-index: 2; }
+.projects { z-index: 3; }
+.contact { z-index: 4; }
+/* give back the space the next sheet overlaps */
+.hero { padding-bottom: calc(clamp(48px, 7vw, 80px) + var(--sheet-r)); }
+.about.section-pad, .experience.section-pad, .projects.section-pad { padding-bottom: calc(clamp(48px, 7vw, 84px) + var(--sheet-r)); }
+
+body[data-project-id] main > section:not(:first-child) {
+  background: var(--surface-0);
+  border-top-color: transparent;
+  border-radius: var(--sheet-r) var(--sheet-r) 0 0;
+  margin-top: calc(var(--sheet-r) * -1);
+  box-shadow: var(--sheet-shadow);
+}
+body[data-project-id] main > section:nth-child(2) { z-index: 1; }
+body[data-project-id] main > section:nth-child(3) { z-index: 2; }
+body[data-project-id] main > section:nth-child(4) { z-index: 3; }
+body[data-project-id] main > section:not(:last-child) { padding-bottom: calc(clamp(40px, 6vw, 64px) + var(--sheet-r)); }
+
+/* ---------- 2. About: mint arch ---------- */
+.about-visual .arch {
+  position: relative;
+  width: 100%;
+  max-width: 440px;
+  margin: 72px auto 0;
+  aspect-ratio: 4 / 3.7;
+  border-radius: 999px 999px 28px 28px;
+  background: linear-gradient(180deg, var(--mint-100), var(--mint-mist));
+}
+.about-visual .arch-img {
+  position: absolute;
+  bottom: 0;
+  left: 50%;
+  width: 92%;
+  height: auto;
+  translate: -50% 0;
+  /* the head may rise above the arch; the bottom follows its rounded corners */
+  clip-path: inset(-60% 0 0 0 round 0 0 28px 28px);
+}
+/* keep the signature scan sweep, now inside the arch */
+.about-visual .arch::after {
+  content: "";
+  position: absolute;
+  left: 4%;
+  right: 4%;
+  height: 3px;
+  top: 8%;
+  border-radius: 3px;
+  background: linear-gradient(90deg, transparent, var(--mint-600) 45%, var(--on-accent) 50%, var(--mint-600) 55%, transparent);
+  box-shadow: 0 0 18px 3px rgba(30, 158, 113, 0.55);
+  animation: scanSweep 4.4s var(--ease) infinite;
+  z-index: 2;
+  pointer-events: none;
+}
+
+/* ---------- 3. About: ink words ---------- */
+.ink-w { display: inline; }
+
+/* ---------- 4. Projects: stacked sheet cards ---------- */
+.pstack { display: grid; gap: clamp(24px, 3vw, 40px); }
+.pcard {
+  position: relative;
+  display: grid;
+  grid-template-columns: minmax(0, 1.1fr) minmax(0, 1fr);
+  min-height: min(62vh, 500px);
+  border-radius: var(--radius-lg);
+  background: var(--white);
+  border: 1px solid var(--line);
+  box-shadow: 0 16px 34px -18px rgba(18, 32, 25, 0.28);
+  overflow: hidden;
+  contain: layout paint;
+  transform-origin: 50% 0;
+  transition: border-color var(--dur-md, .5s) var(--ease);
+}
+/* darkening overlay for cards that sink behind the next one. A real element whose
+   opacity is animated: cheap, unlike a custom property that every child inherits. */
+.pcard-shade {
+  position: absolute;
+  inset: 0;
+  border-radius: inherit;
+  background: var(--ink);
+  opacity: 0;
+  pointer-events: none;
+  will-change: opacity;
+}
+:root[data-theme="dark"] .pcard-shade { background: #000; }
+:root[data-theme="dark"] .pcard { box-shadow: 0 16px 34px -18px rgba(0, 0, 0, 0.7); }
+.pcard:hover { border-color: var(--mint-300); }
+.pcard:focus-within { border-color: var(--mint-600); }
+.pcard-media {
+  position: relative;
+  display: grid;
+  place-items: center;
+  padding: clamp(20px, 3vw, 40px);
+  overflow: hidden;
+  background: radial-gradient(80% 70% at 50% 40%, var(--mint-mist) 0%, transparent 75%), var(--paper-dim);
+}
+.pcard-media img {
+  display: block;
+  width: 100%;
+  height: auto;
+  max-height: 100%;
+  object-fit: contain;
+  border-radius: 14px;
+  box-shadow: var(--shadow-md);
+  transition: scale .9s cubic-bezier(.16, 1, .3, 1);
+}
+.pcard-media .icon-emoji { font-size: 4rem; }
+.pcard:hover .pcard-media img { scale: 1.03; }
+.pcard-body { display: flex; flex-direction: column; gap: 16px; padding: clamp(26px, 3.4vw, 48px); }
+.pcard-top { display: flex; align-items: center; flex-wrap: wrap; gap: 10px 12px; font-size: .84rem; color: var(--ink-soft); }
+.pcard-num { font-family: var(--font-display); font-weight: 600; font-size: .95rem; color: var(--accent-text); font-variant-numeric: tabular-nums; }
+.pcard-num::before { content: "No. "; font-weight: 400; color: var(--ink-faint); }
+.pcard-cat {
+  padding: 3px 10px;
+  border-radius: var(--radius-full);
+  border: 1.5px solid var(--line);
+  font-size: .72rem;
+  font-weight: 700;
+  letter-spacing: .08em;
+  text-transform: uppercase;
+}
+.pcard-period { margin-left: auto; font-size: .78rem; font-weight: 700; color: var(--ink-faint); white-space: nowrap; }
+.pcard-name {
+  font-family: var(--font-display);
+  font-size: clamp(2.4rem, 4.6vw, 4.4rem);
+  font-weight: 600;
+  line-height: .98;
+  letter-spacing: -0.03em;
+  overflow-wrap: break-word;
+}
+.pcard-link { color: inherit; text-decoration: none; }
+.pcard-link::after { content: ""; position: absolute; inset: 0; z-index: 2; border-radius: inherit; }
+.pcard-link:focus-visible { outline: none; }
+.pcard-link:focus-visible::after { outline: 3px solid var(--mint-600); outline-offset: -3px; }
+/* the one-line tagline: display serif, italic */
+.pcard-tagline {
+  font-family: var(--font-display);
+  font-style: italic;
+  font-weight: 400;
+  font-size: clamp(1.12rem, 1.5vw, 1.4rem);
+  line-height: 1.35;
+  color: var(--ink);
+}
+:lang(zh) .pcard-tagline { font-style: normal; }
+.pcard-summary { color: var(--ink-soft); font-size: .95rem; line-height: 1.6; max-width: 46ch; }
+.pcard-tags { display: flex; flex-wrap: wrap; gap: 8px; }
+.pcard-tags .pill {
+  display: inline-flex;
+  align-items: center;
+  padding: 5px 12px;
+  border-radius: var(--radius-full);
+  background: var(--mint-mist);
+  color: var(--accent-text);
+  font-size: .78rem;
+  font-weight: 600;
+  line-height: 1.2;
+}
+.pcard-foot {
+  margin-top: auto;
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-between;
+  gap: 16px;
+  padding-top: 18px;
+  border-top: 1px solid var(--line);
+}
+.pcard-cta { display: inline-flex; align-items: center; gap: 8px; font-weight: 800; color: var(--accent-text); }
+.pcard-cta svg {
+  width: 40px;
+  height: 40px;
+  padding: 10px;
+  border-radius: 50%;
+  background: var(--mint-mist);
+  transition: transform .45s cubic-bezier(.16, 1, .3, 1), background-color .25s ease, color .25s ease;
+}
+.pcard:hover .pcard-cta svg { transform: rotate(45deg); background: var(--mint-600); color: #fff; }
+.pcard--ghost {
+  grid-template-columns: minmax(0, 1fr);
+  min-height: 0;
+  place-items: center;
+  align-content: center;
+  gap: 10px;
+  padding: 48px 24px;
+  text-align: center;
+  background: var(--mint-mist);
+  border: 1.5px dashed var(--mint-300);
+  box-shadow: none;
+}
+.pcard--ghost h3 { font-family: var(--font-display); font-size: clamp(1.6rem, 2.6vw, 2.2rem); font-weight: 600; }
+.pcard--ghost p { max-width: 40ch; color: var(--ink-soft); }
+.pcard--ghost .empty-icon { font-size: 2rem; color: var(--mint-600); }
+@media (min-width: 900px) and (min-height: 700px) {
+  .pstack { gap: 12vh; padding-bottom: 4vh; }
+  /* The headline (title, subtitle, filters) stays pinned while the cards stack under it.
+     enhance.js measures it and sets --stack-top (where card 1 locks). */
+  .pstack { --stack-top: calc(var(--nav-h) + 20px); }
+  .projects-pin {
+    position: sticky;
+    top: calc(var(--nav-h) + 6px);
+    z-index: 6;
+    padding-bottom: 14px;
+    background: var(--surface-1);
+  }
+  .projects-pin::after { /* soft fade where cards slide under the headline */
+    content: "";
+    position: absolute;
+    left: 0; right: 0; top: 100%;
+    height: 16px;
+    background: linear-gradient(var(--surface-1), transparent);
+    pointer-events: none;
+  }
+  .projects-pin .section-head { margin-bottom: 0; }
+  .projects-pin .project-filters { margin: 14px 0 0; }
+  .projects-pin.is-compact .section-sub { display: none; }
+  .pstack .stack-item:not(.stack-item--ghost) { position: sticky; top: calc(var(--stack-top) + var(--i, 0) * 14px); }
+  /* own compositor layer: the scroll-scrubbed shrink then no longer repaints the whole card every frame */
+  .pstack .stack-item:not(.stack-item--ghost) .pcard { will-change: transform; }
+}
+@media (max-width: 899px) {
+  .pcard { grid-template-columns: minmax(0, 1fr); min-height: 0; }
+  .pcard-media { padding: 16px; }
+}
+
+/* ---------- 5. Get in Touch: motion + hover (layout untouched) ---------- */
+.contact-card { position: relative; overflow: hidden; isolation: isolate; }
+.contact-card::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  z-index: -1;
+  background: radial-gradient(240px circle at var(--mx, 50%) var(--my, 0%), rgba(143, 223, 184, 0.38), transparent 70%);
+  opacity: 0;
+  transition: opacity .4s ease;
+}
+:root[data-theme="dark"] .contact-card::before { background: radial-gradient(240px circle at var(--mx, 50%) var(--my, 0%), rgba(47, 190, 139, 0.22), transparent 70%); }
+.contact-card:hover::before, .contact-card:focus-within::before { opacity: 1; }
+.contact-icon { transition: background-color .35s ease, color .35s ease, transform .55s cubic-bezier(.34, 1.56, .64, 1); }
+.contact-card:hover .contact-icon, .contact-card:focus-within .contact-icon {
+  background: var(--mint-600);
+  color: #fff;
+  transform: scale(1.1) rotate(-8deg);
+}
+.cv-cta { position: relative; overflow: hidden; isolation: isolate; }
+.cv-cta::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  z-index: -1;
+  background: linear-gradient(105deg, transparent 35%, rgba(255, 255, 255, 0.16) 50%, transparent 65%);
+  transform: translateX(-100%);
+  transition: transform 1.2s cubic-bezier(.16, 1, .3, 1);
+  pointer-events: none;
+}
+.cv-cta:hover::after { transform: translateX(100%); }
+.cv-cta .btn svg { transition: transform .35s ease; }
+.cv-cta .btn:hover svg { transform: translateY(3px); }
+@media (hover: none) {
+  .contact-card:hover .contact-icon { background: var(--mint-mist); color: var(--accent-text); transform: none; }
+  .contact-card:hover::before { opacity: 0; }
+}
+
+/* ---------- 6. Footer wordmark ---------- */
+.footer-mark-wrap { padding-top: clamp(32px, 5vw, 64px); }
+.footer-mark {
+  display: flex;
+  overflow: hidden;
+  padding-bottom: .08em;
+  font-family: var(--font-display);
+  font-weight: 600;
+  font-size: clamp(64px, 15vw, 200px);
+  line-height: .9;
+  letter-spacing: -0.05em;
+  font-variation-settings: "opsz" 144;
+  color: var(--ink);
+  user-select: none;
+}
+.footer-mark .fm-l { display: inline-block; }
+.footer-mark .dot { color: var(--mint-600); }
+
+/* ---------- 7. Project pages ---------- */
+/* framed cover picture */
+.p-hero-frame {
+  position: relative;
+  aspect-ratio: 5 / 4;
+  padding: 12px;
+  border-radius: 28px;
+  background: var(--white);
+  box-shadow: var(--shadow-lg);
+  transform: rotate(1.5deg);
+}
+.p-hero-img { height: 100%; border-radius: 18px; overflow: hidden; background: var(--paper-dim); }
+.p-hero-img img { display: block; width: 100%; height: 100%; object-fit: var(--fit, cover); scale: var(--zoom, 1); }
+.p-hero-img .photo-placeholder { height: 100%; border-radius: 18px; }
+
+/* first overview paragraph as a serif lead; the rest stay as they are */
+.overview-text p:first-of-type {
+  font-family: var(--font-display);
+  font-size: clamp(1.3rem, 2vw, 1.7rem);
+  line-height: 1.42;
+  letter-spacing: -0.01em;
+  color: var(--ink);
+  font-variation-settings: "opsz" 36;
+}
+
+/* title words rise out of their own line (wrappers added by enhance.js) */
+.project-brand .brand-a, .project-brand .brand-b { display: inline-block; overflow: clip; overflow-clip-margin: .15em; vertical-align: top; padding-bottom: .06em; margin-bottom: -.06em; }
+.project-brand .wi { display: inline-block; }
+
+/* previous / next */
+.pnav-section { padding-block: clamp(56px, 7vw, 96px); }
+.pnav-grid { display: grid; grid-template-columns: minmax(0, 1fr) auto minmax(0, 1fr); gap: 16px; align-items: stretch; }
+.pnav-link, .pnav-all {
+  position: relative;
+  display: grid;
+  align-content: start;
+  gap: 12px;
+  min-height: 160px;
+  padding: clamp(24px, 3vw, 40px);
+  border-radius: var(--radius-lg);
+  background: var(--white);
+  border: 1px solid var(--line);
+  overflow: hidden;
+  isolation: isolate;
+  color: inherit;
+  text-decoration: none;
+  transition: border-color .25s ease, transform .5s cubic-bezier(.16, 1, .3, 1), box-shadow .5s cubic-bezier(.16, 1, .3, 1);
+}
+.pnav-link--next { text-align: end; justify-items: end; }
+.pnav-label { display: inline-flex; align-items: center; gap: 8px; font-size: .78rem; font-weight: 800; letter-spacing: .12em; text-transform: uppercase; color: var(--ink-soft); }
+.pnav-label svg { width: 18px; height: 18px; transition: transform .45s cubic-bezier(.16, 1, .3, 1); }
+.pnav-name { font-family: var(--font-display); font-size: clamp(1.8rem, 3vw, 2.8rem); font-weight: 600; line-height: 1.05; letter-spacing: -0.03em; overflow-wrap: break-word; }
+.pnav-thumb { position: absolute; inset: 0; z-index: -1; opacity: 0; transition: opacity .5s ease; }
+.pnav-thumb img { width: 100%; height: 100%; object-fit: cover; scale: 1.08; transition: scale 1s cubic-bezier(.16, 1, .3, 1); }
+.pnav-thumb::after { content: ""; position: absolute; inset: 0; background: linear-gradient(90deg, var(--white) 30%, color-mix(in srgb, var(--white) 55%, transparent)); }
+.pnav-link--next .pnav-thumb::after { background: linear-gradient(270deg, var(--white) 30%, color-mix(in srgb, var(--white) 55%, transparent)); }
+.pnav-link:hover, .pnav-link:focus-visible { border-color: var(--mint-300); box-shadow: var(--shadow-md); transform: translateY(-4px); }
+.pnav-link:hover .pnav-thumb, .pnav-link:focus-visible .pnav-thumb { opacity: 1; }
+.pnav-link:hover .pnav-thumb img { scale: 1; }
+.pnav-link--prev:hover .pnav-label svg { transform: translateX(-4px); }
+.pnav-link--next:hover .pnav-label svg { transform: translateX(4px); }
+.pnav-all { place-content: center; justify-items: center; text-align: center; background: var(--mint-mist); border-color: transparent; }
+.pnav-all-name { font-family: var(--font-display); font-size: 1.35rem; font-weight: 600; }
+.pnav-all:hover { border-color: var(--mint-300); }
+@media (max-width: 900px) {
+  .pnav-grid { grid-template-columns: minmax(0, 1fr); }
+  .pnav-link--next { text-align: start; justify-items: start; }
+  .pnav-all { min-height: 0; }
+}
+@media (hover: none) {
+  .pnav-link:hover { transform: none; box-shadow: none; }
+  .pnav-link:hover .pnav-thumb { opacity: 0; }
+}
+
+/* never keep something hidden while it has keyboard focus */
+.fx-r:focus-within, .fx-r:focus-visible { opacity: 1 !important; visibility: visible !important; transform: none !important; }
+
+
+/* ---------- 8. Lite mode (set by the performance guard in enhance.js) ---------- */
+html.lite .about, html.lite .experience, html.lite .projects, html.lite .contact { box-shadow: none; }
+html.lite .pcard { box-shadow: none; will-change: auto; contain: none; }
+html.lite .pcard-media img, html.lite .p-hero-frame { box-shadow: none; }
+
+/* ---------- 4b. Projects: two cards per scroll step (left + right) ----------
+   Switched on by enhance.js (class .pstack--2up, desktop only). Delete this block
+   or set PER_ROW = 1 in enhance.js to go back to one card per step.
+   The "More on the way" card is untouched: still one big full-width card at the end. */
+@media (min-width: 900px) and (min-height: 700px) {
+  .pstack--2up {
+    --colgap: clamp(16px, 2vw, 28px);
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    column-gap: var(--colgap);
+  }
+  .pstack--2up .stack-item { display: grid; min-width: 0; }
+  .pstack--2up .stack-item--ghost { grid-column: 1 / -1; }
+  .pstack--2up .stack-item.is-solo {
+    grid-column: 1 / -1;
+    justify-self: center;
+    width: calc((100% - var(--colgap)) / 2);
+  }
+  .pstack--2up .pcard:not(.pcard--ghost) { grid-template-columns: minmax(0, 1fr); grid-template-rows: auto 1fr; min-height: 0; }
+  .pstack--2up .pcard-media { padding: 14px; }
+  .pstack--2up .pcard-media img {
+    width: auto;
+    max-width: 100%;
+    max-height: clamp(110px, 24vh, 250px);
+    margin: 0 auto;
+  }
+  .pstack--2up .pcard-body { gap: 10px; padding: 18px clamp(18px, 2vw, 28px) 20px; }
+  .pstack--2up .pcard-name { font-size: clamp(1.9rem, 3.1vw, 2.9rem); }
+  .pstack--2up .pcard-tagline {
+    font-size: clamp(.98rem, 1.15vw, 1.12rem);
+    display: -webkit-box; -webkit-line-clamp: 3; -webkit-box-orient: vertical; overflow: hidden;
+  }
+  .pstack--2up .pcard-summary { display: none; }
+  .pstack--2up .pcard-foot { padding-top: 12px; gap: 10px; }
+}
+
+/* ---------- 6. Hero: watercolor paint behind the portrait ----------
+   Baked images (light + dark) in assets/img/hero-paint-*.webp. The portrait is also a
+   little smaller than before (420px -> 380px). To undo: remove this block and the
+   <div class="hero-paint"> in index.html. */
+.hero-visual { --pf: min(380px, 80vw); }
+@media (max-width: 980px) { .hero-visual { --pf: min(280px, 62vw); } }
+.hero-visual .profile-frame.scan-frame { width: var(--pf); }
+.hero-paint {
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  width: calc(var(--pf) * 2.021);
+  aspect-ratio: 1;
+  transform: translate(-50%, -50%);
+  background: url("../img/hero-paint-light.webp") center / 100% 100% no-repeat;
+  z-index: -2;
+  pointer-events: none;
+}
+:root[data-theme="dark"] .hero-paint { background-image: url("../img/hero-paint-dark.webp"); }
+@media (prefers-reduced-motion: no-preference) {
+  .hero-paint { animation: paintIn 1.4s .2s both; }
+}
+@keyframes paintIn { from { opacity: 0; } to { opacity: 1; } }
+

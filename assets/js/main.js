@@ -445,40 +445,52 @@
       return `${prefix}${imagePath}`;
     }
 
+    /* Stacked "sheet" cards (styles + scroll animation live in enhance.css / enhance.js).
+       Each card: number, category, period, name, one-line tagline, summary, tags, award. */
     function cardHTML(p) {
       const tr = (typeof PROJECT_TRANSLATIONS !== "undefined" && PROJECT_TRANSLATIONS[p.id] && PROJECT_TRANSLATIONS[p.id][currentLang]) || {};
       const summary = tr.summary || p.summary;
+      const tagline = tr.tagline || p.tagline;
       const awardTr = (typeof AWARD_LABEL_TRANSLATIONS !== "undefined" && AWARD_LABEL_TRANSLATIONS[p.award.label]) || {};
       const awardLabel = awardTr[currentLang] || p.award.label;
+      const catLabel = (typeof CATEGORY_LABELS !== "undefined" && CATEGORY_LABELS[currentLang] && CATEGORY_LABELS[currentLang][p.category]) || p.category;
+      const num = String(PROJECTS.indexOf(p) + 1).padStart(2, "0");
       const tags = p.tags.map((tag) => `<span class="pill">${tag}</span>`).join("");
       const medalIcon = (AWARD_ICON && AWARD_ICON[p.award.tier]) || "";
       const previewImage = p.image
         ? `<img src="${resolveProjectImagePath(p.image)}" alt="${p.name} preview" loading="lazy" />`
         : `<span class="icon-emoji">${p.emoji}</span>`;
       return `
-        <a href="${p.page}" class="project-card reveal" style="view-transition-name: card-${p.id}">
-          <div class="project-card-head">${previewImage}</div>
-          <div class="project-card-body">
-            <div class="project-card-top">
-              <h3>${p.name}</h3>
-              <span class="project-card-period">${p.period}</span>
+        <div class="stack-item reveal" data-category="${p.category}">
+          <article class="pcard">
+            <div class="pcard-media">${previewImage}</div>
+            <div class="pcard-body">
+              <div class="pcard-top">
+                <span class="pcard-num" aria-hidden="true">${num}</span>
+                <span class="pcard-cat">${catLabel}</span>
+                <span class="pcard-period">${p.period}</span>
+              </div>
+              <h3 class="pcard-name"><a href="${p.page}" class="pcard-link"><span class="brand-a">${p.brandA}</span><wbr><span class="brand-b">${p.brandB}</span></a></h3>
+              <p class="pcard-tagline">${tagline}</p>
+              <p class="pcard-summary">${summary}</p>
+              <div class="pcard-tags">${tags}</div>
+              <div class="pcard-foot">
+                <span class="medal medal--${p.award.tier}"><span class="medal-icon">${medalIcon}</span>${awardLabel}</span>
+                <span class="pcard-cta" aria-hidden="true">${t("projects.viewLink")}<svg viewBox="0 0 24 24" fill="none"><path d="M7 17 17 7M9 7h8v8" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg></span>
+              </div>
             </div>
-            <p class="desc">${summary}</p>
-            <div class="project-card-tags">${tags}</div>
-            <div class="project-card-foot">
-              <span class="medal medal--${p.award.tier}"><span class="medal-icon">${medalIcon}</span>${awardLabel}</span>
-              <span class="card-link">${t("projects.viewLink")} <svg viewBox="0 0 24 24" fill="none"><path d="M5 12h14M13 6l6 6-6 6" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/></svg></span>
-            </div>
-          </div>
-        </a>`;
+          </article>
+        </div>`;
     }
 
     function ghostCardHTML() {
       return `
-        <div class="project-card ghost-card reveal" style="view-transition-name: card-ghost">
-          <div class="empty-icon">＋</div>
-          <h3>${t("projects.moreTitle")}</h3>
-          <p>${t("projects.moreText")}</p>
+        <div class="stack-item stack-item--ghost reveal">
+          <div class="pcard pcard--ghost">
+            <div class="empty-icon">＋</div>
+            <h3>${t("projects.moreTitle")}</h3>
+            <p>${t("projects.moreText")}</p>
+          </div>
         </div>`;
     }
 
@@ -492,8 +504,10 @@
           // Transition is doing the animating, so skip the entrance reveal.
           // On first paint we must NOT do this, or scrolling down to the
           // projects section would find every card already faded in.
-          grid.querySelectorAll(".project-card").forEach((c) => c.classList.add("is-visible"));
+          grid.querySelectorAll(".stack-item").forEach((c) => c.classList.add("is-visible"));
         }
+        /* enhance.js rebuilds the stacking scroll animation for the new cards */
+        window.dispatchEvent(new Event("projects:drawn"));
       };
       if (!reduceMotion && typeof document.startViewTransition === "function") {
         document.startViewTransition(paint);

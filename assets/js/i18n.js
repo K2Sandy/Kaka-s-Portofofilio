@@ -81,10 +81,12 @@ const I18N = {
       links: "Links",
       contactMe: "Contact Me",
       viewGithub: "View on GitHub",
+      downloadProposal: "Download Proposal",
       downloadPaper: "Download Paper",
+      team: "Team",
       allProjects: "All Projects"
     },
-    roles: { coLead: "Co-Lead Tech Developer", sole: "Sole Tech Developer" },
+    roles: { coLead: "Co-Lead Tech Developer", sole: "Sole Tech Developer", teamLead: "Team Lead & Tech Developer", leadProgrammer: "Team Lead & Lead Programmer" },
     tags: {
       android: "Android", healthcare: "Healthcare", onDeviceAI: "On-device AI",
       browserExtension: "Browser Extension", mentalHealth: "Mental Health", privacyFirst: "Privacy-first",
@@ -137,6 +139,70 @@ const I18N = {
         role: "Sole Tech Developer (Group Project), built the interactive gameplay while teammates contributed disaster-response content and scenario design.",
         recognition: "🥉 Developed as a competitive submission for the Disaster Education Media Competition (DEMC) U-DARE 3.0, organized by TDMRC USK.",
         g1: "Start Screen", g2: "Gameplay — Scene 1", g3: "Gameplay — Scene 2", g4: "Game Over"
+      },
+      pulmotriage: {
+        awardFull: "3rd Place — INFEST XII Hackathon",
+        tagline: "Offline AI triage for tuberculosis at Puskesmas.",
+        gallerySub: "The triage result, the public portal, and the moments on stage.",
+        overview1: "PulmoTriage helps Puskesmas (community health centers) triage suspected TB from chest X-rays without waiting for a radiologist. Indonesia has too few radiologists, so results can sit in a queue for days or weeks while a contagious patient waits.",
+        overview2: "A health worker enters basic symptoms and uploads a chest X-ray. The app checks image quality, then gives a triage result (green, yellow, or red) with a Grad-CAM heatmap showing where the model looked. A doctor reviews it and makes the final decision, and the app drafts a referral letter automatically. It is a triage aid, not a diagnosis.",
+        overview3: "It runs fully offline on an ordinary laptop, with no GPU. When internet is available, it syncs only anonymous aggregate data, so patient names never leave the clinic computer.",
+        overview4: "The app came together during the 20-hour onsite final of INFEST XII 2026 (17–18 October). I built the model, backend, cloud and deployment, licensing, installer, and the pitch deck.",
+        includesTitle: "What it includes",
+        inc1: "Offline web app with a TB triage model (EfficientNet-B0, Grad-CAM, ONNX Runtime), combined with symptoms for the triage decision",
+        inc2: "Doctor review step and an auto-filled referral letter (PDF)",
+        inc3: "Windows installer with in-app update notice",
+        inc4: "Digitally signed licenses, one per Puskesmas and tied to one computer (Ed25519), checked without internet",
+        inc5: "A GUI tool for the team to issue licenses by picking province, regency, then Puskesmas, covering about 10,000 Puskesmas",
+        inc6: "Public portal with a province heatmap and trend charts. Small counts are hidden to protect privacy.",
+        role: "Team Lead & Tech Developer (Team Project, Tim Sleber). I owned the model, backend, cloud and deployment, licensing, installer, and the pitch deck.",
+        team: "Tim Sleber: Muhammad Albharaka Putrosandy, Muhammad Rizki, Ibnul Jawzy.",
+        recognition: "🥉 3rd Place, Hackathon Competition at INFEST XII 2026 (HMIF, Universitas Syiah Kuala), with a Rp3,000,000 prize. Onsite 20-hour build, 17–18 October 2026.",
+        g1: "Triage result with Grad-CAM heatmap and doctor review",
+        g2: "Public portal: province heatmap and trends (demo data)",
+        g3: "Tim Sleber with the 3rd place award",
+        g4: "Hackathon winners announced",
+        g5: "3rd place certificate"
+      },
+      kawaltumbuh: {
+        awardFull: "Competition Entry — 6th WYIIA 2026",
+        tagline: "An offline-first Android app for growth monitoring, budget-friendly MPASI menus, and immunization tracking to support stunting prevention.",
+        gallerySub: "Eight main screens: status, growth chart, immunization calendar, nutrition calculator, and recipes.",
+        overview1: "KawalTumbuh is an offline-first Android app that brings growth monitoring, nutrition guidance, and immunization tracking into one place to support stunting prevention. Stunting still affects 19.8% of Indonesian children under five (SSGI 2024), and at the household level it is often noticed late.",
+        overview2: "Parents often learn their child's nutritional status only at a monthly Posyandu check-up, MPASI menu advice rarely considers family budgets, and immunization schedules are easy to miss. KawalTumbuh puts four tools in the parent's hands: a Z-score child nutrition calculator, budget-adjusted MPASI recipes using local ingredients, an immunization schedule with automatic reminders, and nutrition guidance for expectant mothers.",
+        overview3: "Everything runs on the device, with no backend, so it works without internet and children's data never leaves the phone. Nutritional status is computed with the WHO LMS method and classified per Permenkes No. 2 of 2020, and recipe ranking adapts energy and protein targets to the child's status.",
+        overview4: "Testing covered eight black-box scenarios (all passed), Z-scores verified against WHO tables (maximum difference 0.01 SD, well under the 0.1 SD tolerance), and a usability test with 30 parents of children under five that averaged 4.65 out of 5 (93.00%, Very Good). It is a prototype: the results measure user acceptance, not any effect on stunting cases.",
+        role: "Tech Developer (Group Project of six). [PLACEHOLDER: confirm your role]",
+        team: "Muhammad Albharaka Putrosandy, Maya Sirrurrifka, Salma Mardhiyah, Muhammad Fathir, Raden Yasmeen Rahima, Sheryl Talitha Uma.",
+        recognition: "📝 Submitted as a full paper to the 6th WYIIA 2026 (World Youth Invention and Innovation Award). [PLACEHOLDER: update when results are announced]",
+        g1: "Home",
+        g2: "Pregnancy status profile",
+        g3: "Growth chart",
+        g4: "Immunization calendar",
+        g5: "Nutrition calculator input",
+        g6: "Child nutrition calculator result",
+        g7: "Budget-filtered recipes",
+        g8: "Pregnancy nutrition guide"
+      },
+      askara: {
+        awardFull: "University Representative — LIDM 2026",
+        tagline: "A tiered handwriting app that bridges on-screen tracing and real paper writing, with a teacher dashboard.",
+        gallerySub: "A look at ASKARA: tracing practice, the paper exam, and the class dashboards.",
+        overview1: "ASKARA is a tiered handwriting-learning app that uses machine learning to bridge digital and physical writing evaluation, with an integrated dashboard for teachers. It turns a phone from a passive screen into an interactive way to build fine motor skills.",
+        overview2: "Children's handwriting is getting worse as passive gadget use replaces the physical practice that builds fine motor control. Existing writing apps mostly keep children inside the screen, so they get good in the app but stay stiff on paper. ASKARA targets early learners moving into elementary school, and has the child prove the skill on real paper before moving on.",
+        overview3: "Learning is organized into 9 chapters, from pre-writing line patterns through vowels, consonants, numbers, syllables, simple words, and short sentences. Each letter has four digital stages (guided path, dotted path, shadow-guided canvas, blank canvas), followed by a physical exam: the child writes on paper, photographs it, and the app reads it back with text recognition. Three failed attempts in a row are flagged to the teacher. Checks run on the device with Google ML Kit (Digital Ink Recognition for tracing, Text Recognition for paper), and only the final score syncs in real time to the teacher dashboard through Firebase, so children's photos never leave the device.",
+        overview4: "In a pilot at SDN 16 in Banda Aceh with 32 Grade 2 students (16 July 2026), every child completed the letter level in about three minutes per child on average, and most could operate the app on their own. A few machine misreads showed up, but they did not block the evaluation flow.",
+        role: "Team Lead & Lead Programmer (group project of three).",
+        team: "Muhammad Albharaka Putrosandy, Muhammad Aqil Mubarak, Muhammad Fathir.",
+        recognition: "🎖️ Selected as Universitas Syiah Kuala's representative at LIDM 2026 (Lomba Inovasi Digital Mahasiswa), Digital Education Technology Innovation division. [PLACEHOLDER: add the stage where it ended / final result]",
+        g1: "Stage 1: follow the guided line",
+        g2: "Stage 3: shadow-guided canvas (AI Ink)",
+        g3: "Stage 5: writing exam on paper",
+        g4: "Choose your role",
+        g5: "Teacher dashboard",
+        g6: "Create a virtual class",
+        g7: "Student dashboard",
+        g8: "Chapter and letter selection"
       }
     }
   },
@@ -204,10 +270,12 @@ const I18N = {
       links: "Tautan",
       contactMe: "Hubungi Saya",
       viewGithub: "Lihat di GitHub",
+      downloadProposal: "Unduh Proposal",
       downloadPaper: "Unduh Makalah",
+      team: "Tim",
       allProjects: "Semua Proyek"
     },
-    roles: { coLead: "Co-Lead Pengembang Teknologi", sole: "Pengembang Teknologi Tunggal" },
+    roles: { coLead: "Co-Lead Pengembang Teknologi", sole: "Pengembang Teknologi Tunggal", teamLead: "Ketua Tim & Tech Developer", leadProgrammer: "Ketua Tim & Lead Programmer" },
     tags: {
       android: "Android", healthcare: "Kesehatan", onDeviceAI: "AI di Perangkat",
       browserExtension: "Ekstensi Browser", mentalHealth: "Kesehatan Mental", privacyFirst: "Mengutamakan Privasi",
@@ -260,6 +328,70 @@ const I18N = {
         role: "Satu-satunya Tech Developer (Proyek Kelompok) — membangun gameplay interaktif, sementara rekan tim berkontribusi pada konten tanggap bencana dan desain skenario.",
         recognition: "🥉 Dikembangkan sebagai karya kompetisi untuk Disaster Education Media Competition (DEMC) U-DARE 3.0, yang diselenggarakan oleh TDMRC USK.",
         g1: "Layar Awal", g2: "Gameplay — Adegan 1", g3: "Gameplay — Adegan 2", g4: "Game Over"
+      },
+      pulmotriage: {
+        awardFull: "Juara 3 — INFEST XII Hackathon",
+        tagline: "Triase tuberkulosis berbasis AI secara offline di Puskesmas.",
+        gallerySub: "Hasil triase, portal publik, dan momen di panggung.",
+        overview1: "PulmoTriage membantu Puskesmas melakukan triase dugaan TBC dari foto rontgen dada tanpa harus menunggu dokter radiologi. Indonesia kekurangan dokter radiologi, sehingga hasil bisa mengantre berhari-hari bahkan berminggu-minggu sementara pasien yang menular terus menunggu.",
+        overview2: "Petugas kesehatan memasukkan gejala dasar dan mengunggah foto rontgen dada. Aplikasi memeriksa kualitas citra, lalu memberikan hasil triase (hijau, kuning, atau merah) beserta peta panas Grad-CAM yang menunjukkan area yang diperhatikan model. Dokter meninjau hasilnya dan mengambil keputusan akhir, lalu aplikasi menyusun draf surat rujukan secara otomatis. Ini alat bantu triase, bukan diagnosis.",
+        overview3: "Aplikasi berjalan sepenuhnya offline di laptop biasa, tanpa GPU. Saat internet tersedia, aplikasi hanya menyinkronkan data agregat anonim, sehingga nama pasien tidak pernah keluar dari komputer klinik.",
+        overview4: "Aplikasi ini disusun selama final onsite INFEST XII 2026 yang berlangsung 20 jam (17–18 Oktober). Saya mengerjakan model, backend, cloud dan deployment, lisensi, installer, serta pitch deck.",
+        includesTitle: "Isi aplikasi",
+        inc1: "Aplikasi web offline dengan model triase TBC (EfficientNet-B0, Grad-CAM, ONNX Runtime), digabung dengan gejala untuk keputusan triase",
+        inc2: "Tahap tinjauan dokter dan surat rujukan yang terisi otomatis (PDF)",
+        inc3: "Installer Windows dengan pemberitahuan pembaruan di dalam aplikasi",
+        inc4: "Lisensi bertanda tangan digital, satu per Puskesmas dan terikat pada satu komputer (Ed25519), diperiksa tanpa internet",
+        inc5: "Alat GUI bagi tim untuk menerbitkan lisensi dengan memilih provinsi, kabupaten/kota, lalu Puskesmas, mencakup sekitar 10.000 Puskesmas",
+        inc6: "Portal publik dengan peta panas provinsi dan grafik tren. Angka yang terlalu kecil disembunyikan demi privasi.",
+        role: "Ketua Tim & Tech Developer (Proyek Tim Sleber). Saya memegang model, backend, cloud dan deployment, lisensi, installer, serta pitch deck.",
+        team: "Tim Sleber: Muhammad Albharaka Putrosandy, Muhammad Rizki, Ibnul Jawzy.",
+        recognition: "🥉 Juara 3 Hackathon Competition INFEST XII 2026 (HMIF, Universitas Syiah Kuala), hadiah Rp3.000.000. Build onsite 20 jam, 17–18 Oktober 2026.",
+        g1: "Hasil triase dengan peta panas Grad-CAM dan tinjauan dokter",
+        g2: "Portal publik: peta provinsi dan tren (data demo)",
+        g3: "Tim Sleber bersama penghargaan Juara 3",
+        g4: "Pengumuman juara Hackathon",
+        g5: "Sertifikat Juara III"
+      },
+      kawaltumbuh: {
+        awardFull: "Peserta Kompetisi — 6th WYIIA 2026",
+        tagline: "Aplikasi Android offline-first untuk memantau pertumbuhan, menu MPASI sesuai anggaran, dan jadwal imunisasi demi pencegahan stunting.",
+        gallerySub: "Delapan layar utama: status, grafik pertumbuhan, kalender imunisasi, kalkulator gizi, dan resep.",
+        overview1: "KawalTumbuh adalah aplikasi Android offline-first yang menyatukan pemantauan pertumbuhan, panduan gizi, dan pelacakan imunisasi untuk mendukung pencegahan stunting. Stunting masih dialami 19,8% balita Indonesia (SSGI 2024), dan di tingkat rumah tangga sering terlambat disadari.",
+        overview2: "Orang tua sering baru tahu status gizi anak saat pemeriksaan Posyandu yang hanya sebulan sekali, saran menu MPASI jarang memperhitungkan anggaran keluarga, dan jadwal imunisasi mudah terlewat. KawalTumbuh menaruh empat alat di tangan orang tua: kalkulator gizi anak berbasis Z-score, rekomendasi MPASI sesuai anggaran dengan bahan lokal, jadwal imunisasi dengan pengingat otomatis, dan panduan gizi untuk ibu hamil.",
+        overview3: "Semuanya berjalan di perangkat, tanpa backend, sehingga tetap bisa dipakai tanpa internet dan data anak tidak pernah keluar dari ponsel. Status gizi dihitung dengan metode LMS WHO dan diklasifikasikan menurut Permenkes No. 2 Tahun 2020, lalu target energi dan protein disesuaikan dengan status anak untuk meranking resep.",
+        overview4: "Pengujian mencakup delapan skenario black-box (semuanya lulus), verifikasi Z-score terhadap tabel WHO (selisih maksimum 0,01 SD, jauh di bawah toleransi 0,1 SD), dan uji kebergunaan pada 30 orang tua balita dengan rata-rata 4,65 dari 5 (93,00%, kategori Sangat Baik). Ini masih prototipe: hasilnya mengukur penerimaan pengguna, bukan dampaknya terhadap kasus stunting.",
+        role: "Tech Developer (proyek kelompok enam orang). [PLACEHOLDER: confirm your role]",
+        team: "Muhammad Albharaka Putrosandy, Maya Sirrurrifka, Salma Mardhiyah, Muhammad Fathir, Raden Yasmeen Rahima, Sheryl Talitha Uma.",
+        recognition: "📝 Diajukan sebagai full paper ke 6th WYIIA 2026 (World Youth Invention and Innovation Award). [PLACEHOLDER: update when results are announced]",
+        g1: "Beranda",
+        g2: "Profil status kehamilan",
+        g3: "Grafik pertumbuhan",
+        g4: "Kalender imunisasi",
+        g5: "Input kalkulator gizi",
+        g6: "Hasil kalkulator gizi anak",
+        g7: "Resep sesuai anggaran",
+        g8: "Panduan gizi kehamilan"
+      },
+      askara: {
+        awardFull: "Perwakilan Universitas — LIDM 2026",
+        tagline: "Aplikasi belajar menulis berjenjang yang menjembatani tracing di layar dan menulis di kertas, lengkap dengan dasbor guru.",
+        gallerySub: "Sekilas ASKARA: latihan menulis, ujian di kertas, dan dasbor kelas.",
+        overview1: "ASKARA adalah aplikasi pembelajaran menulis berjenjang yang memakai machine learning untuk menjembatani evaluasi tulisan digital dan fisik, dengan dasbor terpadu untuk guru. Aplikasi ini mengubah gawai dari layar pasif menjadi cara interaktif untuk melatih motorik halus.",
+        overview2: "Kualitas tulisan tangan anak menurun karena penggunaan gawai pasif menggantikan latihan fisik yang membangun motorik halus. Aplikasi belajar menulis yang ada umumnya mengurung anak di dalam layar, sehingga anak mahir di aplikasi tetapi tetap kaku di atas kertas. ASKARA menyasar anak usia dini yang akan masuk sekolah dasar, dan meminta anak membuktikan kemampuannya di atas kertas sungguhan sebelum melangkah ke materi berikutnya.",
+        overview3: "Materi disusun dalam 9 bab, mulai dari pola garis pra-menulis, huruf vokal dan konsonan, angka, suku kata, kata sederhana, sampai kalimat pendek. Setiap huruf punya empat tahap digital (jalur penuh, jalur titik-titik, kanvas berbayang, kanvas kosong), lalu Ujian Fisik: anak menulis di kertas, memotretnya, dan aplikasi membacanya dengan text recognition. Tiga kali gagal berturut-turut otomatis dilaporkan ke guru. Pemeriksaan berjalan di perangkat dengan Google ML Kit (Digital Ink Recognition untuk tracing, Text Recognition untuk kertas), dan hanya skor akhir yang disinkronkan secara real-time ke dasbor guru lewat Firebase, sehingga foto anak tidak pernah keluar dari perangkat.",
+        overview4: "Dalam uji coba di SDN 16 Banda Aceh dengan 32 siswa Kelas 2 (16 Juli 2026), seluruh anak berhasil menuntaskan level huruf dengan rata-rata sekitar tiga menit per anak, dan sebagian besar siswa bisa mengoperasikan aplikasi sendiri. Ada beberapa salah baca oleh mesin, tetapi tidak menghambat alur evaluasi.",
+        role: "Ketua Tim & Lead Programmer (proyek kelompok bertiga).",
+        team: "Muhammad Albharaka Putrosandy, Muhammad Aqil Mubarak, Muhammad Fathir.",
+        recognition: "🎖️ Terpilih sebagai perwakilan Universitas Syiah Kuala di LIDM 2026 (Lomba Inovasi Digital Mahasiswa), divisi Inovasi Teknologi Digital Pendidikan. [PLACEHOLDER: add the stage where it ended / final result]",
+        g1: "Tahap 1: ikuti garis panduan",
+        g2: "Tahap 3: kanvas berbayang (AI Ink)",
+        g3: "Tahap 5: ujian menulis di kertas",
+        g4: "Pilih peran",
+        g5: "Dasbor guru",
+        g6: "Buat kelas virtual",
+        g7: "Dasbor siswa",
+        g8: "Pilih bab dan huruf"
       }
     }
   },
@@ -527,23 +659,67 @@ const AWARD_LABEL_TRANSLATIONS = {
   "2nd Place": { id: "Juara 2", zh: "第二名", tl: "Ika-2 Puwesto" },
   "Finalist": { id: "Finalis", zh: "入围决赛", tl: "Finalist" },
   "Gold Medal": { id: "Medali Emas", zh: "金牌", tl: "Gintong Medalya" },
-  "Competition Entry": { id: "Peserta Kompetisi", zh: "竞赛参赛作品", tl: "Lahok sa Kumpetisyon" }
+  "Competition Entry": { id: "Peserta Kompetisi", zh: "竞赛参赛作品", tl: "Lahok sa Kumpetisyon" },
+  "3rd Place": { id: "Juara 3", zh: "第三名", tl: "Ika-3 Puwesto" },
+  "University Representative": { id: "Perwakilan Universitas", zh: "校代表", tl: "Kinatawan ng Unibersidad" }
 };
 
 /* Project card tagline + summary, keyed by project id. Falls back to the
    English value already in PROJECTS[] if a language/key is missing. */
 const PROJECT_TRANSLATIONS = {
+  pulmotriage: {
+    id: {
+      tagline: "Triase AI offline untuk klinik: membaca rontgen dada dan langsung menandai dugaan TBC, dengan peta panas yang bisa diperiksa dokter.",
+      summary: "Aplikasi web offline-first yang melakukan triase dugaan TBC dari foto rontgen dada di Puskesmas, lengkap dengan peta panas Grad-CAM dan tinjauan dokter."
+    },
+    zh: {
+      tagline: "面向诊所的离线 AI 分诊：读取胸部 X 光片，当场标记疑似结核病，并提供医生可核对的热力图。",
+      summary: "一款离线优先的网页应用，帮助社区卫生中心（Puskesmas）根据胸部X光片对疑似结核病进行分诊，并提供Grad-CAM热力图和医生复核。"
+    },
+    tl: {
+      tagline: "Offline na AI triage para sa mga klinika: binabasa ang chest X-ray at agad minamarkahan ang pinaghihinalaang TB, may heatmap na masusuri ng doktor.",
+      summary: "Isang offline-first na web app na nagta-triage ng pinaghihinalaang TB mula sa chest X-ray sa mga Puskesmas, may Grad-CAM heatmap at pagsusuri ng doktor."
+    }
+  },
+  kawaltumbuh: {
+    id: {
+      tagline: "Pertumbuhan, gizi, dan imunisasi dalam satu aplikasi offline untuk orang tua.",
+      summary: "Aplikasi Android offline-first yang memantau pertumbuhan anak dengan Z-score WHO, merekomendasikan menu MPASI sesuai anggaran, dan mengingatkan jadwal imunisasi."
+    },
+    zh: {
+      tagline: "把成长、营养和疫苗接种放进一个离线应用，交给家长。",
+      summary: "一款离线优先的安卓应用，基于WHO Z值监测儿童生长，推荐符合预算的辅食（MPASI）食谱，并提醒家长接种疫苗。"
+    },
+    tl: {
+      tagline: "Paglaki, nutrisyon, at pagbabakuna sa iisang offline na app para sa mga magulang.",
+      summary: "Isang offline-first na Android app na sinusubaybayan ang paglaki ng bata gamit ang WHO Z-score, nagmumungkahi ng MPASI recipe na pasok sa budget, at nagpapaalala ng pagbabakuna."
+    }
+  },
+  askara: {
+    id: {
+      tagline: "Latihan menulis tangan berbasis machine learning yang terintegrasi dengan kelas: mulai di layar, dibuktikan di atas kertas.",
+      summary: "Aplikasi Android belajar menulis untuk anak usia dini yang menilai tarikan di layar dan tulisan di kertas dengan ML on-device, terhubung ke dasbor guru."
+    },
+    zh: {
+      tagline: "与课堂集成的机器学习书写练习：从屏幕开始，在纸上得到验证。",
+      summary: "一款面向低龄儿童的安卓书写学习应用，通过设备端机器学习评估屏幕描红和纸上书写，并同步到教师仪表板。"
+    },
+    tl: {
+      tagline: "Pagsasanay sa sulat-kamay na may machine learning at integrasyon sa klase: nagsisimula sa screen, pinapatunayan sa papel.",
+      summary: "Isang Android app sa pagsulat para sa maliliit na bata na sinusuri ang tracing sa screen at sulat sa papel gamit ang on-device ML, naka-sync sa dashboard ng guro."
+    }
+  },
   glucoscan: {
     id: {
-      tagline: "Pindai label makanan, langsung tahu batas gula Anda.",
+      tagline: "Pendamping penderita diabetes yang memindai label kemasan makanan dan melacak asupan gula Anda terhadap batas pribadi.",
       summary: "Aplikasi Android yang membantu penderita diabetes memantau asupan gula harian dengan memindai label kemasan makanan lewat kamera."
     },
     zh: {
-      tagline: "扫描食品标签，立即知晓您的血糖摄入上限。",
+      tagline: "糖尿病伴侣：扫描包装食品标签，对照个人上限追踪糖摄入。",
       summary: "一款安卓应用，通过摄像头扫描食品包装标签，帮助糖尿病患者监测每日糖分摄入量。"
     },
     tl: {
-      tagline: "I-scan ang label ng pagkain, alamin agad ang limitasyon mo sa asukal.",
+      tagline: "Kasama sa diabetes na nag-i-scan ng label ng nakabalot na pagkain at sinusubaybayan ang asukal mo laban sa personal na limitasyon.",
       summary: "Isang Android app na tumutulong sa mga may diabetes na subaybayan ang arawang pagkonsumo ng asukal sa pamamagitan ng pag-scan ng label ng pakete ng pagkain gamit ang camera."
     }
   },

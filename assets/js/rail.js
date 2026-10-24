@@ -18,6 +18,17 @@
   var CHEV_L = '<svg viewBox="0 0 24 24" fill="none"><path d="M15 5l-7 7 7 7" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/></svg>';
   var CHEV_R = '<svg viewBox="0 0 24 24" fill="none"><path d="M9 5l7 7-7 7" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/></svg>';
   var GAP = 20;
+  var GICON = {
+    all: '<path d="M4 5h6v6H4zM14 5h6v6h-6zM4 15h6v4H4zM14 15h6v4h-6z"/>',
+    ai: '<path d="M9 4a3 3 0 0 0-3 3 3 3 0 0 0-2 5 3 3 0 0 0 2 5 3 3 0 0 0 6 1V4a3 3 0 0 0-3 0zM15 4a3 3 0 0 1 3 3 3 3 0 0 1 2 5 3 3 0 0 1-2 5 3 3 0 0 1-6 1"/>',
+    mobile: '<rect x="7" y="3" width="10" height="18" rx="2"/><path d="M11 18h2"/>',
+    web: '<circle cx="12" cy="12" r="9"/><path d="M3 12h18M12 3c3 3 3 15 0 18M12 3c-3 3-3 15 0 18"/>',
+    iot: '<rect x="7" y="7" width="10" height="10" rx="1.5"/><path d="M9 3v4M15 3v4M9 17v4M15 17v4M3 9h4M3 15h4M17 9h4M17 15h4"/>',
+    game: '<rect x="3" y="8" width="18" height="10" rx="5"/><path d="M8 11v4M6 13h4M15.5 12h.01M18 14h.01"/>'
+  };
+  function gIcon(g) {
+    return '<i class="pgenre-ic" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">' + (GICON[g] || "") + '</svg></i>';
+  }
 
   var reduceMotion = window.matchMedia && window.matchMedia("(prefers-reduced-motion: reduce)").matches;
   var active = "all";     /* remembered across language re-renders */
@@ -81,7 +92,7 @@
         '</div>' +
         '<aside class="pgenre"><p class="pgenre-label">' + esc(L.genre) + '</p><ul class="pgenre-list">' +
           genres.map(function (g) {
-            return '<li><button type="button" class="pgenre-btn' + (g === active ? " is-active" : "") + '" data-g="' + g + '" aria-pressed="' + (g === active) + '"><span>' + esc(L[g]) + '</span></button></li>';
+            return '<li><button type="button" class="pgenre-btn' + (g === active ? " is-active" : "") + '" data-g="' + g + '" aria-pressed="' + (g === active) + '">' + gIcon(g) + '<span>' + esc(L[g]) + '</span></button></li>';
           }).join("") +
         '</ul></aside>' +
       '</div>';

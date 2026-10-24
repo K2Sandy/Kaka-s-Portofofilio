@@ -44,7 +44,7 @@
 
 /* ---------- cards ---------- */
 .rcard {
-  flex: 0 0 calc((100% - 40px) / 2.5);
+  flex: 0 0 calc((100% - 40px) / 2.3);
   scroll-snap-align: start;
   display: flex;
   flex-direction: column;
@@ -63,14 +63,14 @@
 .rcard-media img { width: 100%; height: 100%; object-fit: cover; display: block; transition: transform .5s var(--ease); }
 .rcard:hover .rcard-media img { transform: scale(1.04); }
 .rcard-media .icon-emoji { font-size: 3rem; }
-.rcard-body { padding: 18px 20px 20px; display: flex; flex-direction: column; gap: 10px; flex: 1; }
-.rcard-top { display: flex; align-items: center; gap: 10px; font-size: .74rem; color: var(--ink-faint); font-weight: 600; }
+.rcard-body { padding: 20px 22px 22px; display: flex; flex-direction: column; gap: 11px; flex: 1; }
+.rcard-top { display: flex; align-items: center; gap: 10px; font-size: .78rem; color: var(--ink-faint); font-weight: 600; }
 .rcard-num { font-family: var(--font-mono); color: var(--accent-text); }
 .rcard-period { margin-left: auto; }
 .rcard-name { font-family: var(--font-display); font-size: 1.55rem; line-height: 1.1; margin: 0; font-weight: 600; }
 .rcard-name .brand-a { color: var(--mint-600); }
 .rcard-tagline {
-  margin: 0; font-size: .88rem; line-height: 1.55; color: var(--ink-soft);
+  margin: 0; font-size: .92rem; line-height: 1.55; color: var(--ink-soft);
   display: -webkit-box; -webkit-line-clamp: 3; -webkit-box-orient: vertical; overflow: hidden;
 }
 .rcard-foot { margin-top: auto; padding-top: 6px; display: flex; align-items: center; justify-content: space-between; gap: 10px; }
@@ -88,7 +88,7 @@
   text-align: center;
   padding: 28px;
   gap: 8px;
-  min-height: 300px;
+  min-height: 340px;
 }
 .rcard--ghost:hover { transform: none; box-shadow: none; border-color: var(--line); }
 .rcard--ghost .ghost-plus { width: 46px; height: 46px; border-radius: 50%; display: grid; place-items: center; background: var(--mint-mist); color: var(--accent-text); font-size: 1.4rem; }

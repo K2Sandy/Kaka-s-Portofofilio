@@ -429,6 +429,12 @@
 
   /* ---------------- Project grid + filters (homepage) ---------------- */
   function renderProjectGrid() {
+    /* horizontal rail + genre list (assets/js/rail.js). Remove these 4 lines to fall back to the old stack. */
+    const railRoot = document.getElementById("prailRoot");
+    if (railRoot && window.ProjectRail) {
+      window.ProjectRail.render(railRoot, { lang: currentLang, t: t });
+      return;
+    }
     const grid = document.getElementById("projectGrid");
     if (!grid || !hasProjects) return;
     const filterWrap = document.getElementById("projectFilters");

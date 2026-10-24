@@ -1,0 +1,162 @@
+/* ------------------------------------------------------------------
+   HOME · Projects rail (assets/js/rail.js)
+   Horizontal scroll-snap rail on the left, genre list on the right.
+   Under 900px the genre list becomes a chip row above the rail.
+   ------------------------------------------------------------------ */
+.prail-wrap {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) 210px;
+  gap: 36px;
+  margin-top: 40px;
+  align-items: start;
+}
+.prail-main { min-width: 0; position: relative; }
+.prail-box { position: relative; }
+
+/* ---------- rail ---------- */
+.prail {
+  display: flex;
+  gap: 20px;
+  overflow-x: auto;
+  scroll-snap-type: x mandatory;
+  scroll-padding-left: 2px;
+  padding: 6px 2px 18px;
+  scrollbar-width: none;
+  cursor: grab;
+  transition: opacity .2s var(--ease);
+  -webkit-mask-image: linear-gradient(90deg, transparent 0, #000 56px, #000 calc(100% - 56px), transparent);
+          mask-image: linear-gradient(90deg, transparent 0, #000 56px, #000 calc(100% - 56px), transparent);
+}
+.prail::-webkit-scrollbar { display: none; }
+.prail:focus-visible { outline: 2px solid var(--mint-500); outline-offset: 4px; border-radius: var(--radius-md); }
+.prail.is-dragging { cursor: grabbing; scroll-snap-type: none; }
+.prail.is-dragging * { pointer-events: none; }
+.prail.is-swapping { opacity: 0; }
+.prail.at-start {
+  -webkit-mask-image: linear-gradient(90deg, #000 0, #000 calc(100% - 56px), transparent);
+          mask-image: linear-gradient(90deg, #000 0, #000 calc(100% - 56px), transparent);
+}
+.prail.at-end {
+  -webkit-mask-image: linear-gradient(90deg, transparent 0, #000 56px);
+          mask-image: linear-gradient(90deg, transparent 0, #000 56px);
+}
+.prail.at-start.at-end { -webkit-mask-image: none; mask-image: none; }
+
+/* ---------- cards ---------- */
+.rcard {
+  flex: 0 0 calc((100% - 40px) / 2.5);
+  scroll-snap-align: start;
+  display: flex;
+  flex-direction: column;
+  background: var(--white);
+  border: 1px solid var(--line);
+  border-radius: var(--radius-md);
+  overflow: hidden;
+  box-shadow: var(--shadow-sm);
+  transition: transform .3s var(--ease), box-shadow .3s var(--ease), border-color .3s var(--ease);
+  color: inherit;
+  text-decoration: none;
+}
+.rcard:hover { transform: translateY(-4px); box-shadow: var(--shadow-md); border-color: var(--mint-300); }
+.rcard:focus-visible { outline: 2px solid var(--mint-500); outline-offset: 3px; }
+.rcard-media { aspect-ratio: 16 / 10; background: var(--paper-dim); overflow: hidden; display: grid; place-items: center; }
+.rcard-media img { width: 100%; height: 100%; object-fit: cover; display: block; transition: transform .5s var(--ease); }
+.rcard:hover .rcard-media img { transform: scale(1.04); }
+.rcard-media .icon-emoji { font-size: 3rem; }
+.rcard-body { padding: 18px 20px 20px; display: flex; flex-direction: column; gap: 10px; flex: 1; }
+.rcard-top { display: flex; align-items: center; gap: 10px; font-size: .74rem; color: var(--ink-faint); font-weight: 600; }
+.rcard-num { font-family: var(--font-mono); color: var(--accent-text); }
+.rcard-period { margin-left: auto; }
+.rcard-name { font-family: var(--font-display); font-size: 1.55rem; line-height: 1.1; margin: 0; font-weight: 600; }
+.rcard-name .brand-a { color: var(--mint-600); }
+.rcard-tagline {
+  margin: 0; font-size: .88rem; line-height: 1.55; color: var(--ink-soft);
+  display: -webkit-box; -webkit-line-clamp: 3; -webkit-box-orient: vertical; overflow: hidden;
+}
+.rcard-foot { margin-top: auto; padding-top: 6px; display: flex; align-items: center; justify-content: space-between; gap: 10px; }
+.rcard-cta { display: inline-flex; align-items: center; gap: 4px; font-size: .8rem; font-weight: 700; color: var(--accent-text); white-space: nowrap; }
+.rcard-cta svg { width: 14px; height: 14px; transition: transform .3s var(--ease); }
+.rcard:hover .rcard-cta svg { transform: translate(2px, -2px); }
+.rcard .medal { font-size: .7rem; white-space: nowrap; min-width: 0; }
+
+.rcard--ghost {
+  background: transparent;
+  border: 1.5px dashed var(--line);
+  box-shadow: none;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  padding: 28px;
+  gap: 8px;
+  min-height: 300px;
+}
+.rcard--ghost:hover { transform: none; box-shadow: none; border-color: var(--line); }
+.rcard--ghost .ghost-plus { width: 46px; height: 46px; border-radius: 50%; display: grid; place-items: center; background: var(--mint-mist); color: var(--accent-text); font-size: 1.4rem; }
+.rcard--ghost h3 { font-family: var(--font-display); font-size: 1.25rem; margin: 6px 0 0; }
+.rcard--ghost p { margin: 0; font-size: .85rem; color: var(--ink-soft); max-width: 230px; }
+
+/* ---------- edge arrows (sit on the faded cards, vertically centred on the cards) ---------- */
+.prail-edge {
+  position: absolute; top: calc(50% - 6px); z-index: 3;
+  width: 52px; height: 52px; margin-top: -26px; border-radius: 50%;
+  display: grid; place-items: center; cursor: pointer; padding: 0;
+  color: var(--ink);
+  background: rgba(255, 255, 255, .62);
+  border: 1px solid rgba(255, 255, 255, .8);
+  box-shadow: 0 6px 22px rgba(18, 32, 25, .14);
+  -webkit-backdrop-filter: blur(6px); backdrop-filter: blur(6px);
+  transition: opacity .3s var(--ease), transform .3s var(--ease), background .2s, box-shadow .2s;
+}
+.prail-edge svg { width: 22px; height: 22px; }
+.prail-edge--next { right: 6px; }
+.prail-edge--prev { left: 6px; }
+.prail-edge:hover { background: rgba(255, 255, 255, .95); box-shadow: 0 8px 26px rgba(18, 32, 25, .2); transform: scale(1.06); }
+.prail-edge:focus-visible { outline: 2px solid var(--mint-500); outline-offset: 3px; }
+.prail-edge.is-hidden { opacity: 0; pointer-events: none; transform: scale(.85); }
+:root[data-theme="dark"] .prail-edge { background: rgba(14, 27, 21, .6); border-color: rgba(255, 255, 255, .14); color: #EAF6F0; }
+:root[data-theme="dark"] .prail-edge:hover { background: rgba(14, 27, 21, .92); }
+
+/* ---------- progress + counter ---------- */
+.prail-ctrl { display: flex; align-items: center; gap: 14px; margin-top: 2px; }
+.prail-progress { flex: 1; height: 3px; border-radius: 3px; background: var(--line); overflow: hidden; }
+.prail-progress span { display: block; height: 100%; width: 30%; background: var(--mint-500); border-radius: 3px; transition: width .2s, transform .2s; transform-origin: left; }
+.prail-count { font-family: var(--font-mono); font-size: .8rem; color: var(--ink-soft); min-width: 52px; text-align: right; }
+
+/* ---------- genre list ---------- */
+.pgenre { position: sticky; top: calc(var(--nav-h) + 20px); min-width: 0; }
+.pgenre-label { font-size: .72rem; font-weight: 700; letter-spacing: .14em; text-transform: uppercase; color: var(--ink-faint); margin: 4px 0 12px 14px; }
+.pgenre-list { list-style: none; margin: 0; padding: 0; display: flex; flex-direction: column; gap: 2px; border-left: 1px solid var(--line); }
+.pgenre-btn {
+  width: 100%; display: flex; align-items: baseline; gap: 10px;
+  padding: 10px 14px; margin-left: -1px;
+  background: none; border: 0; border-left: 2px solid transparent;
+  font: inherit; font-size: 1rem; font-weight: 600; color: var(--ink-soft);
+  cursor: pointer; text-align: left;
+  transition: color .2s, border-color .2s, background .2s;
+}
+.pgenre-btn:hover { color: var(--ink); }
+.pgenre-btn:focus-visible { outline: 2px solid var(--mint-500); outline-offset: -2px; }
+.pgenre-btn.is-active { color: var(--ink); border-left-color: var(--mint-500); background: linear-gradient(90deg, var(--mint-mist), transparent); }
+
+/* ---------- tablet / phone ---------- */
+@media (max-width: 900px) {
+  .prail-wrap { grid-template-columns: minmax(0, 1fr); gap: 18px; margin-top: 28px; }
+  .pgenre { position: static; order: -1; }
+  .pgenre-label { display: none; }
+  .pgenre-list { flex-direction: row; border-left: 0; gap: 8px; overflow-x: auto; scrollbar-width: none; padding-bottom: 4px; }
+  .pgenre-list::-webkit-scrollbar { display: none; }
+  .pgenre-btn {
+    width: auto; white-space: nowrap; margin: 0; padding: 8px 14px;
+    border: 1px solid var(--line); border-radius: var(--radius-full); font-size: .88rem;
+  }
+  .pgenre-btn.is-active { background: var(--inverse-bg); color: var(--inverse-text); border-color: var(--inverse-bg); }
+  .rcard { flex-basis: min(78vw, 320px); }
+  .prail { cursor: auto; }
+  .prail, .prail.at-start { -webkit-mask-image: none; mask-image: none; }
+  .prail-edge { display: none; }
+  .prail-ctrl { margin-top: 0; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .prail, .rcard, .rcard-media img, .prail-edge, .prail-progress span { transition: none; }
+}

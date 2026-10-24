@@ -17,6 +17,7 @@ const PROJECTS = [
     tagline: "Offline AI triage for clinics: reads chest X-rays and flags suspected TB on the spot, with a heatmap doctors can check.",
     period: "Oct 2026",
     category: "Web",
+    genres: ["ai", "web"], /* filter chips on the homepage rail: ai | mobile | web | iot | game */
     tags: ["AI", "Healthcare", "Offline-first"],
     emoji: "🫁",
     image: "assets/img/pulmo-thumb.webp",
@@ -33,6 +34,7 @@ const PROJECTS = [
     tagline: "Growth, nutrition, and immunization in one offline app for parents.",
     period: "Aug 2026 – Oct 2026",
     category: "Mobile",
+    genres: ["mobile"], /* filter chips on the homepage rail: ai | mobile | web | iot | game */
     tags: ["Android", "Healthcare", "Offline-first"],
     emoji: "🌱",
     image: "assets/img/kawal-thumb.webp", /* app screens composite from the paper */
@@ -49,6 +51,7 @@ const PROJECTS = [
     tagline: "Classroom-integrated machine learning handwriting practice that starts on the screen and is proven on paper.",
     period: "Jun 2026 – Sep 2026",
     category: "Mobile",
+    genres: ["ai", "mobile"], /* filter chips on the homepage rail: ai | mobile | web | iot | game */
     tags: ["Android", "Education", "Machine Learning"],
     emoji: "✍️",
     image: "assets/img/askara-thumb.webp",
@@ -65,6 +68,7 @@ const PROJECTS = [
     tagline: "A diabetes companion that scans packaged food labels and tracks your sugar against a personal limit.",
     period: "Dec 2025 – Mar 2026",
     category: "Mobile",
+    genres: ["ai", "mobile"], /* filter chips on the homepage rail: ai | mobile | web | iot | game */
     tags: ["Android", "Healthcare", "On-device AI"],
     emoji: "🩸",
     image: "assets/img/gluco-thumb.webp",
@@ -81,6 +85,7 @@ const PROJECTS = [
     tagline: "A quiet layer of protection between students and toxic feeds.",
     period: "Mar 2026 – May 2026",
     category: "Web",
+    genres: ["web"], /* filter chips on the homepage rail: ai | mobile | web | iot | game */
     tags: ["Browser Extension", "Mental Health", "Privacy-first"],
     emoji: "🛡️",
     image: "assets/img/mind-thumb.webp",
@@ -97,6 +102,7 @@ const PROJECTS = [
     tagline: "An early warning system that reads the wind before it strikes.",
     period: "May 2024 – Sept 2024",
     category: "IoT",
+    genres: ["iot"], /* filter chips on the homepage rail: ai | mobile | web | iot | game */
     tags: ["Arduino", "C/C++", "Hardware"],
     emoji: "🌬️",
     image: "assets/img/wind-thumb.webp",
@@ -113,6 +119,7 @@ const PROJECTS = [
     tagline: "Practicing the seconds that matter, before they matter for real.",
     period: "Aug 2025 – Sept 2025",
     category: "Game",
+    genres: ["game"], /* filter chips on the homepage rail: ai | mobile | web | iot | game */
     tags: ["TurboWarp", "Education", "Mobile"],
     emoji: "🎮",
     image: "assets/img/escape_thumb.webp",
@@ -131,6 +138,7 @@ const PROJECTS = [
     tagline: "...",
     period: "2026",
     category: "Mobile",
+    genres: ["mobile"],
     tags: ["Flutter", "EdTech"],
     emoji: "✍️",
     award: { tier: "gold", label: "...", event: "..." },

@@ -31,6 +31,7 @@
 
 <link rel="stylesheet" href="assets/css/style.css?v=8" />
 <link rel="stylesheet" href="assets/css/enhance.css?v=6" />
+<link rel="stylesheet" href="assets/css/rail.css?v=1" />
 <noscript><style>.preloader { display: none !important; }</style></noscript>
 </head>
 <body>
@@ -304,10 +305,19 @@
         <p class="section-sub center" data-i18n="projects.subtitle">A selection of my recent work, spanning across mobile apps, web tools, and hardware engineering.</p>
       </div>
 
-      <div class="project-filters" id="projectFilters"></div>
-      <div class="pstack" id="projectGrid">
-        <!-- rendered by assets/js/main.js using assets/js/projects-data.js -->
-      </div>
+      <!-- Projects rail + genre list: rendered by assets/js/rail.js (styles: assets/css/rail.css),
+           data from assets/js/projects-data.js (see the "genres" line of each project).
+
+           TO GO BACK TO THE OLD STACKED CARDS:
+           1) delete the <div id="prailRoot"> line below and un-comment the two old lines here
+           2) in assets/js/main.js, delete the 4-line "prailRoot" block at the top of renderProjectGrid()
+           (rail.css / rail.js can stay, they do nothing without #prailRoot)
+
+           OLD (kept for revert):
+           <div class="project-filters" id="projectFilters"></div>
+           <div class="pstack" id="projectGrid"></div>
+      -->
+      <div id="prailRoot" class="reveal"></div>
     </div>
   </section>
 
@@ -408,9 +418,10 @@
   <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><line x1="12" y1="19" x2="12" y2="5"/><polyline points="5,12 12,5 19,12"/></svg>
 </button>
 
-<script src="assets/js/projects-data.js?v=4"></script>
+<script src="assets/js/projects-data.js?v=5"></script>
 <script src="assets/js/i18n.js?v=6"></script>
-<script src="assets/js/main.js?v=6"></script>
+<script src="assets/js/rail.js?v=1"></script>
+<script src="assets/js/main.js?v=7"></script>
 <script src="assets/vendor/gsap.min.js"></script>
 <script src="assets/vendor/ScrollTrigger.min.js"></script>
 <script src="assets/js/enhance.js?v=5"></script>

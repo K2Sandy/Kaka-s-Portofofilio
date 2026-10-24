@@ -117,9 +117,17 @@
 :root[data-theme="dark"] .prail-edge:hover { background: rgba(14, 27, 21, .92); }
 
 /* ---------- progress + counter ---------- */
-.prail-ctrl { display: flex; align-items: center; gap: 14px; margin-top: 2px; }
-.prail-progress { flex: 1; height: 3px; border-radius: 3px; background: var(--line); overflow: hidden; }
-.prail-progress span { display: block; height: 100%; width: 30%; background: var(--mint-500); border-radius: 3px; transition: width .2s, transform .2s; transform-origin: left; }
+.prail-ctrl { display: flex; align-items: center; gap: 14px; margin-top: -4px; }
+.prail-progress { position: relative; flex: 1; height: 20px; cursor: pointer; touch-action: none; }
+.prail-progress::before { content: ""; position: absolute; left: 0; right: 0; top: 50%; height: 3px; margin-top: -1.5px; border-radius: 3px; background: var(--line); transition: height .2s, margin .2s; }
+.prail-progress span {
+  position: absolute; left: 0; top: 50%; width: 30%; height: 5px; margin-top: -2.5px;
+  background: var(--mint-500); border-radius: 5px; cursor: grab;
+  transition: width .2s, transform .2s, height .2s, margin .2s; transform-origin: left;
+}
+.prail-progress:hover::before, .prail-ctrl.is-scrubbing .prail-progress::before { height: 5px; margin-top: -2.5px; }
+.prail-progress:hover span, .prail-ctrl.is-scrubbing .prail-progress span { height: 9px; margin-top: -4.5px; }
+.prail-ctrl.is-scrubbing .prail-progress span { cursor: grabbing; transition: none; }
 .prail-count { font-family: var(--font-mono); font-size: .8rem; color: var(--ink-soft); min-width: 52px; text-align: right; }
 
 /* ---------- genre list ---------- */
@@ -154,7 +162,7 @@
   .prail { cursor: auto; }
   .prail, .prail.at-start { -webkit-mask-image: none; mask-image: none; }
   .prail-edge { display: none; }
-  .prail-ctrl { margin-top: 0; }
+  .prail-ctrl { margin-top: -6px; }
 }
 
 @media (prefers-reduced-motion: reduce) {

@@ -27,6 +27,14 @@
     return String(s).replace(/[&<>"]/g, function (c) { return { "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;" }[c]; });
   }
 
+  /* settle on the nearest card, but never pull back from the very end of the rail */
+  function snap(rail, stepPx) {
+    var max = rail.scrollWidth - rail.clientWidth;
+    var x = Math.min(max, Math.round(rail.scrollLeft / stepPx) * stepPx);
+    if (rail.scrollLeft >= max - stepPx * 0.35) x = max;
+    rail.scrollTo({ left: x, behavior: reduceMotion ? "auto" : "smooth" });
+  }
+
   function render(root, ctx) {
     if (!root || typeof PROJECTS === "undefined") return;
     var lang = ctx && ctx.lang ? ctx.lang : "en";
@@ -69,7 +77,7 @@
             '<button type="button" class="prail-edge prail-edge--prev is-hidden" data-dir="-1" aria-label="' + esc(L.prev) + '">' + CHEV_L + '</button>' +
             '<button type="button" class="prail-edge prail-edge--next" data-dir="1" aria-label="' + esc(L.next) + '">' + CHEV_R + '</button>' +
           '</div>' +
-          '<div class="prail-ctrl" aria-hidden="true"><div class="prail-progress"><span></span></div><span class="prail-count"></span></div>' +
+          '<div class="prail-ctrl"><div class="prail-progress" aria-hidden="true"><span></span></div><span class="prail-count"></span></div>' +
         '</div>' +
         '<aside class="pgenre"><p class="pgenre-label">' + esc(L.genre) + '</p><ul class="pgenre-list">' +
           genres.map(function (g) {
@@ -113,6 +121,42 @@
       rail.scrollLeft = 0;
       update();
     }
+
+    /* drag (or click) the progress bar to scrub the rail */
+    var track = root.querySelector(".prail-progress");
+    var ctrl = root.querySelector(".prail-ctrl");
+    var grab = null;                      /* px offset inside the thumb while dragging */
+    function scrubTo(clientX) {
+      var tr = track.getBoundingClientRect();
+      var w = bar.getBoundingClientRect().width;
+      var room = tr.width - w;
+      var max = rail.scrollWidth - rail.clientWidth;
+      if (room <= 0 || max <= 0) return;
+      var left = Math.max(0, Math.min(room, clientX - tr.left - grab));
+      rail.scrollLeft = (left / room) * max;
+    }
+    track.addEventListener("pointerdown", function (e) {
+      if (e.pointerType === "mouse" && e.button !== 0) return;
+      var tb = bar.getBoundingClientRect();
+      grab = (e.clientX >= tb.left && e.clientX <= tb.right) ? e.clientX - tb.left : tb.width / 2;
+      track.setPointerCapture(e.pointerId);
+      ctrl.classList.add("is-scrubbing");
+      rail.classList.add("is-dragging");   /* no snap while scrubbing */
+      scrubTo(e.clientX);
+      e.preventDefault();
+    });
+    track.addEventListener("pointermove", function (e) {
+      if (grab !== null) scrubTo(e.clientX);
+    });
+    function endScrub() {
+      if (grab === null) return;
+      grab = null;
+      ctrl.classList.remove("is-scrubbing");
+      rail.classList.remove("is-dragging");
+      snap(rail, step());
+    }
+    track.addEventListener("pointerup", endScrub);
+    track.addEventListener("pointercancel", endScrub);
 
     rail.addEventListener("scroll", function () { requestAnimationFrame(update); }, { passive: true });
     [prev, next].forEach(function (b) {
@@ -163,8 +207,7 @@
     s.down = false;
     if (s.moved) {
       s.rail.classList.remove("is-dragging");
-      var i = Math.round(s.rail.scrollLeft / s.step());
-      s.rail.scrollTo({ left: i * s.step(), behavior: reduceMotion ? "auto" : "smooth" });
+      snap(s.rail, s.step());
     }
   });
   window.addEventListener("resize", function () { if (cur) cur.update(); });

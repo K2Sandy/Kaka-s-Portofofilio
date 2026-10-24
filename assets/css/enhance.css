@@ -446,3 +446,11 @@ html.lite .pcard-media img, html.lite .p-hero-frame { box-shadow: none; }
 }
 @keyframes paintIn { from { opacity: 0; } to { opacity: 1; } }
 
+
+/* ---------- 7. KawalTumbuh gallery: 4 on top, 4 below ----------
+   Only pages that add class "grid-4" to .gallery-grid are affected.
+   To undo: remove this block and the "grid-4" class in projects/kawaltumbuh.html. */
+.gallery-grid.grid-4 { grid-template-columns: repeat(4, minmax(0, 1fr)); }
+@media (max-width: 900px) {
+  .gallery-grid.grid-4 { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+}
